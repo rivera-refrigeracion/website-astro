@@ -1,0 +1,66 @@
+---
+import '@/styles/global.css';
+import SEO from '@/components/SEO.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Analytics from '@/components/Analytics.astro';
+import Chatwoot from '@/components/Chatwoot.astro';
+import type { SEOProps } from '@/types';
+
+interface Props extends SEOProps {
+  class?: string;
+  postType?: 'page' | 'post';
+}
+
+const { class: className, postType = 'page', ...seoProps } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1976D2" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/webp" href="/favicon.webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SEO -->
+    <SEO {...seoProps} />
+
+    <!-- RSS Feed -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Rivera Refrigeración Blog"
+      href="/rss.xml"
+    />
+
+    <!-- Analytics -->
+    <Analytics postType={postType} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 bg-primary-600 text-white px-4 py-2 rounded"
+    >
+      Ir al contenido
+    </a>
+    <Header />
+    <main id="main-content" class:list={['flex-grow', className]}>
+      <slot />
+    </main>
+    <Footer />
+    <Chatwoot />
+  </body>
+</html>

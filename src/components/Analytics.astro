@@ -1,0 +1,27 @@
+---
+// Google Analytics / Site Kit integration
+// Replicates WordPress Google Site Kit configuration
+interface Props {
+  postType?: 'page' | 'post';
+}
+
+const { postType = 'page' } = Astro.props;
+const GA_MEASUREMENT_ID = 'GT-NBXCT45G';
+---
+
+<!-- Google Tag (gtag.js) - Google Site Kit -->
+<script
+  is:inline
+  async
+  src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+></script>
+<script is:inline define:vars={{ GA_MEASUREMENT_ID, postType }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('set', 'linker', { domains: ['rivera-refrigeracion.com'] });
+  gtag('js', new Date());
+  gtag('set', 'developer_id.dZTNiMT', true);
+  gtag('config', GA_MEASUREMENT_ID, { googlesitekit_post_type: postType });
+</script>

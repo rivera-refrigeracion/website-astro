@@ -1,0 +1,23 @@
+---
+import { CONTACT } from '@/lib/config';
+---
+
+<section
+  class="py-16 lg:py-24 bg-gradient-to-r from-primary-700 to-primary-800 text-white"
+>
+  <div class="container text-center">
+    <h2 class="text-3xl lg:text-4xl font-bold mb-6">¡Contratanos!</h2>
+    <p class="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+      ¿Tienes problemas con tu aire acondicionado, nevera o lavadora? Nuestro
+      equipo está listo para ayudarte.
+    </p>
+    <a
+      href={CONTACT.appointmentLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn-lg bg-secondary-500 hover:bg-secondary-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all"
+    >
+      Agenda tu cita
+    </a>
+  </div>
+</section>

@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout
+  title="Blog"
+  description="Artículos y consejos sobre aire acondicionado, neveras, lavadoras y calentadores. Aprende a cuidar tus electrodomésticos con Rivera Refrigeración."
+>
+  <section class="section bg-neutral-50">
+    <div class="container">
+      <h1 class="text-3xl lg:text-4xl font-bold text-center mb-12">Blog</h1>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          posts.map((post) => (
+            <article class="card hover:shadow-[var(--shadow-level2)] transition-shadow group">
+              {post.data.image && (
+                <a
+                  href={`/${post.slug}`}
+                  class="block aspect-video overflow-hidden rounded-md mb-4"
+                >
+                  <img
+                    src={post.data.image.url}
+                    alt={post.data.image.alt}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    width="400"
+                    height="225"
+                  />
+                </a>
+              )}
+
+              <span class="inline-block text-sm text-primary-600 font-medium mb-2">
+                {post.data.category}
+              </span>
+
+              <h2 class="text-xl font-semibold mb-3 text-neutral-900 group-hover:text-primary-600 transition-colors">
+                <a href={`/${post.slug}`}>{post.data.title}</a>
+              </h2>
+
+              <div class="text-sm text-neutral-500 mb-3">
+                <span>{post.data.category}</span>
+                <span class="mx-1">/</span>
+                <span>{post.data.author}</span>
+              </div>
+
+              <p class="text-neutral-600 line-clamp-3">
+                {post.data.description}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

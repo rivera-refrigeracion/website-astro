@@ -1,0 +1,220 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { SITE, CONTACT } from '@/lib/config';
+---
+
+<Layout
+  title="Política de Privacidad"
+  description="Política de privacidad de Rivera Refrigeración. Conoce cómo protegemos tus datos personales."
+>
+  <section class="section bg-white">
+    <div class="container">
+      <div class="max-w-3xl mx-auto">
+        <h1
+          class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-8 text-center"
+        >
+          Política de Privacidad
+        </h1>
+
+        <div class="prose prose-lg prose-neutral max-w-none">
+          <p class="text-neutral-600 mb-6">
+            <strong>Última actualización:</strong>{' '}
+            {
+              new Date().toLocaleDateString('es-CO', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })
+            }
+          </p>
+
+          <p>
+            En <strong>{SITE.name}</strong>, valoramos y respetamos tu
+            privacidad. Esta Política de Privacidad describe cómo recopilamos,
+            usamos y protegemos la información personal que nos proporcionas
+            cuando utilizas nuestro sitio web o servicios.
+          </p>
+
+          <h2>1. Información que Recopilamos</h2>
+          <p>Podemos recopilar los siguientes tipos de información:</p>
+          <ul>
+            <li>
+              <strong>Información de contacto:</strong> nombre, número de teléfono,
+              correo electrónico y dirección cuando nos contactas para solicitar nuestros
+              servicios.
+            </li>
+            <li>
+              <strong>Información de navegación:</strong> datos sobre tu visita a
+              nuestro sitio web, incluyendo las páginas que visitas y el tiempo que
+              pasas en ellas, a través de herramientas de análisis como Google Analytics.
+            </li>
+            <li>
+              <strong>Información de comunicación:</strong> mensajes que nos envías
+              a través de WhatsApp u otros medios de contacto.
+            </li>
+          </ul>
+
+          <h2>2. Uso de la Información</h2>
+          <p>Utilizamos tu información personal para:</p>
+          <ul>
+            <li>
+              Responder a tus consultas y solicitudes de servicio técnico.
+            </li>
+            <li>Programar y gestionar citas de mantenimiento o reparación.</li>
+            <li>Mejorar nuestros servicios y la experiencia del usuario.</li>
+            <li>
+              Enviarte información relevante sobre nuestros servicios (solo si
+              has dado tu consentimiento).
+            </li>
+            <li>Cumplir con obligaciones legales aplicables.</li>
+          </ul>
+
+          <h2>3. Compartir Información</h2>
+          <p>
+            No vendemos, alquilamos ni compartimos tu información personal con
+            terceros, excepto en los siguientes casos:
+          </p>
+          <ul>
+            <li>
+              Cuando sea necesario para prestar nuestros servicios (por ejemplo,
+              coordinar con proveedores de repuestos).
+            </li>
+            <li>Cuando sea requerido por ley o autoridades competentes.</li>
+            <li>
+              Con proveedores de servicios que nos ayudan a operar nuestro sitio
+              web (como servicios de análisis), bajo estrictas obligaciones de
+              confidencialidad.
+            </li>
+          </ul>
+
+          <h2>4. Google Analytics</h2>
+          <p>
+            Utilizamos Google Analytics para comprender cómo los visitantes
+            interactúan con nuestro sitio web. Google Analytics recopila
+            información de forma anónima, incluyendo:
+          </p>
+          <ul>
+            <li>Número de visitantes del sitio</li>
+            <li>Páginas más visitadas</li>
+            <li>Tiempo de permanencia en el sitio</li>
+            <li>Ubicación geográfica general</li>
+          </ul>
+          <p>
+            Para más información sobre cómo Google utiliza estos datos, consulta
+            la{' '}
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Política de Privacidad de Google
+            </a>.
+          </p>
+
+          <h2>5. Cookies</h2>
+          <p>
+            Nuestro sitio web puede utilizar cookies para mejorar tu
+            experiencia. Las cookies son pequeños archivos de texto que se
+            almacenan en tu dispositivo. Puedes configurar tu navegador para
+            rechazar cookies, aunque esto puede afectar algunas funcionalidades
+            del sitio.
+          </p>
+
+          <h2>6. Seguridad de los Datos</h2>
+          <p>
+            Implementamos medidas de seguridad técnicas y organizativas
+            apropiadas para proteger tu información personal contra acceso no
+            autorizado, alteración, divulgación o destrucción. Sin embargo,
+            ningún método de transmisión por Internet es 100% seguro.
+          </p>
+
+          <h2>7. Tus Derechos</h2>
+          <p>Tienes derecho a:</p>
+          <ul>
+            <li>Acceder a la información personal que tenemos sobre ti.</li>
+            <li>
+              Solicitar la corrección de información incorrecta o incompleta.
+            </li>
+            <li>
+              Solicitar la eliminación de tu información personal (salvo que
+              existan obligaciones legales de conservarla).
+            </li>
+            <li>
+              Retirar tu consentimiento para el uso de tu información en
+              cualquier momento.
+            </li>
+          </ul>
+
+          <h2>8. Contacto</h2>
+          <p>
+            Si tienes preguntas sobre esta Política de Privacidad o deseas
+            ejercer tus derechos, puedes contactarnos a través de:
+          </p>
+          <ul>
+            <li>
+              <strong>WhatsApp:</strong>{' '}
+              <a
+                href={CONTACT.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {CONTACT.phone}
+              </a>
+            </li>
+            <li>
+              <strong>Ubicación:</strong>
+              {CONTACT.location}
+            </li>
+          </ul>
+
+          <h2>9. Cambios a esta Política</h2>
+          <p>
+            Nos reservamos el derecho de actualizar esta Política de Privacidad
+            en cualquier momento. Los cambios serán publicados en esta página
+            con la fecha de última actualización. Te recomendamos revisar esta
+            política periódicamente.
+          </p>
+
+          <div class="mt-12 pt-8 border-t border-neutral-200 text-center">
+            <a href="/" class="btn btn-primary"> Volver al inicio </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .prose h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-neutral-900);
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .prose ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+  }
+
+  .prose li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .prose a {
+    color: var(--color-primary-600);
+    text-decoration: underline;
+  }
+
+  .prose a:hover {
+    color: var(--color-primary-700);
+  }
+</style>

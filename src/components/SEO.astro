@@ -1,0 +1,155 @@
+---
+import { SITE } from '@/lib/config';
+import type { SEOProps } from '@/types';
+
+interface Props extends SEOProps {}
+
+const {
+  title,
+  description = SITE.description,
+  image = '/images/og-default.jpg',
+  article = false,
+  publishedTime,
+  modifiedTime,
+  author = SITE.author,
+  section,
+  tags = [],
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = title ? `${title} | ${SITE.name}` : SITE.title;
+const canonicalURL = new URL(Astro.url.pathname, SITE.url);
+const imageURL = new URL(image, SITE.url);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': article ? 'Article' : 'WebPage',
+  name: pageTitle,
+  description,
+  url: canonicalURL.toString(),
+  image: imageURL.toString(),
+  ...(article && {
+    headline: title,
+    author: {
+      '@type': 'Person',
+      name: author,
+    },
+    datePublished: publishedTime,
+    dateModified: modifiedTime || publishedTime,
+  }),
+  publisher: {
+    '@type': 'LocalBusiness',
+    name: SITE.name,
+    description: SITE.description,
+    url: SITE.url,
+    telephone: '+573173095159',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Cali',
+      addressRegion: 'Valle del Cauca',
+      addressCountry: 'CO',
+    },
+    areaServed: {
+      '@type': 'City',
+      name: 'Cali',
+    },
+    priceRange: '$$',
+    openingHours: 'Mo-Fr 08:00-18:00',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Servicios de reparación',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Reparación de Aire Acondicionado',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Reparación de Neveras',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Reparación de Lavadoras',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Reparación de Calentadores',
+          },
+        },
+      ],
+    },
+  },
+};
+---
+
+<!-- Primary Meta Tags -->
+<title>{pageTitle}</title>
+<meta name="title" content={pageTitle} />
+<meta name="description" content={description} />
+<meta name="author" content={author} />
+<link rel="canonical" href={canonicalURL} />
+
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Language -->
+<meta property="og:locale" content={SITE.locale} />
+<link rel="alternate" hreflang="es" href={canonicalURL} />
+<link rel="alternate" hreflang="x-default" href={canonicalURL} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={article ? 'article' : 'website'} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={pageTitle} />
+<meta property="og:site_name" content={SITE.name} />
+
+{
+  article && (
+    <>
+      <meta property="article:published_time" content={publishedTime} />
+      {modifiedTime && (
+        <meta property="article:modified_time" content={modifiedTime} />
+      )}
+      <meta property="article:author" content={author} />
+      {section && <meta property="article:section" content={section} />}
+      {tags.map((tag) => (
+        <meta property="article:tag" content={tag} />
+      ))}
+    </>
+  )
+}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageURL} />
+
+<!-- Additional SEO Meta Tags -->
+<meta name="geo.region" content="CO-VAC" />
+<meta name="geo.placename" content="Cali" />
+<meta name="geo.position" content="3.4516467;-76.5319854" />
+<meta name="ICBM" content="3.4516467, -76.5319854" />
+
+<!-- Structured Data -->
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(jsonLd)}
+/>

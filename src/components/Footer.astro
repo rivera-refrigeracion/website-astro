@@ -1,0 +1,16 @@
+---
+import { SITE } from '@/lib/config';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-primary-800 text-white py-8">
+  <div class="container">
+    <div class="text-center">
+      <p class="text-white/80">
+        Copyright &copy; {currentYear}
+        {SITE.name}
+      </p>
+    </div>
+  </div>
+</footer>

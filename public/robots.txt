@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://rivera-refrigeracion.com/sitemap-index.xml
+
+# Disallow admin and private paths
+Disallow: /api/
+Disallow: /_astro/
+
+# Crawl delay for bots
+Crawl-delay: 1
