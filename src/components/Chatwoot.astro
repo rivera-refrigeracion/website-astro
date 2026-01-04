@@ -2,19 +2,24 @@
 /**
  * Chatwoot live chat widget
  * Loads the Chatwoot SDK for customer support chat
+ * Hidden initially on mobile, shows on scroll
  */
 ---
 
 <script is:inline>
-  window.chatwootSettings = {
-    position: 'right',
-    type: 'standard',
-    launcherTitle: 'Habla con nosotros',
-  };
-  (function (d, t) {
+  (function () {
+    var isMobile = window.innerWidth < 768;
+
+    window.chatwootSettings = {
+      position: 'right',
+      type: 'standard',
+      launcherTitle: 'Habla con nosotros',
+      hideMessageBubble: isMobile,
+    };
+
     var BASE_URL = 'https://chatwoot.jjuanrivvera.com';
-    var g = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
+    var g = document.createElement('script'),
+      s = document.getElementsByTagName('script')[0];
     g.src = BASE_URL + '/packs/js/sdk.js';
     g.defer = true;
     g.async = true;
@@ -24,6 +29,31 @@
         websiteToken: 'D5NFtGXHnQFwJh4Z9BUY7jeX',
         baseUrl: BASE_URL,
       });
+
+      // Show widget on scroll only for mobile (after 300px)
+      if (isMobile) {
+        var hasShown = false;
+        var scrollThreshold = 300;
+
+        function showChatwootOnScroll() {
+          if (hasShown) return;
+
+          if (window.scrollY > scrollThreshold) {
+            hasShown = true;
+            if (window.$chatwoot) {
+              window.$chatwoot.toggle('open');
+              setTimeout(function () {
+                window.$chatwoot.toggle('close');
+              }, 100);
+            }
+            window.removeEventListener('scroll', showChatwootOnScroll);
+          }
+        }
+
+        window.addEventListener('scroll', showChatwootOnScroll, {
+          passive: true,
+        });
+      }
     };
-  })(document, 'script');
+  })();
 </script>
