@@ -31,8 +31,8 @@ brands:
 # Process (4 steps)
 process:
   - step: 1
-    title: 'Diagnóstico Inicial'
-    description: 'Evaluamos el estado del equipo y detectamos fallas'
+    title: 'Diagnóstico Profesional'
+    description: 'Visitamos su hogar y evaluamos el problema (costo aplicable a reparación)'
     icon: '🔍'
   - step: 2
     title: 'Presupuesto Transparente'

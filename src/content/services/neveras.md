@@ -5,7 +5,7 @@ icon: 'refrigerator'
 
 # SEO
 metaTitle: 'Reparación de Neveras en Cali | Técnico Especializado | Rivera Refrigeración'
-metaDescription: 'Servicio técnico de neveras en Cali. Reparamos todas las marcas: Samsung, LG, Whirlpool, Haceb. +30 años de experiencia. Diagnóstico gratis.'
+metaDescription: 'Servicio técnico de neveras en Cali. Reparamos todas las marcas: Samsung, LG, Whirlpool, Haceb. +30 años de experiencia. Diagnóstico a domicilio.'
 keywords:
   - 'reparación neveras Cali'
   - 'técnico neveras Cali'
@@ -31,8 +31,8 @@ brands:
 # Process (4 steps)
 process:
   - step: 1
-    title: 'Diagnóstico Gratuito'
-    description: 'Visitamos su hogar y evaluamos el problema sin costo'
+    title: 'Diagnóstico Profesional'
+    description: 'Visitamos su hogar y evaluamos el problema (costo aplicable a reparación)'
     icon: '🔍'
   - step: 2
     title: 'Cotización Clara'

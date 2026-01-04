@@ -31,9 +31,9 @@ brands:
 # Process (4 steps)
 process:
   - step: 1
-    title: 'Evaluación del Sitio'
-    description: 'Visitamos su hogar y evaluamos instalación o problema'
-    icon: '📏'
+    title: 'Diagnóstico Profesional'
+    description: 'Visitamos su hogar y evaluamos el problema (costo aplicable a reparación)'
+    icon: '🔍'
   - step: 2
     title: 'Presupuesto Detallado'
     description: 'Cotizamos materiales y mano de obra transparentemente'
@@ -50,7 +50,7 @@ process:
 # FAQs
 faqs:
   - question: '¿Cuánto cuesta instalar un calentador de agua en Cali?'
-    answer: 'El costo de instalación varía según el tipo (gas o eléctrico), capacidad, y complejidad de la instalación. Incluye mano de obra, materiales, y conexiones. Visitamos sin costo para elaborar presupuesto detallado.'
+    answer: 'El costo de instalación varía según el tipo (gas o eléctrico), capacidad, y complejidad de la instalación. Incluye mano de obra, materiales, y conexiones. La visita de evaluación tiene un costo desde $25,000 COP que se aplica al trabajo si aprueba el presupuesto.'
   - question: '¿Qué tipo de calentador es mejor: a gas o eléctrico?'
     answer: 'Calentadores a gas son más económicos en consumo mensual pero requieren ventilación adecuada. Eléctricos son más fáciles de instalar y mantener pero consumen más energía. Recomendamos según su situación específica.'
   - question: '¿Cuánto tiempo toma instalar un calentador?'

@@ -31,13 +31,13 @@ brands:
 # Process (4 steps)
 process:
   - step: 1
-    title: 'Visita a Domicilio'
-    description: 'Vamos a su hogar y revisamos su lavadora'
-    icon: '🏠'
-  - step: 2
-    title: 'Diagnóstico Preciso'
-    description: 'Identificamos el problema y explicamos la solución'
+    title: 'Diagnóstico Profesional'
+    description: 'Visitamos su hogar y evaluamos el problema (costo aplicable a reparación)'
     icon: '🔍'
+  - step: 2
+    title: 'Cotización Transparente'
+    description: 'Explicamos el diagnóstico y presupuesto de reparación'
+    icon: '💰'
   - step: 3
     title: 'Reparación Inmediata'
     description: 'Reparamos en el momento con repuestos de calidad'
