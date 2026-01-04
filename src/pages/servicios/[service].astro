@@ -92,7 +92,9 @@ const { Content } = await service.render();
             {
               service.data.process.map((step) => (
                 <div class="text-center">
-                  <div class="text-4xl mb-3">{step.icon}</div>
+                  <div class="text-4xl mb-3" aria-hidden="true">
+                    {step.icon}
+                  </div>
                   <div class="text-sm font-semibold text-primary-600 mb-2">
                     Paso {step.step}
                   </div>
@@ -120,6 +122,7 @@ const { Content } = await service.render();
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path
                         stroke-linecap="round"
@@ -149,7 +152,8 @@ const { Content } = await service.render();
             href={CONTACT.whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
+            class="whatsapp-btn whatsapp-cta-service inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
+            data-service={service.slug}
           >
             <svg
               class="w-6 h-6"
@@ -166,7 +170,8 @@ const { Content } = await service.render();
           <p class="text-sm mt-4 opacity-75">
             Llamadas: <a
               href={`tel:${CONTACT.phone}`}
-              class="text-white underline hover:no-underline">{CONTACT.phone}</a
+              class="phone-link phone-link-service text-white underline hover:no-underline"
+              data-service={service.slug}>{CONTACT.phone}</a
             >
           </p>
         </section>
@@ -204,7 +209,7 @@ const { Content } = await service.render();
       provider: {
         '@type': 'LocalBusiness',
         name: 'Rivera Refrigeración',
-        telephone: '+573173095159',
+        telephone: CONTACT.phone,
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Cali',
