@@ -65,4 +65,35 @@ test.describe('Chatwoot', () => {
 
     expect(chatwootSettings).toBeDefined();
   });
+
+  test('should not hide bubble on desktop', async ({ page }) => {
+    // Default Playwright viewport is 1280x720 (desktop)
+    const chatwootSettings = await page.evaluate(() => {
+      return (
+        window as unknown as {
+          chatwootSettings: { hideMessageBubble?: boolean };
+        }
+      ).chatwootSettings;
+    });
+
+    expect(chatwootSettings.hideMessageBubble).toBe(false);
+  });
+});
+
+test.describe('Chatwoot Mobile', () => {
+  test.use({ viewport: { width: 375, height: 667 } });
+
+  test('should hide bubble on mobile initially', async ({ page }) => {
+    await page.goto('/');
+
+    const chatwootSettings = await page.evaluate(() => {
+      return (
+        window as unknown as {
+          chatwootSettings: { hideMessageBubble?: boolean };
+        }
+      ).chatwootSettings;
+    });
+
+    expect(chatwootSettings.hideMessageBubble).toBe(true);
+  });
 });
