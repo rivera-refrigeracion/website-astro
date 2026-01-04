@@ -53,28 +53,33 @@
       if (isMobile) {
         let hasShown = false;
 
+        function showBubble() {
+          if (hasShown) return;
+          hasShown = true;
+          window.$chatwoot.toggleBubbleVisibility('show');
+          window.removeEventListener('scroll', showChatwootOnScroll);
+        }
+
         function showChatwootOnScroll() {
           if (hasShown) return;
 
           requestAnimationFrame(function () {
             if (window.scrollY > MOBILE_SCROLL_THRESHOLD) {
-              hasShown = true;
-
-              // Wait for Chatwoot to be fully ready
-              if (
-                window.$chatwoot &&
-                typeof window.$chatwoot.toggleBubbleVisibility === 'function'
-              ) {
-                window.$chatwoot.toggleBubbleVisibility('show');
-              }
-
-              window.removeEventListener('scroll', showChatwootOnScroll);
+              showBubble();
             }
           });
         }
 
-        window.addEventListener('scroll', showChatwootOnScroll, {
-          passive: true,
+        // Wait for Chatwoot to be fully ready before adding scroll listener
+        window.addEventListener('chatwoot:ready', function () {
+          // Check if already scrolled past threshold
+          if (window.scrollY > MOBILE_SCROLL_THRESHOLD) {
+            showBubble();
+          } else {
+            window.addEventListener('scroll', showChatwootOnScroll, {
+              passive: true,
+            });
+          }
         });
       }
     };
