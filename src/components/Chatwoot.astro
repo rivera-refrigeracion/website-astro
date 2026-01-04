@@ -3,12 +3,21 @@
  * Chatwoot live chat widget
  * Loads the Chatwoot SDK for customer support chat
  * Hidden initially on mobile, shows on scroll
+ *
+ * Note: Mobile detection happens on page load. Resize behavior is not handled
+ * as it's a rare edge case for this business site.
  */
 ---
 
 <script is:inline>
   (function () {
-    const isMobile = window.innerWidth < 768;
+    // Configuration
+    const BASE_URL = 'https://chatwoot.jjuanrivvera.com';
+    const WEBSITE_TOKEN = 'D5NFtGXHnQFwJh4Z9BUY7jeX';
+    const MOBILE_BREAKPOINT = 768;
+    const MOBILE_SCROLL_THRESHOLD = 300; // Show widget after scrolling past hero section
+
+    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
 
     window.chatwootSettings = {
       position: 'right',
@@ -17,7 +26,6 @@
       hideMessageBubble: isMobile,
     };
 
-    const BASE_URL = 'https://chatwoot.jjuanrivvera.com';
     const script = document.createElement('script');
     const firstScript = document.getElementsByTagName('script')[0];
 
@@ -26,23 +34,30 @@
     script.async = true;
     firstScript.parentNode.insertBefore(script, firstScript);
 
+    script.onerror = function () {
+      console.error('Failed to load Chatwoot SDK');
+    };
+
     script.onload = function () {
-      window.chatwootSDK.run({
-        websiteToken: 'D5NFtGXHnQFwJh4Z9BUY7jeX',
-        baseUrl: BASE_URL,
-      });
+      try {
+        window.chatwootSDK.run({
+          websiteToken: WEBSITE_TOKEN,
+          baseUrl: BASE_URL,
+        });
+      } catch (error) {
+        console.error('Chatwoot initialization failed:', error);
+        return;
+      }
 
       // Show widget on scroll only for mobile
       if (isMobile) {
         let hasShown = false;
-        // Show after scrolling past hero section (~300px on most mobile devices)
-        const scrollThreshold = 300;
 
         function showChatwootOnScroll() {
           if (hasShown) return;
 
           requestAnimationFrame(function () {
-            if (window.scrollY > scrollThreshold && !hasShown) {
+            if (window.scrollY > MOBILE_SCROLL_THRESHOLD) {
               hasShown = true;
 
               // Wait for Chatwoot to be fully ready
