@@ -2,86 +2,31 @@
 /**
  * Chatwoot live chat widget
  * Loads the Chatwoot SDK for customer support chat
- * Hidden initially on mobile, shows on scroll
- *
- * Note: Mobile detection happens on page load. Resize behavior is not handled
- * as it's a rare edge case for this business site.
  */
 ---
 
 <script is:inline>
   (function () {
-    // Configuration
-    const BASE_URL = 'https://chatwoot.jjuanrivvera.com';
-    const WEBSITE_TOKEN = 'D5NFtGXHnQFwJh4Z9BUY7jeX';
-    const MOBILE_BREAKPOINT = 768;
-    const MOBILE_SCROLL_THRESHOLD = 300; // Show widget after scrolling past hero section
-
-    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+    var BASE_URL = 'https://chatwoot.jjuanrivvera.com';
+    var WEBSITE_TOKEN = 'D5NFtGXHnQFwJh4Z9BUY7jeX';
 
     window.chatwootSettings = {
       position: 'right',
       type: 'standard',
       launcherTitle: 'Habla con nosotros',
-      hideMessageBubble: isMobile,
     };
 
-    const script = document.createElement('script');
-    const firstScript = document.getElementsByTagName('script')[0];
-
+    var script = document.createElement('script');
     script.src = BASE_URL + '/packs/js/sdk.js';
     script.defer = true;
     script.async = true;
-    firstScript.parentNode.insertBefore(script, firstScript);
-
-    script.onerror = function () {
-      console.error('Failed to load Chatwoot SDK');
-    };
+    document.body.appendChild(script);
 
     script.onload = function () {
-      try {
-        window.chatwootSDK.run({
-          websiteToken: WEBSITE_TOKEN,
-          baseUrl: BASE_URL,
-        });
-      } catch (error) {
-        console.error('Chatwoot initialization failed:', error);
-        return;
-      }
-
-      // Show widget on scroll only for mobile
-      if (isMobile) {
-        let hasShown = false;
-
-        function showBubble() {
-          if (hasShown) return;
-          hasShown = true;
-          window.$chatwoot.toggleBubbleVisibility('show');
-          window.removeEventListener('scroll', showChatwootOnScroll);
-        }
-
-        function showChatwootOnScroll() {
-          if (hasShown) return;
-
-          requestAnimationFrame(function () {
-            if (window.scrollY > MOBILE_SCROLL_THRESHOLD) {
-              showBubble();
-            }
-          });
-        }
-
-        // Wait for Chatwoot to be fully ready before adding scroll listener
-        window.addEventListener('chatwoot:ready', function () {
-          // Check if already scrolled past threshold
-          if (window.scrollY > MOBILE_SCROLL_THRESHOLD) {
-            showBubble();
-          } else {
-            window.addEventListener('scroll', showChatwootOnScroll, {
-              passive: true,
-            });
-          }
-        });
-      }
+      window.chatwootSDK.run({
+        websiteToken: WEBSITE_TOKEN,
+        baseUrl: BASE_URL,
+      });
     };
   })();
 </script>
