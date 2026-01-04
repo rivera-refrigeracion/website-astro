@@ -2,28 +2,81 @@
 /**
  * Chatwoot live chat widget
  * Loads the Chatwoot SDK for customer support chat
+ * Hidden initially on mobile, shows on scroll
+ *
+ * Note: Mobile detection happens on page load. Resize behavior is not handled
+ * as it's a rare edge case for this business site.
  */
 ---
 
 <script is:inline>
-  window.chatwootSettings = {
-    position: 'right',
-    type: 'standard',
-    launcherTitle: 'Habla con nosotros',
-  };
-  (function (d, t) {
-    var BASE_URL = 'https://chatwoot.jjuanrivvera.com';
-    var g = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    g.src = BASE_URL + '/packs/js/sdk.js';
-    g.defer = true;
-    g.async = true;
-    s.parentNode.insertBefore(g, s);
-    g.onload = function () {
-      window.chatwootSDK.run({
-        websiteToken: 'D5NFtGXHnQFwJh4Z9BUY7jeX',
-        baseUrl: BASE_URL,
-      });
+  (function () {
+    // Configuration
+    const BASE_URL = 'https://chatwoot.jjuanrivvera.com';
+    const WEBSITE_TOKEN = 'D5NFtGXHnQFwJh4Z9BUY7jeX';
+    const MOBILE_BREAKPOINT = 768;
+    const MOBILE_SCROLL_THRESHOLD = 300; // Show widget after scrolling past hero section
+
+    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+
+    window.chatwootSettings = {
+      position: 'right',
+      type: 'standard',
+      launcherTitle: 'Habla con nosotros',
+      hideMessageBubble: isMobile,
     };
-  })(document, 'script');
+
+    const script = document.createElement('script');
+    const firstScript = document.getElementsByTagName('script')[0];
+
+    script.src = BASE_URL + '/packs/js/sdk.js';
+    script.defer = true;
+    script.async = true;
+    firstScript.parentNode.insertBefore(script, firstScript);
+
+    script.onerror = function () {
+      console.error('Failed to load Chatwoot SDK');
+    };
+
+    script.onload = function () {
+      try {
+        window.chatwootSDK.run({
+          websiteToken: WEBSITE_TOKEN,
+          baseUrl: BASE_URL,
+        });
+      } catch (error) {
+        console.error('Chatwoot initialization failed:', error);
+        return;
+      }
+
+      // Show widget on scroll only for mobile
+      if (isMobile) {
+        let hasShown = false;
+
+        function showChatwootOnScroll() {
+          if (hasShown) return;
+
+          requestAnimationFrame(function () {
+            if (window.scrollY > MOBILE_SCROLL_THRESHOLD) {
+              hasShown = true;
+
+              // Wait for Chatwoot to be fully ready
+              if (
+                window.$chatwoot &&
+                typeof window.$chatwoot.toggleBubbleVisibility === 'function'
+              ) {
+                window.$chatwoot.toggleBubbleVisibility('show');
+              }
+
+              window.removeEventListener('scroll', showChatwootOnScroll);
+            }
+          });
+        }
+
+        window.addEventListener('scroll', showChatwootOnScroll, {
+          passive: true,
+        });
+      }
+    };
+  })();
 </script>

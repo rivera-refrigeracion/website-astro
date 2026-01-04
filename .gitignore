@@ -68,3 +68,6 @@ yarn.lock
 # Misc
 *.pem
 *.local
+
+# AI documentation (private notes)
+.ai/
