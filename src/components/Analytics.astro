@@ -1,7 +1,9 @@
 ---
-// Google Tag Manager
+// Google Tag Manager - Head Script
 // Manages all analytics and conversion tracking through GTM container
 // Only loads in production to avoid sending test data to GA4
+// Note: This component only includes the <head> script portion
+// The <noscript> iframe fallback should be added in <body> via AnalyticsBody.astro
 const GTM_ID = 'GTM-WGKFDPTD';
 const isProduction = import.meta.env.PROD;
 
