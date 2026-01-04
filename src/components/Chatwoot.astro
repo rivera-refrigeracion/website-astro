@@ -6,27 +6,24 @@
 ---
 
 <script is:inline>
-  (function () {
+  window.chatwootSettings = {
+    position: 'right',
+    type: 'standard',
+    launcherTitle: 'Habla con nosotros',
+  };
+  (function (d, t) {
     var BASE_URL = 'https://chatwoot.jjuanrivvera.com';
-    var WEBSITE_TOKEN = 'D5NFtGXHnQFwJh4Z9BUY7jeX';
-
-    window.chatwootSettings = {
-      position: 'right',
-      type: 'standard',
-      launcherTitle: 'Habla con nosotros',
-    };
-
-    var script = document.createElement('script');
-    script.src = BASE_URL + '/packs/js/sdk.js';
-    script.defer = true;
-    script.async = true;
-    document.body.appendChild(script);
-
-    script.onload = function () {
+    var g = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    g.src = BASE_URL + '/packs/js/sdk.js';
+    g.defer = true;
+    g.async = true;
+    s.parentNode.insertBefore(g, s);
+    g.onload = function () {
       window.chatwootSDK.run({
-        websiteToken: WEBSITE_TOKEN,
+        websiteToken: 'D5NFtGXHnQFwJh4Z9BUY7jeX',
         baseUrl: BASE_URL,
       });
     };
-  })();
+  })(document, 'script');
 </script>
