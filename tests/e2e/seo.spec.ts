@@ -13,10 +13,7 @@ test.describe('SEO', () => {
 
     test('should have canonical URL', async ({ page }) => {
       const canonical = page.locator('link[rel="canonical"]');
-      await expect(canonical).toHaveAttribute(
-        'href',
-        /^https:\/\/.+/
-      );
+      await expect(canonical).toHaveAttribute('href', /^https:\/\/.+/);
     });
 
     test('should have Open Graph tags', async ({ page }) => {
