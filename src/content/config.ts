@@ -21,4 +21,54 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const services = defineCollection({
+  type: 'content',
+  schema: z.object({
+    // Basic info
+    title: z.string(),
+    shortDescription: z.string(),
+    icon: z.string(),
+
+    // SEO
+    metaTitle: z.string(),
+    metaDescription: z.string(),
+    keywords: z.array(z.string()),
+
+    // Images
+    heroImage: z.object({
+      url: z.string(),
+      alt: z.string(),
+    }),
+
+    // Brands serviced
+    brands: z.array(
+      z.object({
+        name: z.string(),
+        logo: z.string().optional(),
+      })
+    ),
+
+    // Process/methodology (4 steps)
+    process: z.array(
+      z.object({
+        step: z.number(),
+        title: z.string(),
+        description: z.string(),
+        icon: z.string().optional(),
+      })
+    ),
+
+    // FAQs
+    faqs: z.array(
+      z.object({
+        question: z.string(),
+        answer: z.string(),
+      })
+    ),
+
+    // Service areas
+    serviceAreas: z.array(z.string()),
+  }),
+});
+
+export const collections = { blog, services };

@@ -5,7 +5,7 @@ const serviceImages: Record<string, string> = {
   'aire-acondicionado': '/images/services/aire-acondicionado.jpg',
   neveras: '/images/services/nevera.webp',
   lavadoras: '/images/services/lavadora.webp',
-  calentadores: '/images/services/calentador.png',
+  calentadores: '/images/services/calentador.webp',
 };
 ---
 
@@ -13,10 +13,13 @@ const serviceImages: Record<string, string> = {
   <div class="container">
     <h2 class="section-title">Nuestros servicios</h2>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr">
       {
         SERVICES.map((service) => (
-          <article class="card text-center hover:shadow-[var(--shadow-level2)] transition-shadow">
+          <a
+            href={`/servicios/${service.id}`}
+            class="card text-center hover:shadow-[var(--shadow-level2)] transition-all hover:scale-105 flex flex-col group"
+          >
             <figure class="mb-4">
               <img
                 src={
@@ -33,10 +36,26 @@ const serviceImages: Record<string, string> = {
             <h3 class="text-xl font-semibold mb-3 text-neutral-900">
               {service.title}
             </h3>
-            <p class="text-neutral-600 leading-relaxed">
+            <p class="text-neutral-600 leading-relaxed mb-4 flex-grow">
               {service.description}
             </p>
-          </article>
+            <span class="inline-flex items-center gap-1 text-secondary-600 hover:text-secondary-700 font-medium text-sm transition-colors mt-auto group-hover:gap-2">
+              Ver más
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </span>
+          </a>
         ))
       }
     </div>
