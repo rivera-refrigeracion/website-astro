@@ -78,12 +78,6 @@ serviceAreas:
   - 'San Fernando'
   - 'Limonar'
   - 'Pance'
-
-# Pricing
-pricing:
-  inspection: 'Desde $25,000 COP'
-  hourlyRate: '$50,000 - $80,000 COP'
-  notes: 'Instalación completa desde $150,000 COP según complejidad. Reparaciones desde $35,000 COP.'
 ---
 
 ## Instalación y Reparación de Calentadores de Agua en Cali

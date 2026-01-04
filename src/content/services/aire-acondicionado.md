@@ -78,12 +78,6 @@ serviceAreas:
   - 'San Fernando'
   - 'Limonar'
   - 'Meléndez'
-
-# Pricing
-pricing:
-  inspection: 'Desde $25,000 COP'
-  hourlyRate: '$40,000 - $60,000 COP'
-  notes: 'El costo de inspección se descuenta si aprueba la reparación. Precios de repuestos según marca y modelo.'
 ---
 
 ## Servicio Técnico Especializado en Aire Acondicionado en Cali

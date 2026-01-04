@@ -136,42 +136,6 @@ const { Content } = await service.render();
           </div>
         </section>
 
-        <!-- Pricing Section -->
-        <section class="mb-16 bg-secondary-50 rounded-lg p-8">
-          <h2 class="text-2xl lg:text-3xl font-bold mb-6 text-center">
-            Tarifas
-          </h2>
-          <div class="max-w-2xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div class="text-center p-4 bg-white rounded-lg">
-                <p class="text-sm text-neutral-600 mb-2">
-                  Visita de Diagnóstico
-                </p>
-                <p class="text-2xl font-bold text-secondary-600">
-                  {service.data.pricing.inspection}
-                </p>
-              </div>
-              {
-                service.data.pricing.hourlyRate && (
-                  <div class="text-center p-4 bg-white rounded-lg">
-                    <p class="text-sm text-neutral-600 mb-2">Mano de Obra</p>
-                    <p class="text-2xl font-bold text-secondary-600">
-                      {service.data.pricing.hourlyRate}
-                    </p>
-                  </div>
-                )
-              }
-            </div>
-            {
-              service.data.pricing.notes && (
-                <p class="text-sm text-neutral-600 text-center italic">
-                  {service.data.pricing.notes}
-                </p>
-              )
-            }
-          </div>
-        </section>
-
         <!-- CTA Section -->
         <section class="text-center bg-primary-600 text-white rounded-lg p-8">
           <h2 class="text-2xl lg:text-3xl font-bold mb-4">
@@ -202,7 +166,7 @@ const { Content } = await service.render();
           <p class="text-sm mt-4 opacity-75">
             Llamadas: <a
               href={`tel:${CONTACT.phone}`}
-              class="underline hover:no-underline">{CONTACT.phone}</a
+              class="text-white underline hover:no-underline">{CONTACT.phone}</a
             >
           </p>
         </section>
@@ -251,14 +215,6 @@ const { Content } = await service.render();
       areaServed: {
         '@type': 'City',
         name: 'Cali',
-      },
-      offers: {
-        '@type': 'Offer',
-        priceSpecification: {
-          '@type': 'PriceSpecification',
-          priceCurrency: 'COP',
-          price: service.data.pricing.inspection.match(/\d+/)?.[0] || '25000',
-        },
       },
     })}
   />

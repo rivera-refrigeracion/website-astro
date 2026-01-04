@@ -68,13 +68,6 @@ const services = defineCollection({
 
     // Service areas
     serviceAreas: z.array(z.string()),
-
-    // Pricing
-    pricing: z.object({
-      inspection: z.string(),
-      hourlyRate: z.string().optional(),
-      notes: z.string().optional(),
-    }),
   }),
 });
 

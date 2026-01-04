@@ -78,12 +78,6 @@ serviceAreas:
   - 'El Ingenio'
   - 'Pance'
   - 'Jamundí'
-
-# Pricing
-pricing:
-  inspection: 'Desde $25,000 COP'
-  hourlyRate: '$35,000 - $55,000 COP'
-  notes: 'Costo de diagnóstico se descuenta si aprueba reparación. Repuestos cotizados según marca y modelo.'
 ---
 
 ## Reparación Profesional de Neveras en Cali

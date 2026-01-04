@@ -78,12 +78,6 @@ serviceAreas:
   - 'Tequendama'
   - 'Normandía'
   - 'Versalles'
-
-# Pricing
-pricing:
-  inspection: 'Desde $25,000 COP'
-  hourlyRate: '$35,000 - $50,000 COP'
-  notes: 'Diagnóstico se descuenta al aprobar reparación. Costo de repuestos según marca y modelo.'
 ---
 
 ## Servicio Técnico de Lavadoras a Domicilio en Cali

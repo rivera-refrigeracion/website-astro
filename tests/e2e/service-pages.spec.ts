@@ -123,17 +123,6 @@ test.describe('Service Pages - General', () => {
         await expect(answer).toBeVisible();
       });
 
-      test('should display pricing section', async ({ page }) => {
-        const pricingHeading = page.getByRole('heading', {
-          name: /Tarifas/i,
-        });
-        await expect(pricingHeading).toBeVisible();
-
-        // Should show inspection cost text from the pricing data
-        const pricingSection = page.locator('text=Tarifas').locator('..');
-        await expect(pricingSection).toBeVisible();
-      });
-
       test('should display CTA section with WhatsApp button', async ({
         page,
       }) => {

@@ -23,7 +23,7 @@ test.describe('Homepage', () => {
     if (!isMobile) {
       const navItems = ['Inicio', 'Servicios', 'Sobre nosotros', 'Blog'];
       for (const item of navItems) {
-        await expect(page.getByRole('link', { name: item })).toBeVisible();
+        await expect(header.getByRole('link', { name: item })).toBeVisible();
       }
     }
   });

@@ -88,11 +88,6 @@ describe('Services Collection', () => {
         expect(faq.answer.length).toBeGreaterThan(20);
       });
     });
-
-    it('should have pricing information', () => {
-      expect(service.data.pricing.inspection).toBeDefined();
-      expect(service.data.pricing.inspection).toContain('$');
-    });
   });
 
   describe('Service: Neveras', () => {
@@ -204,13 +199,6 @@ describe('Services Collection', () => {
     it('all services should have 4-step process', () => {
       services.forEach((service) => {
         expect(service.data.process).toHaveLength(4);
-      });
-    });
-
-    it('all services should have pricing with inspection cost', () => {
-      services.forEach((service) => {
-        expect(service.data.pricing.inspection).toBeDefined();
-        expect(service.data.pricing.inspection.length).toBeGreaterThan(0);
       });
     });
   });
