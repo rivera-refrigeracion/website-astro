@@ -18,8 +18,9 @@ const {
 } = Astro.props;
 
 const pageTitle = title ? `${title} | ${SITE.name}` : SITE.title;
-const canonicalURL = new URL(Astro.url.pathname, SITE.url);
-const imageURL = new URL(image, SITE.url);
+const siteURL = Astro.url.origin;
+const canonicalURL = new URL(Astro.url.pathname, siteURL);
+const imageURL = new URL(image, siteURL);
 
 const jsonLd = {
   '@context': 'https://schema.org',
