@@ -1,27 +1,17 @@
 ---
-// Google Analytics / Site Kit integration
-// Replicates WordPress Google Site Kit configuration
-interface Props {
-  postType?: 'page' | 'post';
-}
+// Google Tag Manager
+// Manages all analytics and conversion tracking through GTM container
+// Only loads in production to avoid sending test data to GA4
+const GTM_ID = 'GTM-WGKFDPTD';
+const isProduction = import.meta.env.PROD;
 
-const { postType = 'page' } = Astro.props;
-const GA_MEASUREMENT_ID = 'GT-NBXCT45G';
+const gtmScript = `<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');
+</script>`;
 ---
 
-<!-- Google Tag (gtag.js) - Google Site Kit -->
-<script
-  is:inline
-  async
-  src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-></script>
-<script is:inline define:vars={{ GA_MEASUREMENT_ID, postType }}>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag('set', 'linker', { domains: ['rivera-refrigeracion.com'] });
-  gtag('js', new Date());
-  gtag('set', 'developer_id.dZTNiMT', true);
-  gtag('config', GA_MEASUREMENT_ID, { googlesitekit_post_type: postType });
-</script>
+{isProduction && <Fragment set:html={gtmScript} />}
