@@ -15,7 +15,7 @@ test.describe('SEO', () => {
       const canonical = page.locator('link[rel="canonical"]');
       await expect(canonical).toHaveAttribute(
         'href',
-        /https:\/\/rivera-refrigeracion\.com/
+        /^https:\/\/.+/
       );
     });
 

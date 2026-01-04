@@ -18,7 +18,8 @@ const {
 } = Astro.props;
 
 const pageTitle = title ? `${title} | ${SITE.name}` : SITE.title;
-const siteURL = Astro.url.origin;
+// Use canonical domain in production, dynamic origin in preview/dev environments
+const siteURL = import.meta.env.PROD ? SITE.url : Astro.url.origin;
 const canonicalURL = new URL(Astro.url.pathname, siteURL);
 const imageURL = new URL(image, siteURL);
 
