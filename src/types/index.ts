@@ -50,6 +50,101 @@ export type IconName =
   | 'clock';
 
 /**
+ * Runtime validation helper for star ratings.
+ * Checks if a number is a valid StarRating (1-5).
+ *
+ * @param value - The number to validate
+ * @returns True if the value is a valid star rating
+ *
+ * @example
+ * ```typescript
+ * if (isValidStarRating(userInput)) {
+ *   const rating: StarRating = userInput;
+ * }
+ * ```
+ */
+export function isValidStarRating(value: number): value is StarRating {
+  return Number.isInteger(value) && value >= 1 && value <= 5;
+}
+
+/**
+ * Runtime validation and conversion helper for service IDs.
+ * Validates and converts a string to a ServiceId.
+ *
+ * @param value - The string to validate and convert
+ * @returns The value as a ServiceId
+ * @throws Error if the value is not a valid service ID
+ *
+ * @example
+ * ```typescript
+ * try {
+ *   const serviceId = toServiceId(userInput);
+ *   // Use serviceId safely
+ * } catch (error) {
+ *   console.error('Invalid service ID');
+ * }
+ * ```
+ */
+export function toServiceId(value: string): ServiceId {
+  const validIds = [
+    'aire-acondicionado',
+    'neveras',
+    'lavadoras',
+    'calentadores',
+  ];
+  if (!validIds.includes(value)) {
+    throw new Error(`Invalid service ID: ${value}`);
+  }
+  return value as ServiceId;
+}
+
+/**
+ * Runtime validation helper for icon names.
+ * Checks if a string is a valid IconName.
+ *
+ * @param value - The string to validate
+ * @returns True if the value is a valid icon name
+ *
+ * @example
+ * ```typescript
+ * if (isValidIconName(iconString)) {
+ *   const icon: IconName = iconString;
+ * }
+ * ```
+ */
+export function isValidIconName(value: string): value is IconName {
+  const validIcons: IconName[] = [
+    'air-conditioner',
+    'refrigerator',
+    'washing-machine',
+    'flame',
+    'shield-check',
+    'users',
+    'clock',
+  ];
+  return validIcons.includes(value as IconName);
+}
+
+/**
+ * Runtime validation helper for ISO date strings.
+ * Checks if a string is a valid ISO 8601 date format.
+ *
+ * @param value - The string to validate
+ * @returns True if the value is a valid ISO date string
+ *
+ * @example
+ * ```typescript
+ * if (isValidISODateString(dateString)) {
+ *   const isoDate: ISODateString = dateString;
+ * }
+ * ```
+ */
+export function isValidISODateString(value: string): value is ISODateString {
+  const isoDateRegex = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d{3})?Z?)?$/;
+  return isoDateRegex.test(value) && !isNaN(Date.parse(value));
+}
+
+/**
  * Represents a blog post entry with metadata and content.
  * Used for rendering blog articles and RSS feed generation.
  */
