@@ -5,6 +5,9 @@ import type {
   Testimonial,
   NavItem,
   SEOProps,
+  ServiceId,
+  IconName,
+  ISODateString,
 } from '../../src/types';
 
 describe('Type Definitions', () => {
@@ -48,10 +51,10 @@ describe('Type Definitions', () => {
   describe('Service interface', () => {
     it('should allow valid service object', () => {
       const service: Service = {
-        id: 'test-service',
+        id: 'test-service' as ServiceId,
         title: 'Test Service',
         description: 'Test description',
-        icon: 'test-icon',
+        icon: 'air-conditioner' as IconName,
       };
 
       expect(service.id).toBe('test-service');
@@ -106,8 +109,8 @@ describe('Type Definitions', () => {
         description: 'Test description',
         image: '/images/og.jpg',
         article: true,
-        publishedTime: '2024-01-01',
-        modifiedTime: '2024-01-02',
+        publishedTime: '2024-01-01' as ISODateString,
+        modifiedTime: '2024-01-02' as ISODateString,
         author: 'Author',
         section: 'Blog',
         tags: ['tag1', 'tag2'],

@@ -1,4 +1,55 @@
 /**
+ * Branded type for service IDs to prevent accidental mixing with plain strings.
+ * Ensures type safety when working with service identifiers.
+ *
+ * @example
+ * ```typescript
+ * const serviceId: ServiceId = 'aire-acondicionado' as ServiceId;
+ * ```
+ */
+export type ServiceId = string & { readonly __brand: 'ServiceId' };
+
+/**
+ * Branded type for ISO 8601 date strings.
+ * Provides compile-time safety for date string formatting.
+ *
+ * @example
+ * ```typescript
+ * const publishDate: ISODateString = '2024-01-15T00:00:00Z' as ISODateString;
+ * ```
+ */
+export type ISODateString = string & { readonly __brand: 'ISODateString' };
+
+/**
+ * Union type for star ratings (1-5).
+ * Restricts rating values to valid integers between 1 and 5 inclusive.
+ *
+ * @example
+ * ```typescript
+ * const rating: StarRating = 5;
+ * ```
+ */
+export type StarRating = 1 | 2 | 3 | 4 | 5;
+
+/**
+ * Union type for valid icon identifiers used throughout the application.
+ * Includes icons for services and feature sections.
+ *
+ * @example
+ * ```typescript
+ * const icon: IconName = 'air-conditioner';
+ * ```
+ */
+export type IconName =
+  | 'air-conditioner'
+  | 'refrigerator'
+  | 'washing-machine'
+  | 'flame'
+  | 'shield-check'
+  | 'users'
+  | 'clock';
+
+/**
  * Represents a blog post entry with metadata and content.
  * Used for rendering blog articles and RSS feed generation.
  */
@@ -34,13 +85,13 @@ export interface BlogPost {
  */
 export interface Service {
   /** Unique identifier for the service (e.g., "aire-acondicionado") */
-  id: string;
+  id: ServiceId;
   /** Service name displayed to users */
   title: string;
   /** Brief description of the service offering */
   description: string;
   /** Icon name from the icon library (e.g., "air-conditioner") */
-  icon: string;
+  icon: IconName;
 }
 
 /**
@@ -53,7 +104,7 @@ export interface Testimonial {
   /** Name of the customer providing the testimonial */
   author: string;
   /** Optional star rating (1-5) */
-  rating?: number;
+  rating?: StarRating;
 }
 
 /**
@@ -91,9 +142,9 @@ export interface SEOProps {
   /** Whether this is an article page (enables article-specific meta tags) */
   article?: boolean;
   /** ISO 8601 publication date for articles */
-  publishedTime?: string;
+  publishedTime?: ISODateString;
   /** ISO 8601 last modification date for articles */
-  modifiedTime?: string;
+  modifiedTime?: ISODateString;
   /** Article author name */
   author?: string;
   /** Article section/category (e.g., "Mantenimiento") */

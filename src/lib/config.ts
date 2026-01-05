@@ -1,3 +1,5 @@
+import type { ServiceId, IconName } from '@/types';
+
 /**
  * Site-wide configuration and metadata.
  * Used for SEO, Open Graph tags, and general site information.
@@ -75,32 +77,32 @@ export const NAVIGATION = [
  */
 export const SERVICES = [
   {
-    id: 'aire-acondicionado',
+    id: 'aire-acondicionado' as ServiceId,
     title: 'Aire Acondicionado',
     description:
       'Instalamos y reparamos unidades de aire acondicionado para mantener tu hogar u oficina a la temperatura perfecta durante todo el año.',
-    icon: 'air-conditioner',
+    icon: 'air-conditioner' as IconName,
   },
   {
-    id: 'neveras',
+    id: 'neveras' as ServiceId,
     title: 'Neveras',
     description:
       'Mantenemos tus alimentos frescos con nuestros servicios de reparación y mantenimiento de refrigeradores de todas las marcas y modelos.',
-    icon: 'refrigerator',
+    icon: 'refrigerator' as IconName,
   },
   {
-    id: 'lavadoras',
+    id: 'lavadoras' as ServiceId,
     title: 'Lavadoras',
     description:
       'Ofrecemos reparación y mantenimiento para asegurarte que tu lavadora funcione de manera eficiente, ahorrándote tiempo y esfuerzo.',
-    icon: 'washing-machine',
+    icon: 'washing-machine' as IconName,
   },
   {
-    id: 'calentadores',
+    id: 'calentadores' as ServiceId,
     title: 'Calentadores',
     description:
       'Instalación, mantenimiento y reparación de calentadores de agua de gas y eléctricos para garantizar agua caliente cuando la necesites.',
-    icon: 'flame',
+    icon: 'flame' as IconName,
   },
 ] as const;
 
@@ -114,19 +116,19 @@ export const WHY_US = [
     title: 'Experiencia y Confiabilidad',
     description:
       'Con décadas de experiencia, Rubén Darío Rivera ha construido una reputación de confianza y calidad en cada trabajo realizado.',
-    icon: 'shield-check',
+    icon: 'shield-check' as IconName,
   },
   {
     title: 'Atención Personalizada',
     description:
       'Nos enorgullece ofrecer un servicio personalizado y adaptado a las necesidades específicas de cada cliente.',
-    icon: 'users',
+    icon: 'users' as IconName,
   },
   {
     title: 'Soluciones Rápidas y Efectivas',
     description:
       'Entendemos la importancia de tus electrodomésticos en el día a día, por lo que trabajamos con rapidez y eficiencia para minimizar las molestias.',
-    icon: 'clock',
+    icon: 'clock' as IconName,
   },
 ] as const;
 
