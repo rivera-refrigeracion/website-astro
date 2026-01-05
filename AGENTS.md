@@ -293,6 +293,107 @@ The project uses `rollup-plugin-visualizer` to analyze bundle composition:
   - Consider tree-shakeable alternatives
   - Evaluate if the functionality can be implemented natively
 
+## Deployment
+
+### Netlify Automatic Deployment
+
+The site is configured for **automatic deployment** to Netlify. Every push to the `main` branch triggers a production deployment.
+
+**Production URL**: `https://rivera-refrigeracion.com`
+
+#### Build Configuration
+
+The deployment is configured via `netlify.toml`:
+
+```toml
+[build]
+  command = "pnpm install && pnpm build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  PNPM_VERSION = "9"
+```
+
+**Build Process**:
+
+1. Push commits to `main` branch
+2. Netlify detects changes via webhook
+3. Runs `pnpm install && pnpm build`
+4. Deploys `dist/` directory to production
+5. Deployment typically completes in 2-3 minutes
+
+#### Cache Strategy
+
+Netlify is configured with aggressive caching for optimal performance:
+
+- **HTML**: No cache (`max-age=0, must-revalidate`) - Always fresh content
+- **Hashed Assets** (`/_astro/*`): 1 year cache (`immutable`) - Fingerprinted files
+- **Images** (`.webp`, `.png`, `.jpg`, `.svg`): 1 year cache (`immutable`)
+- **CSS/JS**: 1 year cache (`immutable`)
+- **Fonts** (`.woff2`, `.woff`): 1 year cache (`immutable`)
+- **Favicon**: 1 week cache
+- **RSS/Sitemap**: 1 hour cache
+- **robots.txt**: 1 day cache
+
+#### Security Headers
+
+All pages include security headers configured in `netlify.toml`:
+
+- `X-Frame-Options: DENY`
+- `X-Content-Type-Options: nosniff`
+- `X-XSS-Protection: 1; mode=block`
+- `Strict-Transport-Security` (HSTS)
+- Content Security Policy (CSP)
+- `Referrer-Policy: strict-origin-when-cross-origin`
+
+#### Deployment Workflow
+
+```bash
+# 1. Make changes locally
+git add .
+git commit -m "Add new feature"
+
+# 2. Push to GitHub (triggers Netlify build)
+git push origin main
+
+# 3. Monitor deployment
+# Visit Netlify dashboard or check GitHub commit status
+
+# 4. Verify deployment
+# Open https://rivera-refrigeracion.com
+```
+
+#### Important Notes
+
+- **E2E tests run locally** against `http://localhost:4500`, not production
+- **Images must be committed** to git to appear in production
+- **Cache purging**: Changes to HTML are immediate; cached assets require new hash
+- **Build failures**: Check Netlify deploy logs if deployment fails
+- **Preview deploys**: Pull requests automatically get preview URLs
+
+#### Troubleshooting Deployment Issues
+
+**Image 404 errors:**
+
+- Verify file exists in `public/images/` directory
+- Ensure file is committed to git: `git ls-files public/images/filename`
+- Check Netlify deploy log for missing files
+- Clear browser cache if image was recently added
+
+**Build failures:**
+
+- Check Netlify deploy logs for error messages
+- Verify build passes locally: `pnpm build`
+- Ensure all dependencies are in `package.json`
+- Check Node/pnpm versions match `netlify.toml`
+
+**Stale content:**
+
+- HTML updates are immediate (no cache)
+- CSS/JS changes require new build (Astro hashes filenames automatically)
+- Force refresh browser cache: `Ctrl+Shift+R` or `Cmd+Shift+R`
+
 ## Language & Content Guidelines
 
 - All user-facing content in Spanish (Colombia locale)
