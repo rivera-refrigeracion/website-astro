@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   SITE,
   CONTACT,
+  SOCIAL,
   NAVIGATION,
   SERVICES,
   WHY_US,
@@ -48,6 +49,34 @@ describe('Site Configuration', () => {
     it('should have location in Cali, Colombia', () => {
       expect(CONTACT.location).toContain('Cali');
       expect(CONTACT.location).toContain('Colombia');
+    });
+
+    it('should have valid email address', () => {
+      expect(CONTACT.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+    });
+
+    it('should have email at rivera-refrigeracion.com domain', () => {
+      expect(CONTACT.email).toContain('rivera-refrigeracion.com');
+    });
+  });
+
+  describe('SOCIAL', () => {
+    it('should have WhatsApp link', () => {
+      expect(SOCIAL.whatsapp).toMatch(/whatsapp\.com|wa\.me/);
+    });
+
+    it('should have Facebook link', () => {
+      expect(SOCIAL.facebook).toMatch(/facebook\.com/);
+    });
+
+    it('should have Instagram link', () => {
+      expect(SOCIAL.instagram).toMatch(/instagram\.com/);
+    });
+
+    it('all social links should be valid URLs', () => {
+      expect(SOCIAL.whatsapp).toMatch(/^https?:\/\//);
+      expect(SOCIAL.facebook).toMatch(/^https?:\/\//);
+      expect(SOCIAL.instagram).toMatch(/^https?:\/\//);
     });
   });
 

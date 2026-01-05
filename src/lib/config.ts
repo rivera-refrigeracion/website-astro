@@ -16,10 +16,13 @@ export const CONTACT = {
   whatsappLink: 'https://api.whatsapp.com/send?phone=573016963313',
   appointmentLink: 'https://bit.ly/3XomYEV',
   location: 'Cali, Valle del Cauca, Colombia',
+  email: 'ruben@rivera-refrigeracion.com',
 } as const;
 
 export const SOCIAL = {
   whatsapp: 'https://api.whatsapp.com/send?phone=573016963313',
+  facebook: 'https://www.facebook.com/profile.php?id=61564032905797',
+  instagram: 'https://instagram.com/rivera.refrigeracion',
 } as const;
 
 export const NAVIGATION = [

@@ -188,7 +188,7 @@ test.describe('Service Pages - General', () => {
         await expect(h1).toBeVisible();
 
         const whatsappButton = page.getByRole('link', {
-          name: /WhatsApp/i,
+          name: 'Contáctanos por WhatsApp',
         });
         await expect(whatsappButton).toBeVisible();
       });
