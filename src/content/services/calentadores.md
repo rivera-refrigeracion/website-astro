@@ -15,7 +15,7 @@ keywords:
 
 # Images
 heroImage:
-  url: '/images/services/calentador.webp'
+  url: '/images/services/calentadores.webp'
   alt: 'Instalación profesional de calentador de agua en Cali'
 
 # Brands serviced
