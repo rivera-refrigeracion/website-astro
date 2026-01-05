@@ -4,6 +4,9 @@ dist/
 # Astro generated files
 .astro/
 
+# Bundle analyzer
+stats.html
+
 # Dependencies
 node_modules/
 
