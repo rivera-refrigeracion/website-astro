@@ -14,6 +14,14 @@ This document provides comprehensive guidelines for working with the Rivera Refr
 - `pnpm build` - Run type check (astro check) and build for production
 - `pnpm check` - Run Astro type checking only
 
+### Bundle Analysis
+
+- `pnpm build` - Automatically generates `stats.html` with bundle analysis
+  - Opens interactive visualization in browser
+  - Shows module sizes with gzip and brotli compression
+  - Helps identify optimization opportunities
+  - File is excluded from git (.gitignore)
+
 ### Code Quality
 
 - `pnpm lint` - Run ESLint on .js, .ts, .astro files
@@ -267,6 +275,23 @@ test('should display hero section with CTA', async ({ page }) => {
 - Minimize client-side JavaScript
 - Leverage Tailwind's purging for smaller CSS bundles
 - Test build output regularly with `pnpm build`
+
+### Bundle Optimization
+
+The project uses `rollup-plugin-visualizer` to analyze bundle composition:
+
+- **Review stats.html regularly** after significant dependency changes
+- **Monitor bundle size** - look for unexpectedly large modules
+- **Identify optimization opportunities:**
+  - Replace large dependencies with lighter alternatives
+  - Use dynamic imports for code splitting
+  - Remove unused dependencies
+  - Check for duplicate dependencies
+- **Track compression ratios** - gzip and brotli sizes shown
+- **Before adding dependencies:**
+  - Check their bundle impact in stats.html
+  - Consider tree-shakeable alternatives
+  - Evaluate if the functionality can be implemented natively
 
 ## Language & Content Guidelines
 

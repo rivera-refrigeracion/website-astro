@@ -61,6 +61,10 @@ Este sitio web está construido con tecnologías modernas para proporcionar una 
 - **[Husky](https://typicode.github.io/husky/)** - Git hooks
 - **[lint-staged](https://github.com/okonet/lint-staged)** - Ejecutar linters en archivos staged
 
+### Optimización
+
+- **[rollup-plugin-visualizer](https://github.com/btd/rollup-plugin-visualizer)** - Análisis visual del bundle
+
 ### Integraciones
 
 - **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)** - Generación automática de sitemap
@@ -151,6 +155,28 @@ Los archivos de producción se generarán en la carpeta `dist/`.
 ```bash
 pnpm preview
 ```
+
+### Análisis de Bundle:
+
+El proyecto incluye `rollup-plugin-visualizer` para analizar el tamaño y composición del bundle:
+
+```bash
+pnpm build
+```
+
+Esto generará automáticamente un archivo `stats.html` que contiene:
+
+- **Visualización interactiva** del tamaño de cada módulo
+- **Tamaños comprimidos** con gzip y brotli
+- **Identificación de dependencias grandes** para optimización
+- **Análisis de tree-shaking** y code splitting
+
+El archivo `stats.html` se abrirá automáticamente en tu navegador después del build. Úsalo para:
+
+- Identificar dependencias que pueden optimizarse
+- Detectar código duplicado o innecesario
+- Monitorear el impacto de nuevas dependencias
+- Planificar estrategias de code splitting
 
 ## 🧪 Pruebas
 
