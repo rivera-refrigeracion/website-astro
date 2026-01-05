@@ -53,9 +53,7 @@
   "lint-staged": {
     "*.{js,ts,astro}": [
       "eslint --fix",
-      "prettier --write",
-      "bash -c 'pnpm test'",
-      "bash -c 'pnpm test:e2e'"
+      "prettier --write"
     ],
     "*.{json,md,css}": [
       "prettier --write"

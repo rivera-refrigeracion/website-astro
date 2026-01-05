@@ -1,5 +1,6 @@
 ---
 import { SITE, CONTACT, SERVICES, SOCIAL } from '@/lib/config';
+import { formatPhoneNumber } from '@/lib/utils';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -65,7 +66,7 @@ const currentYear = new Date().getFullYear();
               itemprop="telephone"
               class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-1"
             >
-              ☎ {CONTACT.phone}
+              ☎ {formatPhoneNumber(CONTACT.phone)}
             </a>
           </li>
           <li>
@@ -78,9 +79,7 @@ const currentYear = new Date().getFullYear();
               rel="noopener noreferrer"
               class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-1"
             >
-              💬 +57 {CONTACT.whatsapp.slice(2, 5)}
-              {CONTACT.whatsapp.slice(5, 8)}
-              {CONTACT.whatsapp.slice(8)}
+              💬 {formatPhoneNumber(CONTACT.whatsapp)}
             </a>
           </li>
           <li>
