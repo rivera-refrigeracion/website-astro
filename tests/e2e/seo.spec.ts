@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 
 test.describe('SEO', () => {
   test.describe('Homepage SEO', () => {
@@ -97,6 +97,81 @@ test.describe('SEO', () => {
 
       const h1 = page.getByRole('heading', { level: 1 });
       await expect(h1).toHaveCount(1);
+    });
+  });
+
+  test.describe('Analytics Blocking', () => {
+    test('should block GTM/GA requests in E2E tests', async ({ page }) => {
+      const completedRequests: string[] = [];
+      const failedRequests: string[] = [];
+
+      // Listen for all request completions
+      page.on('requestfinished', (request) => {
+        const url = request.url();
+        if (
+          url.includes('googletagmanager.com') ||
+          url.includes('google-analytics.com') ||
+          url.includes('analytics.google.com')
+        ) {
+          completedRequests.push(url);
+        }
+      });
+
+      // Listen for failed/aborted requests
+      page.on('requestfailed', (request) => {
+        const url = request.url();
+        if (
+          url.includes('googletagmanager.com') ||
+          url.includes('google-analytics.com') ||
+          url.includes('analytics.google.com')
+        ) {
+          failedRequests.push(url);
+        }
+      });
+
+      await page.goto('/');
+
+      // Wait a moment for any scripts to attempt loading
+      await page.waitForTimeout(1000);
+
+      // Log for debugging
+      if (completedRequests.length > 0) {
+        console.log('Completed analytics requests:', completedRequests);
+      }
+      if (failedRequests.length > 0) {
+        console.log('Failed/aborted analytics requests:', failedRequests);
+      }
+
+      // No analytics requests should have completed successfully
+      expect(completedRequests.length).toBe(0);
+
+      // Analytics requests should have been blocked (failed/aborted)
+      expect(failedRequests.length).toBeGreaterThan(0);
+    });
+
+    test('should have GTM script in HTML but not execute', async ({ page }) => {
+      await page.goto('/');
+
+      // Verify the GTM script tag exists in the HTML
+      const pageContent = await page.content();
+      expect(pageContent).toContain('GTM-WGKFDPTD');
+      expect(pageContent).toContain('googletagmanager.com');
+
+      // But the dataLayer should not be populated with GTM events
+      // since the script is blocked from loading
+      const dataLayerExists = await page.evaluate(() => {
+        return typeof window !== 'undefined' && 'dataLayer' in window;
+      });
+
+      // DataLayer might exist but should be empty or minimal
+      // since GTM script never loaded
+      if (dataLayerExists) {
+        const dataLayerLength = await page.evaluate(() => {
+          return (window as any).dataLayer?.length || 0;
+        });
+        // If dataLayer exists, it should be empty or have minimal entries
+        expect(dataLayerLength).toBeLessThanOrEqual(1);
+      }
     });
   });
 });

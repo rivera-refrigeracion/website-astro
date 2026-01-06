@@ -66,6 +66,34 @@ playwright test tests/e2e/homepage.spec.ts --grep "should have correct title"
 playwright test tests/e2e/homepage.spec.ts --debug
 ```
 
+#### Analytics Blocking in E2E Tests
+
+All E2E tests automatically block Google Analytics and Google Tag Manager requests to prevent fake test data from polluting production analytics dashboards. This is handled by a custom Playwright fixture located at `tests/e2e/fixtures.ts`.
+
+**How it works:**
+
+- GTM and GA network requests are intercepted and aborted before they complete
+- Analytics scripts still exist in the HTML (so we can verify they're configured)
+- No test data is sent to production analytics platforms
+
+**Important**: Always import test utilities from `./fixtures` instead of `@playwright/test` to ensure analytics blocking is active:
+
+```typescript
+// ✅ Good - analytics automatically blocked
+import { test, expect } from './fixtures';
+
+// ❌ Bad - missing analytics blocking
+import { test, expect } from '@playwright/test';
+```
+
+**Blocked domains:**
+
+- `googletagmanager.com` (GTM scripts)
+- `google-analytics.com` (GA tracking)
+- `analytics.google.com` (Additional GA endpoints)
+
+**Related**: See GitHub Issue #28 for implementation details.
+
 ## Code Style Guidelines
 
 ### Imports
