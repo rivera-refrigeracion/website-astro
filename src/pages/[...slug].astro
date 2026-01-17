@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import { CONTACT } from '@/lib/config';
+import type { ISODateString } from '@/types';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -27,8 +28,8 @@ const formattedDate = new Intl.DateTimeFormat('es-CO', {
   title={post.data.title}
   description={post.data.description}
   article={true}
-  publishedTime={post.data.pubDate.toISOString()}
-  modifiedTime={post.data.updatedDate?.toISOString()}
+  publishedTime={post.data.pubDate.toISOString() as ISODateString}
+  modifiedTime={post.data.updatedDate?.toISOString() as ISODateString}
   author={post.data.author}
   section={post.data.category}
   tags={post.data.tags}
