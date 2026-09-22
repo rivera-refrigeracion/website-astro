@@ -90,7 +90,14 @@ export interface ServicioResumen {
   serviceAreas: readonly string[];
 }
 
-export function negocio(servicios: readonly ServicioResumen[]): LocalBusiness {
+/**
+ * `logo` es una URL absoluta: el archivo lo genera Astro desde src/assets y su
+ * nombre lleva hash, así que no se puede escribir aquí a mano.
+ */
+export function negocio(
+  servicios: readonly ServicioResumen[],
+  logo: string
+): LocalBusiness {
   return {
     '@type': 'LocalBusiness',
     '@id': NEGOCIO_ID,
@@ -100,7 +107,7 @@ export function negocio(servicios: readonly ServicioResumen[]): LocalBusiness {
     telephone: CONTACT.phone,
     email: CONTACT.email,
     image: urlAbsoluta('/images/og-default.jpg'),
-    logo: urlAbsoluta('/images/logo.webp'),
+    logo,
     address: {
       '@type': 'PostalAddress',
       addressLocality: ADDRESS.locality,

@@ -1,6 +1,8 @@
 ---
+import { getImage, Picture } from 'astro:assets';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
+import { imagenLocal } from '@/lib/images';
 import { whatsappUrl } from '@/lib/utils';
 
 export async function getStaticPaths() {
@@ -21,6 +23,18 @@ const formattedDate = new Intl.DateTimeFormat('es-CO', {
   month: 'long',
   day: 'numeric',
 }).format(post.data.pubDate);
+
+const imagen = post.data.image ? imagenLocal(post.data.image.url) : undefined;
+
+// WhatsApp, por donde se comparte casi todo, no siempre previsualiza WebP:
+// la imagen social del artículo sale en JPEG aunque la de la página no.
+const imagenSocial = imagen
+  ? await getImage({
+      src: imagen,
+      format: 'jpg',
+      width: Math.min(1200, imagen.width),
+    })
+  : undefined;
 ---
 
 <Layout
@@ -32,7 +46,10 @@ const formattedDate = new Intl.DateTimeFormat('es-CO', {
   author={post.data.author}
   section={post.data.category}
   tags={post.data.tags}
-  image={post.data.image?.url}
+  image={imagenSocial?.src}
+  imageAlt={post.data.image?.alt}
+  imageWidth={imagenSocial && Number(imagenSocial.attributes.width)}
+  imageHeight={imagenSocial && Number(imagenSocial.attributes.height)}
   breadcrumbs={[
     { name: 'Inicio', path: '/' },
     { name: 'Blog', path: '/blog/' },
@@ -65,13 +82,18 @@ const formattedDate = new Intl.DateTimeFormat('es-CO', {
       </header>
 
       {
-        post.data.image?.url && post.data.imagePosition === 'top' && (
+        imagen && post.data.imagePosition === 'top' && (
           <figure class="max-w-3xl mx-auto mb-8">
-            <img
-              src={post.data.image.url}
-              alt={post.data.image.alt || post.data.title}
+            <Picture
+              src={imagen}
+              formats={['avif']}
+              fallbackFormat="webp"
+              alt={post.data.image?.alt || post.data.title}
               class="w-full h-auto rounded-lg shadow-lg"
+              widths={[400, 768, 1024]}
+              sizes="(min-width: 816px) 768px, calc(100vw - 48px)"
               loading="eager"
+              fetchpriority="high"
             />
           </figure>
         )

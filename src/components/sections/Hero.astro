@@ -1,5 +1,20 @@
 ---
+import { getImage } from 'astro:assets';
+import electrodomesticos from '@/assets/images/hero-appliances.webp';
 import { whatsappUrl } from '@/lib/utils';
+
+// La ilustración sólo se ve desde lg (1024 px). Con <source media> el
+// navegador ni la pide en móvil, donde el contenedor está oculto; el <img>
+// de respaldo es un GIF vacío en línea que tampoco genera petición.
+const ESCRITORIO = '(min-width: 1024px)';
+const ANCHOS = [448, 800];
+const [heroAvif, heroWebp] = await Promise.all(
+  (['avif', 'webp'] as const).map((format) =>
+    getImage({ src: electrodomesticos, format, widths: ANCHOS })
+  )
+);
+const PIXEL_VACIO =
+  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 ---
 
 <section
@@ -36,14 +51,28 @@ import { whatsappUrl } from '@/lib/utils';
       <!-- Hero Image -->
       <div class="relative hidden lg:block">
         <div class="relative w-full aspect-square max-w-md mx-auto">
-          <img
-            src="/images/hero-appliances.webp"
-            alt="Aire acondicionado, nevera y lavadora - Servicios de Rivera Refrigeración"
-            class="w-full h-full object-contain drop-shadow-2xl"
-            loading="eager"
-            width="500"
-            height="500"
-          />
+          <picture>
+            <source
+              media={ESCRITORIO}
+              type="image/avif"
+              srcset={heroAvif.srcSet.attribute}
+              sizes="448px"
+            />
+            <source
+              media={ESCRITORIO}
+              type="image/webp"
+              srcset={heroWebp.srcSet.attribute}
+              sizes="448px"
+            />
+            <img
+              src={PIXEL_VACIO}
+              alt="Aire acondicionado, nevera y lavadora - Servicios de Rivera Refrigeración"
+              class="w-full h-full object-contain drop-shadow-2xl"
+              width="448"
+              height="448"
+              fetchpriority="high"
+            />
+          </picture>
         </div>
       </div>
     </div>

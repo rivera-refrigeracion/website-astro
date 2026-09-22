@@ -1,5 +1,7 @@
 ---
 import { SITE, NAVIGATION } from '@/lib/config';
+import { Picture } from 'astro:assets';
+import logo from '@/assets/images/logo.webp';
 import { whatsappUrl } from '@/lib/utils';
 
 const currentPath = Astro.url.pathname;
@@ -16,15 +18,19 @@ const currentPath = Astro.url.pathname;
         class="flex items-center gap-3 hover:opacity-90 transition-opacity"
         aria-label={SITE.name}
       >
-        <img
-          src="/images/logo.webp"
+        <Picture
+          src={logo}
+          formats={['avif']}
+          fallbackFormat="webp"
           alt={SITE.name}
           class="h-10 lg:h-12 w-auto"
-          width="48"
-          height="48"
+          width={48}
+          height={48}
+          densities={[1, 2]}
+          loading="eager"
         />
         <span
-          class="hidden sm:block text-xl lg:text-2xl font-bold text-secondary-400"
+          class="hidden sm:block text-xl lg:text-2xl font-bold text-secondary-200"
         >
           Rivera Refrigeración
         </span>

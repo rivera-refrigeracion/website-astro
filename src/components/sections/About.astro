@@ -1,5 +1,6 @@
 ---
-
+import { Picture } from 'astro:assets';
+import tecnico from '@/assets/images/about-technician.jpg';
 ---
 
 <section id="about" class="section bg-neutral-50">
@@ -37,13 +38,15 @@
         <figure
           class="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg"
         >
-          <img
-            src="/images/about-technician.jpg"
+          <Picture
+            src={tecnico}
+            formats={['avif']}
+            fallbackFormat="webp"
             alt="Rubén Darío Rivera - Técnico especialista"
             class="w-full h-full object-cover"
+            widths={[400, 600, 800, 962]}
+            sizes="(min-width: 1224px) 552px, (min-width: 1024px) calc(50vw - 60px), calc(100vw - 48px)"
             loading="lazy"
-            width="600"
-            height="450"
           />
         </figure>
       </div>

@@ -1,6 +1,8 @@
 ---
+import { getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import type { Thing } from 'schema-dts';
+import logoMarca from '@/assets/images/logo.webp';
 import { ADDRESS, GEO, SERVICES, SITE } from '@/lib/config';
 import {
   NEGOCIO_ID,
@@ -64,9 +66,12 @@ const servicios = (await getCollection('services'))
       SERVICES.findIndex((s) => s.id === a.slug) -
       SERVICES.findIndex((s) => s.id === b.slug)
   );
+// Google pide un logo de al menos 112 px en un formato que indexe; PNG es el
+// más seguro.
+const logo = await getImage({ src: logoMarca, format: 'png', width: 512 });
 const url = canonicalURL.toString();
 const nodos: Thing[] = [
-  negocio(servicios),
+  negocio(servicios, new URL(logo.src, SITE.url).toString()),
   sitio(),
   pagina({
     url,

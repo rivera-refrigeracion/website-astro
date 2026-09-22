@@ -13,7 +13,7 @@ imagePosition: 'inline'
 
 Una nevera es un electrodoméstico fundamental en cualquier hogar, y mantenerla en buen estado es clave para conservar tus alimentos frescos y evitar gastos innecesarios. Sin embargo, es común que con el tiempo presente fallas que, si no se detectan a tiempo, pueden causar problemas mayores. En **Rivera Refrigeración**, te ayudamos a identificar las señales de que tu nevera necesita reparación o mantenimiento, y te ofrecemos soluciones rápidas y profesionales.
 
-![Nevera que necesita mantenimiento](/images/blog/nevera-mantenimiento.webp)
+![Nevera que necesita mantenimiento](../../assets/images/blog/nevera-mantenimiento.webp)
 
 A continuación, te mostramos las señales más comunes que indican que tu nevera necesita atención urgente:
 

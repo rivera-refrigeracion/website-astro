@@ -1,6 +1,8 @@
 ---
+import { Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
+import { imagenLocal } from '@/lib/images';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -22,20 +24,23 @@ const posts = (await getCollection('blog'))
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {
-          posts.map((post) => (
+          posts.map((post, indice) => (
             <article class="card hover:shadow-[var(--shadow-level2)] transition-shadow group">
               {post.data.image && (
                 <a
                   href={`/blog/${post.slug}/`}
                   class="block aspect-video overflow-hidden rounded-md mb-4"
                 >
-                  <img
-                    src={post.data.image.url}
+                  <Picture
+                    src={imagenLocal(post.data.image.url)}
+                    formats={['avif']}
+                    fallbackFormat="webp"
                     alt={post.data.image.alt}
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                    width="400"
-                    height="225"
+                    widths={[400, 704]}
+                    sizes="(min-width: 1024px) 336px, (min-width: 768px) calc(50vw - 88px), calc(100vw - 96px)"
+                    loading={indice === 0 ? 'eager' : 'lazy'}
+                    fetchpriority={indice === 0 ? 'high' : 'auto'}
                   />
                 </a>
               )}

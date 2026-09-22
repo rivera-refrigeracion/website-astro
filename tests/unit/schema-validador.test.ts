@@ -215,7 +215,10 @@ describe('validador de datos estructurados', () => {
   it('da por bueno el @graph que genera src/lib/schema.ts', async () => {
     const zonas = ['Toda la ciudad de Cali', 'Valle del Lili', 'Jamundí'];
     const nodos = grafo([
-      negocio([{ slug: 'neveras', title: 'Neveras', serviceAreas: zonas }]),
+      negocio(
+        [{ slug: 'neveras', title: 'Neveras', serviceAreas: zonas }],
+        `${SITE.url}/_astro/logo.png`
+      ),
       sitio(),
       pagina({
         url: URL_PAGINA,

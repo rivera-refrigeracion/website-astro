@@ -39,6 +39,13 @@ export default defineConfig({
     locales: ['es'],
   },
 
+  // Las imágenes del Markdown de los artículos salían a su tamaño original
+  // (1024 px) sin srcset. Con layout 'constrained' Astro genera los anchos
+  // intermedios; los componentes que ya fijan widths/densities no cambian.
+  image: {
+    layout: 'constrained',
+  },
+
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'viewport',
