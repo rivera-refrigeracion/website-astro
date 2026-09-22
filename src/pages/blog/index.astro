@@ -1,6 +1,8 @@
 ---
+import { Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
+import { imagenLocal } from '@/lib/images';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -22,29 +24,35 @@ const posts = (await getCollection('blog'))
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {
-          posts.map((post) => (
+          posts.map((post, indice) => (
             <article class="card hover:shadow-[var(--shadow-level2)] transition-shadow group">
               {post.data.image && (
                 <a
                   href={`/blog/${post.slug}/`}
                   class="block aspect-video overflow-hidden rounded-md mb-4"
                 >
-                  <img
-                    src={post.data.image.url}
+                  <Picture
+                    src={imagenLocal(post.data.image.url)}
+                    formats={['avif']}
+                    fallbackFormat="webp"
                     alt={post.data.image.alt}
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                    width="400"
-                    height="225"
+                    width={704}
+                    height={396}
+                    fit="cover"
+                    widths={[400, 560, 704]}
+                    sizes="(min-width: 1024px) 336px, (min-width: 768px) calc(50vw - 88px), calc(100vw - 96px)"
+                    loading={indice === 0 ? 'eager' : 'lazy'}
+                    fetchpriority={indice === 0 ? 'high' : 'auto'}
                   />
                 </a>
               )}
 
-              <span class="inline-block text-sm text-primary-600 font-medium mb-2">
+              <span class="inline-block text-sm text-primary-700 font-medium mb-2">
                 {post.data.category}
               </span>
 
-              <h2 class="text-xl font-semibold mb-3 text-neutral-900 group-hover:text-primary-600 transition-colors">
+              <h2 class="text-xl font-semibold mb-3 text-neutral-900 group-hover:text-primary-700 transition-colors">
                 <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
               </h2>
 

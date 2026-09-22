@@ -13,7 +13,7 @@ imagePosition: 'inline'
 
 La lavadora es uno de los electrodomésticos más esenciales en cualquier hogar, pero su uso incorrecto puede llevar a problemas serios y costosos de reparar. En **Rivera Refrigeración**, hemos visto de primera mano cómo algunos errores comunes pueden afectar el rendimiento y la vida útil de las lavadoras. A continuación, te compartimos los cinco errores más comunes que debes evitar y cómo hacerlo para mantener tu lavadora en perfecto estado.
 
-![Errores comunes al usar la lavadora](/images/blog/errores-lavadora.webp)
+![Errores comunes al usar la lavadora](../../assets/images/blog/errores-lavadora.webp)
 
 ## 1. Sobrecargar la Lavadora
 

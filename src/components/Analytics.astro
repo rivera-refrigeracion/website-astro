@@ -4,16 +4,16 @@
 // Only loads in production to avoid sending test data to GA4
 // Note: This component only includes the <head> script portion
 // The <noscript> iframe fallback should be added in <body> via AnalyticsBody.astro
+// La carga es diferida; el porqué está en src/lib/gtm-diferido.js.
+import cargadorGtm from '@/lib/gtm-diferido.js?raw';
+
 const GTM_ID = 'GTM-WGKFDPTD';
 const isProduction = import.meta.env.PROD;
 
-const gtmScript = `<script>
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${GTM_ID}');
-</script>`;
+// Sin el comentario de cabecera: se incrusta en cada página.
+const script = cargadorGtm
+  .replace(/^\/\*[\s\S]*?\*\/\s*/, '')
+  .replace('__GTM_ID__', GTM_ID);
 ---
 
-{isProduction && <Fragment set:html={gtmScript} />}
+{isProduction && <script is:inline set:html={script} />}

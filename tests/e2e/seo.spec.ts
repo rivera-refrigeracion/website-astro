@@ -131,7 +131,12 @@ test.describe('SEO', () => {
 
       await page.goto('/');
 
-      // Wait a moment for any scripts to attempt loading
+      // GTM se carga con la primera interacción: sin ella no hay nada que
+      // bloquear en el primer segundo.
+      await page.waitForTimeout(1000);
+      expect(completedRequests.length + failedRequests.length).toBe(0);
+
+      await page.mouse.wheel(0, 200);
       await page.waitForTimeout(1000);
 
       // Log for debugging

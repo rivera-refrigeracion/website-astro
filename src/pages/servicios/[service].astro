@@ -1,7 +1,9 @@
 ---
+import { getImage, Picture } from 'astro:assets';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import { CONTACT } from '@/lib/config';
+import { imagenLocal } from '@/lib/images';
 import {
   idServicio,
   preguntas,
@@ -25,6 +27,17 @@ const service: Props = Astro.props;
 const { Content } = await service.render();
 
 const url = urlAbsoluta(`/servicios/${service.slug}/`);
+// Nunca más ancha que el archivo: una foto de 500 px estirada a 896 se ve
+// borrosa (Lighthouse, image-size-responsive).
+const imagenPrincipal = imagenLocal(service.data.heroImage.url);
+
+// El schema necesita una URL que exista: el original ya no se publica en
+// /images/, sólo las versiones que genera Astro.
+const imagenSchema = await getImage({
+  src: imagenPrincipal,
+  format: 'jpg',
+  width: Math.min(1200, imagenPrincipal.width),
+});
 ---
 
 <Layout
@@ -48,7 +61,7 @@ const url = urlAbsoluta(`/servicios/${service.slug}/`);
       url,
       nombre: service.data.title,
       descripcion: service.data.metaDescription,
-      imagen: urlAbsoluta(service.data.heroImage.url),
+      imagen: urlAbsoluta(imagenSchema.src),
       zonas: service.data.serviceAreas,
     }),
   ]}
@@ -67,13 +80,17 @@ const url = urlAbsoluta(`/servicios/${service.slug}/`);
 
       <!-- Hero Image -->
       <figure class="max-w-4xl mx-auto mb-12">
-        <img
-          src={service.data.heroImage.url}
+        <Picture
+          src={imagenPrincipal}
+          formats={['avif']}
+          fallbackFormat="webp"
           alt={service.data.heroImage.alt}
-          class="w-full h-auto rounded-lg shadow-lg"
+          class="w-full h-auto mx-auto rounded-lg shadow-lg"
+          style={`max-width: ${imagenPrincipal.width}px`}
+          widths={[400, 600, 800, 896, 1200]}
+          sizes="(min-width: 944px) 896px, calc(100vw - 48px)"
           loading="eager"
-          width="1200"
-          height="600"
+          fetchpriority="high"
         />
       </figure>
 
@@ -126,7 +143,7 @@ const url = urlAbsoluta(`/servicios/${service.slug}/`);
                   <div class="text-4xl mb-3" aria-hidden="true">
                     {step.icon}
                   </div>
-                  <div class="text-sm font-semibold text-primary-600 mb-2">
+                  <div class="text-sm font-semibold text-primary-800 mb-2">
                     Paso {step.step}
                   </div>
                   <h3 class="font-bold text-lg mb-2">{step.title}</h3>
@@ -190,7 +207,7 @@ const url = urlAbsoluta(`/servicios/${service.slug}/`);
         </section>
 
         <!-- CTA Section -->
-        <section class="text-center bg-primary-600 text-white rounded-lg p-8">
+        <section class="text-center bg-primary-800 text-white rounded-lg p-8">
           <h2 class="text-2xl lg:text-3xl font-bold mb-4">
             ¿Necesitas este servicio?
           </h2>
@@ -204,7 +221,7 @@ const url = urlAbsoluta(`/servicios/${service.slug}/`);
             )}
             target="_blank"
             rel="noopener noreferrer"
-            class="whatsapp-btn whatsapp-cta-service inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
+            class="whatsapp-btn whatsapp-cta-service inline-flex items-center gap-2 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
             data-service={service.slug}
           >
             <svg
@@ -219,7 +236,7 @@ const url = urlAbsoluta(`/servicios/${service.slug}/`);
             </svg>
             Contáctanos por WhatsApp
           </a>
-          <p class="text-sm mt-4 opacity-75">
+          <p class="text-sm mt-4 opacity-90">
             Llamadas: <a
               href={`tel:${CONTACT.phone}`}
               class="phone-link phone-link-service text-white underline hover:no-underline"

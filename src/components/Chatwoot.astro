@@ -1,9 +1,44 @@
 ---
 /**
- * Chatwoot live chat widget
- * Loads the Chatwoot SDK for customer support chat
+ * Chat en vivo de Chatwoot, cargado sólo cuando alguien lo pide.
+ *
+ * El SDK arrastra unos 500 KiB entre scripts, estilos, una fuente y varias
+ * llamadas a la API, y lo hacía en cada visita aunque casi nadie abra el
+ * chat. En su lugar se pinta una réplica estática de la burbuja (mismo
+ * tamaño, posición, sombra, color del widget e icono que genera el SDK) y el
+ * SDK se descarga cuando alguien se dispone a usar el chat, que se abre al
+ * clic.
+ *
+ * Si se cambia el color del widget en el panel de Chatwoot hay que cambiar
+ * WIDGET_COLOR aquí, o la burbuja falsa y la real no coincidirán.
  */
+const BASE_URL = 'https://chatwoot.jjuanrivvera.com';
+const WEBSITE_TOKEN = 'D5NFtGXHnQFwJh4Z9BUY7jeX';
+const WIDGET_COLOR = '#3BE000';
 ---
+
+<button
+  type="button"
+  id="chat-launcher"
+  class="chat-launcher"
+  aria-label="Abrir el chat: Habla con nosotros"
+  data-base-url={BASE_URL}
+  data-website-token={WEBSITE_TOKEN}
+  style={`background: ${WIDGET_COLOR}`}
+>
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 240 240"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path
+      d="M240.808 240.808H122.123C56.6994 240.808 3.45695 187.562 3.45695 122.122C3.45695 56.7031 56.6994 3.45697 122.124 3.45697C187.566 3.45697 240.808 56.7031 240.808 122.122V240.808Z"
+      fill="#FFFFFF"></path>
+  </svg>
+</button>
 
 <script is:inline>
   window.chatwootSettings = {
@@ -11,19 +46,99 @@
     type: 'standard',
     launcherTitle: 'Habla con nosotros',
   };
-  (function (d, t) {
-    var BASE_URL = 'https://chatwoot.jjuanrivvera.com';
-    var g = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    g.src = BASE_URL + '/packs/js/sdk.js';
-    g.defer = true;
-    g.async = true;
-    s.parentNode.insertBefore(g, s);
-    g.onload = function () {
-      window.chatwootSDK.run({
-        websiteToken: 'D5NFtGXHnQFwJh4Z9BUY7jeX',
-        baseUrl: BASE_URL,
-      });
-    };
-  })(document, 'script');
+
+  (function (d) {
+    var launcher = d.getElementById('chat-launcher');
+    if (!launcher) return;
+
+    var solicitado = false;
+    var abrirAlEstarListo = false;
+
+    window.addEventListener(
+      'chatwoot:ready',
+      function () {
+        if (abrirAlEstarListo) window.$chatwoot.toggle('open');
+        launcher.remove();
+      },
+      { once: true }
+    );
+
+    // Se empieza a descargar con la intención (pasar el puntero, enfocar o
+    // tocar) para que al hacer clic el chat tarde lo menos posible.
+    function cargarSdk() {
+      if (solicitado) return;
+      solicitado = true;
+
+      var baseUrl = launcher.dataset.baseUrl;
+      var script = d.createElement('script');
+      script.src = baseUrl + '/packs/js/sdk.js';
+      script.async = true;
+      script.onload = function () {
+        window.chatwootSDK.run({
+          websiteToken: launcher.dataset.websiteToken,
+          baseUrl: baseUrl,
+        });
+      };
+      script.onerror = function () {
+        solicitado = false;
+        launcher.removeAttribute('aria-busy');
+        launcher.classList.remove('chat-launcher--loading');
+      };
+      d.body.appendChild(script);
+    }
+
+    ['pointerenter', 'focus', 'touchstart'].forEach(function (tipo) {
+      launcher.addEventListener(tipo, cargarSdk, { passive: true });
+    });
+    launcher.addEventListener('click', function () {
+      abrirAlEstarListo = true;
+      launcher.setAttribute('aria-busy', 'true');
+      launcher.classList.add('chat-launcher--loading');
+      cargarSdk();
+    });
+  })(document);
 </script>
+
+<style>
+  /* Copia de .woot-widget-bubble del SDK de Chatwoot, para que el cambio de
+     burbuja falsa a real no se note. */
+  .chat-launcher {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 2147483000;
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    border: 0;
+    border-radius: 100px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+    cursor: pointer;
+    user-select: none;
+    transition: box-shadow 300ms ease;
+  }
+
+  .chat-launcher:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .chat-launcher svg {
+    margin: 20px;
+  }
+
+  .chat-launcher--loading svg {
+    animation: chat-launcher-pulse 1s ease-in-out infinite;
+  }
+
+  @keyframes chat-launcher-pulse {
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chat-launcher--loading svg {
+      animation: none;
+    }
+  }
+</style>

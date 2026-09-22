@@ -1,5 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
 import { SERVICES } from '@/lib/config';
+import { imagenLocal } from '@/lib/images';
 
 const serviceImages: Record<string, string> = {
   'aire-acondicionado': '/images/services/aire-acondicionado.jpg',
@@ -21,16 +23,20 @@ const serviceImages: Record<string, string> = {
             class="card text-center hover:shadow-[var(--shadow-level2)] transition-all hover:scale-105 flex flex-col group"
           >
             <figure class="mb-4">
-              <img
-                src={
+              <Picture
+                src={imagenLocal(
                   serviceImages[service.id] ||
-                  '/images/services/aire-acondicionado.jpg'
-                }
+                    '/images/services/aire-acondicionado.jpg'
+                )}
+                formats={['avif']}
+                fallbackFormat="webp"
                 alt={service.title}
                 class="w-32 h-32 object-contain mx-auto"
+                width={128}
+                height={128}
+                widths={[128, 256]}
+                sizes="128px"
                 loading="lazy"
-                width="128"
-                height="128"
               />
             </figure>
             <h3 class="text-xl font-semibold mb-3 text-neutral-900">
@@ -39,7 +45,7 @@ const serviceImages: Record<string, string> = {
             <p class="text-neutral-600 leading-relaxed mb-4 flex-grow">
               {service.description}
             </p>
-            <span class="inline-flex items-center gap-1 text-secondary-600 hover:text-secondary-700 font-medium text-sm transition-colors mt-auto group-hover:gap-2">
+            <span class="inline-flex items-center gap-1 text-secondary-950 font-medium text-sm transition-colors mt-auto group-hover:gap-2">
               Ver más
               <svg
                 class="w-4 h-4"
