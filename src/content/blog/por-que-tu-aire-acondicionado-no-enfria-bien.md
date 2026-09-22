@@ -6,7 +6,7 @@ category: 'Aire Acondicionado'
 author: 'Rivera Refrigeración'
 image:
   url: '/images/blog/aire-acondicionado-no-enfria.webp'
-  alt: 'Aire acondicionado que no enfría'
+  alt: 'Ilustración de un aire acondicionado con un técnico y señales de falta de frío'
 tags: ['aire acondicionado', 'reparación', 'mantenimiento', 'problemas comunes']
 imagePosition: 'top'
 ---
@@ -55,12 +55,14 @@ Un termostato mal calibrado o defectuoso puede hacer que el aire acondicionado n
 
 - Verifica que el termostato esté ajustado correctamente. Si sigue sin funcionar, un técnico puede ayudarte a calibrarlo o reemplazarlo si es necesario.
 
-## ¿Tu Aire Acondicionado Sigue Sin Funcionar Bien? ¡Déjanos Ayudarte!
+## Si el aire acondicionado sigue sin enfriar
 
-Si tu aire acondicionado no está enfriando como debería, es posible que haya un problema más complejo que necesita atención profesional. En **Rivera Refrigeración**, contamos con más de 30 años de experiencia solucionando problemas de aire acondicionado. Nuestros expertos están listos para ayudarte con una revisión completa y las reparaciones necesarias.
+Cuando los filtros y los ajustes no explican la falla, una revisión puede
+ayudar a identificar qué ocurre. Rivera Refrigeración presta el servicio de
+[reparación de aires acondicionados en Cali](/servicios/aire-acondicionado/).
 
-## Solicita una Revisión Profesional Hoy Mismo
+## Solicite una revisión
 
-No dejes que el calor te gane. Si tu aire acondicionado no está funcionando correctamente, agenda una revisión profesional: **llámanos al +573173095159** o chatea con nuestro servicio automatizado.
+Para coordinar una visita, llame al +57 317 309 5159 o escriba por WhatsApp.
 
-[¡Agenda tu cita AQUÍ!](https://wa.me/573016963313)
+[Agende su visita por WhatsApp](https://wa.me/573016963313).

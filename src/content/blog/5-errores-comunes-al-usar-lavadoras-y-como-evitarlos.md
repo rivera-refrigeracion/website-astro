@@ -6,14 +6,14 @@ category: 'Consejos'
 author: 'Rivera Refrigeración'
 image:
   url: '/images/blog/errores-lavadora.webp'
-  alt: 'Errores comunes al usar la lavadora'
+  alt: 'Ilustración de dos lavadoras: una con carga adecuada y otra sobrecargada'
 tags: ['lavadora', 'consejos', 'mantenimiento', 'errores comunes']
 imagePosition: 'inline'
 ---
 
 La lavadora es uno de los electrodomésticos más esenciales en cualquier hogar, pero su uso incorrecto puede llevar a problemas serios y costosos de reparar. En **Rivera Refrigeración**, hemos visto de primera mano cómo algunos errores comunes pueden afectar el rendimiento y la vida útil de las lavadoras. A continuación, te compartimos los cinco errores más comunes que debes evitar y cómo hacerlo para mantener tu lavadora en perfecto estado.
 
-![Errores comunes al usar la lavadora](../../assets/images/blog/errores-lavadora.webp)
+![Ilustración de dos lavadoras: una con carga adecuada y otra sobrecargada](../../assets/images/blog/errores-lavadora.webp)
 
 ## 1. Sobrecargar la Lavadora
 
@@ -70,10 +70,12 @@ La lavadora es uno de los electrodomésticos más esenciales en cualquier hogar,
 
 **Consejo Adicional:** Utiliza bolsas de lavandería para prendas delicadas o pequeños objetos que puedan soltarse durante el lavado, protegiendo tanto la ropa como la lavadora.
 
-## ¿Tu Lavadora Está Presentando Problemas? ¡Podemos Ayudarte!
+## Si necesita revisar su lavadora
 
-Si tu lavadora presenta algún problema o no funciona como debería, no dudes en contactarnos. En **Rivera Refrigeración**, ofrecemos servicios profesionales de reparación y mantenimiento de lavadoras para asegurar que tu electrodoméstico funcione de manera óptima durante más tiempo.
+Si la lavadora presenta una falla, Rivera Refrigeración presta el servicio de
+[reparación de lavadoras en Cali](/servicios/lavadoras/). En la visita se
+explica el diagnóstico y se entrega el presupuesto antes de empezar.
 
-**¡Agenda una cita hoy mismo y deja que nuestros expertos cuiden de tu lavadora!** Llámanos al +573173095159 o chatea con nuestro servicio automatizado:
+Para coordinar una visita, llame al +57 317 309 5159 o escriba por WhatsApp.
 
-[¡Agenda tu cita AQUÍ!](https://wa.me/573016963313)
+[Agende su visita por WhatsApp](https://wa.me/573016963313).
