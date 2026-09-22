@@ -30,6 +30,41 @@ describe('Service pages', () => {
     ).toHaveLength(1);
   });
 
+  it.each([
+    [
+      'aire-acondicionado',
+      'Aire Acondicionado',
+      'Instalación y reparación de aire acondicionado en Cali',
+      'Aire acondicionado en Cali',
+    ],
+    [
+      'calentadores',
+      'Calentadores de Agua',
+      'Instalación y reparación de calentadores de agua en Cali',
+      'Calentadores de agua en Cali',
+    ],
+    [
+      'lavadoras',
+      'Lavadoras',
+      'Reparación de lavadoras en Cali a domicilio',
+      'Reparación de lavadoras en Cali',
+    ],
+    [
+      'neveras',
+      'Neveras y Refrigeradores',
+      'Reparación de neveras en Cali a domicilio',
+      'Reparación de neveras en Cali',
+    ],
+  ])(
+    'restores the reviewed title fields for %s',
+    (slug, title, h1, metaTitle) => {
+      const service = services.find((entry) => entry.slug === slug);
+      expect(service?.data.title).toBe(title);
+      expect(service?.data.h1).toBe(h1);
+      expect(service?.data.metaTitle).toBe(metaTitle);
+    }
+  );
+
   it.each(services)('$slug has a unique meta title', (service) => {
     expect(
       services.filter(({ data }) => data.metaTitle === service.data.metaTitle)
@@ -38,6 +73,7 @@ describe('Service pages', () => {
 
   it.each(services)('$slug has a unique short meta description', (service) => {
     expect(service.data.metaDescription.length).toBeLessThan(160);
+    expect(service.data.metaDescription).not.toMatch(/todas las marcas/i);
     expect(
       services.filter(
         ({ data }) => data.metaDescription === service.data.metaDescription
@@ -178,7 +214,9 @@ describe('Service pages', () => {
     const heater = parseServiceFile('calentadores.md');
     const allText = `${heater.content} ${JSON.stringify(heater.data)}`;
 
-    expect(heater.data.h1).toBe('Instalación de calentadores en Cali');
+    expect(heater.data.h1).toBe(
+      'Instalación y reparación de calentadores de agua en Cali'
+    );
     expect(allText).not.toMatch(
       /termocupla|quemador|fuga de gas|gas natural|propano/i
     );

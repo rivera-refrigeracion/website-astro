@@ -1,13 +1,14 @@
 ---
-title: 'Reparación de aires acondicionados en Cali'
-h1: 'Reparación de aires acondicionados en Cali'
+title: 'Aire Acondicionado'
+h1: 'Instalación y reparación de aire acondicionado en Cali'
 shortDescription: 'Diagnóstico a domicilio, presupuesto antes de empezar y prueba final del equipo.'
 icon: 'air-conditioner'
-metaTitle: 'Reparación de aires acondicionados en Cali'
-metaDescription: 'Reparación de aires acondicionados en Cali. Rivera Refrigeración revisa la falla, presenta el presupuesto y prueba el equipo al terminar.'
+metaTitle: 'Aire acondicionado en Cali'
+metaDescription: 'En Cali, Rivera Refrigeración repara aires acondicionados, instala equipos y realiza su mantenimiento, con diagnóstico y presupuesto previo.'
 keywords:
-  - 'reparación de aires acondicionados Cali'
-  - 'reparación de aire acondicionado en Cali'
+  - 'reparación de aire acondicionado Cali'
+  - 'instalación de aire acondicionado Cali'
+  - 'mantenimiento de aire acondicionado Cali'
   - 'servicio técnico de aire acondicionado Cali'
 heroImage:
   url: '/images/services/aire-acondicionado.jpg'
@@ -80,12 +81,21 @@ intermitente. No desmonte la unidad antes de la visita.
 Cuente en qué momento aparece y de cuál unidad parece provenir. Esa información
 ayuda a orientar la revisión, pero se confirma en el diagnóstico.
 
-## Reparación de aire acondicionado a domicilio
+## Reparación de aire acondicionado
 
 La visita incluye diagnóstico, explicación del trabajo propuesto y presupuesto
 antes de empezar. Con su aprobación, se realiza la reparación acordada y se
 prueba el equipo al finalizar. El tiempo estimado depende de la falla y de la
 disponibilidad de los repuestos requeridos.
 
-Si necesita instalar un equipo, conozca el servicio de
+## Instalación
+
+Rivera Refrigeración también instala equipos de aire acondicionado en Cali.
+Conozca el alcance y lo que se revisa durante la visita en la página de
 [instalación de aire acondicionado en Cali](/servicios/instalacion-aire-acondicionado/).
+
+## Mantenimiento
+
+Rivera Refrigeración realiza mantenimiento de aire acondicionado. Durante la
+visita se revisa el equipo y se confirma el trabajo necesario antes de
+presentar el presupuesto.

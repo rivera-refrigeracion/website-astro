@@ -124,9 +124,7 @@ describe('Site Configuration', () => {
         (service) => service.id === 'aire-acondicionado'
       );
       expect(acService).toBeDefined();
-      expect(acService?.title).toBe(
-        'Reparación de aires acondicionados en Cali'
-      );
+      expect(acService?.title).toBe('Aire Acondicionado');
     });
 
     it('should include refrigerator service', () => {
@@ -134,7 +132,7 @@ describe('Site Configuration', () => {
         (service) => service.id === 'neveras'
       );
       expect(fridgeService).toBeDefined();
-      expect(fridgeService?.title).toBe('Reparación de neveras en Cali');
+      expect(fridgeService?.title).toBe('Neveras');
     });
 
     it('should include washing machine service', () => {
@@ -142,7 +140,7 @@ describe('Site Configuration', () => {
         (service) => service.id === 'lavadoras'
       );
       expect(washerService).toBeDefined();
-      expect(washerService?.title).toBe('Reparación de lavadoras en Cali');
+      expect(washerService?.title).toBe('Lavadoras');
     });
 
     it('should include the separate air conditioner installation page', () => {
@@ -152,6 +150,16 @@ describe('Site Configuration', () => {
       expect(installService?.title).toBe(
         'Instalación de aire acondicionado en Cali'
       );
+    });
+
+    it('uses service terms as internal link text', () => {
+      expect(SERVICES.map((service) => service.anchorText)).toEqual([
+        'Reparación de aire acondicionado en Cali',
+        'Reparación de neveras y refrigeradores en Cali',
+        'Reparación de lavadoras en Cali',
+        'Instalación y reparación de calentadores en Cali',
+        'Instalación de aire acondicionado en Cali',
+      ]);
     });
 
     it('all services should have id, title, description and icon', () => {

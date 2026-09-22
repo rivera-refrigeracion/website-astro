@@ -1,14 +1,15 @@
 ---
-title: 'Reparación de lavadoras en Cali'
-h1: 'Reparación de lavadoras en Cali'
+title: 'Lavadoras'
+h1: 'Reparación de lavadoras en Cali a domicilio'
 shortDescription: 'Servicio a domicilio con diagnóstico, presupuesto previo y prueba de funcionamiento.'
 icon: 'washing-machine'
 metaTitle: 'Reparación de lavadoras en Cali'
-metaDescription: 'Reparación de lavadoras en Cali. Rivera Refrigeración identifica la falla, entrega el presupuesto antes de empezar y prueba el equipo.'
+metaDescription: 'Reparación y mantenimiento de lavadoras en Cali. Diagnóstico a domicilio, presupuesto previo y prueba del equipo al terminar.'
 keywords:
   - 'reparación de lavadoras Cali'
-  - 'reparación de lavadoras en Cali'
+  - 'mantenimiento de lavadoras Cali'
   - 'servicio técnico de lavadoras Cali'
+  - 'arreglo de lavadoras a domicilio'
 heroImage:
   url: '/images/services/lavadora.webp'
   alt: 'Lavadora de carga frontal LG en acabado gris'
@@ -81,7 +82,7 @@ el área alrededor de las mangueras para que puedan revisarse en la visita.
 Anote en qué etapa del ciclo sucede. Si observa agua cerca del equipo, informe
 dónde aparece antes de volver a usarlo.
 
-## Visita de reparación de lavadoras
+## Reparación de lavadoras
 
 En la visita se revisa el equipo y se explica el diagnóstico. Rivera
 Refrigeración entrega el presupuesto antes de empezar; con su aprobación,

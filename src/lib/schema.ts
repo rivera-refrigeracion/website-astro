@@ -38,6 +38,70 @@ export const idMigas = (url: string) => `${url}#migas`;
 export const idArticulo = (url: string) => `${url}#articulo`;
 export const idServicio = (url: string) => `${url}#servicio`;
 
+export const OFERTAS_CATALOGO = [
+  {
+    slug: 'aire-acondicionado',
+    fragmento: 'servicio',
+    nombre: 'Reparación de aire acondicionado',
+    tipo: 'Reparación de aire acondicionado',
+    descripcion:
+      'Diagnóstico, presupuesto previo, reparación acordada y prueba final del equipo.',
+  },
+  {
+    slug: 'instalacion-aire-acondicionado',
+    fragmento: 'servicio',
+    nombre: 'Instalación de aire acondicionado',
+    tipo: 'Instalación de aire acondicionado',
+    descripcion:
+      'Revisión del equipo y el espacio, alcance y presupuesto antes de empezar.',
+  },
+  {
+    slug: 'aire-acondicionado',
+    fragmento: 'servicio-mantenimiento',
+    nombre: 'Mantenimiento de aire acondicionado',
+    tipo: 'Mantenimiento de aire acondicionado',
+    descripcion:
+      'Visita para revisar el equipo y confirmar el trabajo de mantenimiento requerido.',
+  },
+  {
+    slug: 'neveras',
+    fragmento: 'servicio',
+    nombre: 'Reparación de neveras y refrigeradores',
+    tipo: 'Reparación de neveras y refrigeradores',
+    descripcion:
+      'Revisión para identificar la falla, presupuestar la reparación y probar el equipo.',
+  },
+  {
+    slug: 'lavadoras',
+    fragmento: 'servicio',
+    nombre: 'Reparación de lavadoras',
+    tipo: 'Reparación de lavadoras',
+    descripcion:
+      'Diagnóstico a domicilio, presupuesto previo y prueba de funcionamiento.',
+  },
+  {
+    slug: 'calentadores',
+    fragmento: 'servicio',
+    nombre: 'Instalación de calentadores',
+    tipo: 'Instalación de calentadores',
+    descripcion:
+      'Revisión del equipo y del lugar para confirmar el alcance de la instalación.',
+  },
+  {
+    slug: 'calentadores',
+    fragmento: 'servicio-reparacion',
+    nombre: 'Reparación de calentadores',
+    tipo: 'Reparación de calentadores',
+    descripcion:
+      'Revisión del equipo para identificar la falla y definir si procede una reparación.',
+  },
+] as const;
+
+export type OfertaCatalogo = (typeof OFERTAS_CATALOGO)[number];
+
+export const idOferta = (oferta: OfertaCatalogo) =>
+  `${urlAbsoluta(`/servicios/${oferta.slug}/`)}#${oferta.fragmento}`;
+
 // --- Zonas de cobertura -----------------------------------------------------
 
 const VALLE: AdministrativeArea = {
@@ -120,7 +184,6 @@ export function negocio(
       longitude: GEO.longitude,
     },
     areaServed: ciudadesAtendidas(servicios.flatMap((s) => s.serviceAreas)),
-    priceRange: '$$',
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: HOURS.dayOfWeek.map(
@@ -150,13 +213,10 @@ export function negocio(
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Servicios',
-      itemListElement: servicios.map((s) => ({
+      itemListElement: OFERTAS_CATALOGO.map((oferta) => ({
         '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: s.title,
-          url: urlAbsoluta(`/servicios/${s.slug}/`),
-        },
+        '@id': `${SITE.url}/#oferta-${oferta.slug}-${oferta.fragmento}`,
+        itemOffered: ref(idOferta(oferta)),
       })),
     },
   };
@@ -255,20 +315,22 @@ export function articulo(opciones: {
 }
 
 export function servicio(opciones: {
+  id?: string;
   url: string;
   nombre: string;
+  tipo?: string;
   descripcion: string;
-  imagen: string;
+  imagen?: string;
   zonas: readonly string[];
 }): Service {
   return {
     '@type': 'Service',
-    '@id': idServicio(opciones.url),
+    '@id': opciones.id ?? idServicio(opciones.url),
     name: opciones.nombre,
-    serviceType: opciones.nombre,
+    serviceType: opciones.tipo ?? opciones.nombre,
     description: opciones.descripcion,
     url: opciones.url,
-    image: opciones.imagen,
+    ...(opciones.imagen && { image: opciones.imagen }),
     provider: ref(NEGOCIO_ID),
     areaServed: opciones.zonas.map(zonaAtendida),
   };

@@ -8,6 +8,8 @@ import { CONTACT } from '@/lib/config';
 import { imagenLocal } from '@/lib/images';
 import {
   idServicio,
+  idOferta,
+  OFERTAS_CATALOGO,
   preguntas,
   ref,
   servicio as servicioSchema,
@@ -40,6 +42,12 @@ const imagenSchema = await getImage({
   format: 'jpg',
   width: Math.min(1200, imagenPrincipal.width),
 });
+const ofertaPrincipal = OFERTAS_CATALOGO.find(
+  (oferta) => oferta.slug === service.slug && oferta.fragmento === 'servicio'
+);
+if (!ofertaPrincipal) {
+  throw new Error(`No hay una oferta principal de schema para ${service.slug}`);
+}
 ---
 
 <Layout
@@ -52,7 +60,7 @@ const imagenSchema = await getImage({
   pageType="FAQPage"
   breadcrumbs={[
     { name: 'Inicio', path: '/' },
-    { name: service.data.title, path: `/servicios/${service.slug}/` },
+    { name: service.data.h1, path: `/servicios/${service.slug}/` },
   ]}
   pageSchema={{
     about: ref(idServicio(url)),
@@ -60,8 +68,10 @@ const imagenSchema = await getImage({
   }}
   schemaNodes={[
     servicioSchema({
+      id: idOferta(ofertaPrincipal),
       url,
-      nombre: service.data.title,
+      nombre: ofertaPrincipal.nombre,
+      tipo: ofertaPrincipal.tipo,
       descripcion: service.data.metaDescription,
       imagen: urlAbsoluta(imagenSchema.src),
       zonas: service.data.serviceAreas,

@@ -6,7 +6,9 @@ test.describe('Homepage', () => {
   });
 
   test('should have correct title', async ({ page }) => {
-    await expect(page).toHaveTitle(/Rivera Refrigeración/);
+    await expect(page).toHaveTitle(
+      'Rivera Refrigeración - Expertos en Aire Acondicionado y Electrodomésticos'
+    );
   });
 
   test('should display header with logo and navigation', async ({ page }) => {
@@ -36,7 +38,7 @@ test.describe('Homepage', () => {
     const heroHeading = page.getByRole('heading', { level: 1 });
     await expect(heroHeading).toBeVisible();
     await expect(heroHeading).toContainText(
-      'Reparación de aire acondicionado y electrodomésticos en Cali'
+      'Soluciones Confiables para Aire Acondicionado, Neveras, Lavadoras y Más'
     );
 
     const ctaButton = page
@@ -55,15 +57,15 @@ test.describe('Homepage', () => {
     await expect(servicesHeading).toBeVisible();
 
     const services = [
-      'Reparación de aires acondicionados en Cali',
-      'Reparación de neveras en Cali',
-      'Reparación de lavadoras en Cali',
-      'Instalación de calentadores en Cali',
+      'Aire Acondicionado',
+      'Neveras',
+      'Lavadoras',
+      'Calentadores',
       'Instalación de aire acondicionado en Cali',
     ];
     for (const service of services) {
       await expect(
-        servicesSection.getByRole('heading', { name: service })
+        servicesSection.getByRole('heading', { name: service, exact: true })
       ).toBeVisible();
     }
 

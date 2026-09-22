@@ -6,36 +6,40 @@ const servicePath = (slug: string) => `/servicios/${slug}/`;
 const services = [
   {
     slug: 'aire-acondicionado',
-    title: 'Reparación de aires acondicionados en Cali',
-    metaTitle: 'Reparación de aires acondicionados en Cali',
-    h1: 'Reparación de aires acondicionados en Cali',
-    keyword: 'aires acondicionados',
-    topic: 'Fallas frecuentes en aires acondicionados',
+    title: 'Aire Acondicionado',
+    metaTitle: 'Aire acondicionado en Cali',
+    h1: 'Instalación y reparación de aire acondicionado en Cali',
+    schemaName: 'Reparación de aire acondicionado',
+    keyword: 'aire acondicionado',
+    topic: 'Reparación de aire acondicionado',
     hasBrands: true,
   },
   {
     slug: 'neveras',
-    title: 'Reparación de neveras en Cali',
+    title: 'Neveras y Refrigeradores',
     metaTitle: 'Reparación de neveras en Cali',
-    h1: 'Reparación de neveras en Cali',
+    h1: 'Reparación de neveras en Cali a domicilio',
+    schemaName: 'Reparación de neveras y refrigeradores',
     keyword: 'neveras',
-    topic: 'Problemas frecuentes en neveras',
+    topic: 'Reparación de neveras y refrigeradores',
     hasBrands: true,
   },
   {
     slug: 'lavadoras',
-    title: 'Reparación de lavadoras en Cali',
+    title: 'Lavadoras',
     metaTitle: 'Reparación de lavadoras en Cali',
-    h1: 'Reparación de lavadoras en Cali',
+    h1: 'Reparación de lavadoras en Cali a domicilio',
+    schemaName: 'Reparación de lavadoras',
     keyword: 'lavadoras',
-    topic: 'Problemas frecuentes en lavadoras',
+    topic: 'Reparación de lavadoras',
     hasBrands: true,
   },
   {
     slug: 'calentadores',
-    title: 'Instalación de calentadores en Cali',
-    metaTitle: 'Instalación de calentadores en Cali',
-    h1: 'Instalación de calentadores en Cali',
+    title: 'Calentadores de Agua',
+    metaTitle: 'Calentadores de agua en Cali',
+    h1: 'Instalación y reparación de calentadores de agua en Cali',
+    schemaName: 'Instalación de calentadores',
     keyword: 'calentadores',
     topic: 'Situaciones que puede consultar',
     hasBrands: true,
@@ -45,6 +49,7 @@ const services = [
     title: 'Instalación de aire acondicionado en Cali',
     metaTitle: 'Instalación de aire acondicionado en Cali',
     h1: 'Instalación de aire acondicionado en Cali',
+    schemaName: 'Instalación de aire acondicionado',
     keyword: 'instalación de aire acondicionado',
     topic: 'Qué se revisa durante la instalación',
     hasBrands: false,
@@ -75,6 +80,7 @@ test.describe('Service Pages - General', () => {
 
         expect(content).toBeTruthy();
         expect(content!.length).toBeGreaterThan(50);
+        expect(content!.length).toBeLessThan(160);
         expect(content).toContain('Cali');
       });
 
@@ -215,7 +221,7 @@ test.describe('Service Pages - General', () => {
         expect(hasServiceSchema).toBe(true);
       });
 
-      test('should link Service data to the LocalBusiness and include breadcrumbs', async ({
+      test('should link service offers and breadcrumbs by @id', async ({
         page,
       }) => {
         const raw = await page
@@ -225,13 +231,55 @@ test.describe('Service Pages - General', () => {
           Record<string, unknown>
         >;
         const serviceNode = graph.find((node) => node['@type'] === 'Service');
+        const currentService = graph.find(
+          (node) =>
+            node['@id'] ===
+            `https://rivera-refrigeracion.com${servicePath(service.slug)}#servicio`
+        );
+        const business = graph.find(
+          (node) => node['@type'] === 'LocalBusiness'
+        );
+        const catalog = business?.hasOfferCatalog as {
+          itemListElement: Array<{ itemOffered: { '@id': string } }>;
+        };
+        const serviceIds = new Set(
+          graph
+            .filter((node) => node['@type'] === 'Service')
+            .map((node) => node['@id'])
+        );
+        const serviceNodes = graph.filter(
+          (node) => node['@type'] === 'Service'
+        );
+        const businessAreas = business?.areaServed as Array<{
+          name: string;
+        }>;
+        const breadcrumb = graph.find(
+          (node) => node['@type'] === 'BreadcrumbList'
+        );
+        const breadcrumbItems = breadcrumb?.itemListElement as Array<{
+          name: string;
+        }>;
 
         expect(serviceNode?.provider).toEqual({
           '@id': 'https://rivera-refrigeracion.com/#negocio',
         });
-        expect(graph.some((node) => node['@type'] === 'BreadcrumbList')).toBe(
-          true
+        expect(currentService?.name).toBe(service.schemaName);
+        expect(currentService?.serviceType).toBe(service.schemaName);
+        expect(catalog.itemListElement).toHaveLength(7);
+        catalog.itemListElement.forEach((offer) => {
+          expect(serviceIds.has(offer.itemOffered['@id'])).toBe(true);
+          expect('price' in offer).toBe(false);
+        });
+        expect(businessAreas).toEqual(
+          expect.arrayContaining([expect.objectContaining({ name: 'Cali' })])
         );
+        for (const node of serviceNodes) {
+          const areas = node.areaServed as Array<{ name: string }>;
+          expect(areas).toEqual(
+            expect.arrayContaining([expect.objectContaining({ name: 'Cali' })])
+          );
+        }
+        expect(breadcrumbItems.at(-1)?.name).toBe(service.h1);
       });
 
       test('should be responsive on mobile', async ({ page }) => {
@@ -269,7 +317,7 @@ test.describe('Service Pages - Navigation from Homepage', () => {
     await expect(servicesSection).toBeVisible();
 
     const serviceLink = servicesSection.getByRole('link', {
-      name: 'Reparación de aires acondicionados en Cali',
+      name: 'Reparación de aire acondicionado en Cali',
     });
     await expect(serviceLink).toBeVisible();
 
@@ -438,6 +486,40 @@ test.describe('Service Pages - Content Quality', () => {
       await expect(mainContent).toContainText(
         /presupuesto.{0,60}antes de empezar/i
       );
+    }
+  });
+
+  test('uses service terms in the concrete sections', async ({ page }) => {
+    const sections = [
+      {
+        slug: 'aire-acondicionado',
+        headings: [
+          'Reparación de aire acondicionado',
+          'Instalación',
+          'Mantenimiento',
+        ],
+      },
+      {
+        slug: 'neveras',
+        headings: ['Reparación de neveras y refrigeradores'],
+      },
+      { slug: 'lavadoras', headings: ['Reparación de lavadoras'] },
+      {
+        slug: 'calentadores',
+        headings: [
+          'Instalación de calentadores en Cali',
+          'Reparación de calentadores',
+        ],
+      },
+    ];
+
+    for (const section of sections) {
+      await page.goto(servicePath(section.slug));
+      for (const heading of section.headings) {
+        await expect(
+          page.getByRole('heading', { level: 2, name: heading, exact: true })
+        ).toBeVisible();
+      }
     }
   });
 

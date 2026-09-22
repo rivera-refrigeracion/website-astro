@@ -146,7 +146,7 @@ test.describe('Footer', () => {
 
     test('should link to air conditioning service', async ({ page }) => {
       const link = page.locator('footer').getByRole('link', {
-        name: 'Reparación de aires acondicionados en Cali',
+        name: 'Reparación de aire acondicionado en Cali',
       });
       await expect(link).toHaveAttribute(
         'href',
@@ -155,9 +155,9 @@ test.describe('Footer', () => {
     });
 
     test('should link to refrigerator service', async ({ page }) => {
-      const link = page
-        .locator('footer')
-        .getByRole('link', { name: 'Reparación de neveras en Cali' });
+      const link = page.locator('footer').getByRole('link', {
+        name: 'Reparación de neveras y refrigeradores en Cali',
+      });
       await expect(link).toHaveAttribute('href', '/servicios/neveras/');
     });
 
@@ -169,9 +169,9 @@ test.describe('Footer', () => {
     });
 
     test('should link to water heater service', async ({ page }) => {
-      const link = page
-        .locator('footer')
-        .getByRole('link', { name: 'Instalación de calentadores en Cali' });
+      const link = page.locator('footer').getByRole('link', {
+        name: 'Instalación y reparación de calentadores en Cali',
+      });
       await expect(link).toHaveAttribute('href', '/servicios/calentadores/');
     });
 

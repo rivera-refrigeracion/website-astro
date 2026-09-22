@@ -6,7 +6,8 @@ export const SITE = {
   /** Business name displayed throughout the site */
   name: 'Rivera Refrigeración',
   /** Full page title used as default for meta tags */
-  title: 'Servicio técnico de aire y electrodomésticos en Cali',
+  title:
+    'Rivera Refrigeración - Expertos en Aire Acondicionado y Electrodomésticos',
   /** Site description for meta tags and SEO */
   description:
     'Más de 30 años de experiencia en instalación, mantenimiento y reparación de aire acondicionado, neveras, lavadoras y calentadores en Cali, Colombia.',
@@ -121,28 +122,32 @@ export const NAVIGATION = [
 export const SERVICES = [
   {
     id: 'aire-acondicionado',
-    title: 'Reparación de aires acondicionados en Cali',
+    title: 'Aire Acondicionado',
+    anchorText: 'Reparación de aire acondicionado en Cali',
     description:
       'Diagnóstico a domicilio, presupuesto antes de empezar y prueba final del equipo.',
     icon: 'air-conditioner',
   },
   {
     id: 'neveras',
-    title: 'Reparación de neveras en Cali',
+    title: 'Neveras',
+    anchorText: 'Reparación de neveras y refrigeradores en Cali',
     description:
       'Revisión del equipo, presupuesto previo y comprobación de funcionamiento.',
     icon: 'refrigerator',
   },
   {
     id: 'lavadoras',
-    title: 'Reparación de lavadoras en Cali',
+    title: 'Lavadoras',
+    anchorText: 'Reparación de lavadoras en Cali',
     description:
       'Atención a domicilio para identificar fallas de llenado, drenaje, centrifugado y más.',
     icon: 'washing-machine',
   },
   {
     id: 'calentadores',
-    title: 'Instalación de calentadores en Cali',
+    title: 'Calentadores',
+    anchorText: 'Instalación y reparación de calentadores en Cali',
     description:
       'Revisión del equipo y del lugar, con alcance y presupuesto antes de empezar.',
     icon: 'flame',
@@ -150,6 +155,7 @@ export const SERVICES = [
   {
     id: 'instalacion-aire-acondicionado',
     title: 'Instalación de aire acondicionado en Cali',
+    anchorText: 'Instalación de aire acondicionado en Cali',
     description:
       'Evaluación del equipo y el espacio, cotización previa y prueba final.',
     icon: 'air-conditioner',

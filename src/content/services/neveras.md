@@ -1,14 +1,14 @@
 ---
-title: 'Reparación de neveras en Cali'
-h1: 'Reparación de neveras en Cali'
+title: 'Neveras y Refrigeradores'
+h1: 'Reparación de neveras en Cali a domicilio'
 shortDescription: 'Revisión a domicilio para identificar la falla y presupuestar la reparación antes de empezar.'
 icon: 'refrigerator'
 metaTitle: 'Reparación de neveras en Cali'
-metaDescription: 'Reparación de neveras en Cali. Rivera Refrigeración revisa el equipo, presenta el presupuesto antes de empezar y comprueba su funcionamiento.'
+metaDescription: 'Reparación de neveras y refrigeradores en Cali. Rivera Refrigeración identifica la falla, entrega el presupuesto y prueba el equipo.'
 keywords:
   - 'reparación de neveras Cali'
-  - 'reparación de neveras en Cali'
-  - 'servicio técnico de neveras Cali'
+  - 'reparación de refrigeradores Cali'
+  - 'servicio técnico de neveras a domicilio Cali'
 heroImage:
   url: '/images/services/nevera.webp'
   alt: 'Nevera Mabe de dos puertas con dispensador de agua'
@@ -81,7 +81,7 @@ desconectar o desmontar piezas antes de la visita.
 Señale cuándo escucha el ruido y si coincide con cambios de temperatura. La
 revisión permite valorar el estado del equipo.
 
-## Visita de reparación de neveras
+## Reparación de neveras y refrigeradores
 
 En la visita se revisa la nevera y se explica el diagnóstico. Rivera
 Refrigeración entrega el presupuesto antes de empezar; con su aprobación,

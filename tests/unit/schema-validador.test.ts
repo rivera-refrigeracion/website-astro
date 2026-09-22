@@ -3,8 +3,10 @@ import { describe, expect, it } from 'vitest';
 import { CONTACT, SITE } from '@/lib/config';
 import {
   NEGOCIO_ID,
+  OFERTAS_CATALOGO,
   articulo,
   grafo,
+  idOferta,
   migas,
   negocio,
   pagina,
@@ -238,12 +240,28 @@ describe('validador de datos estructurados', () => {
         { name: 'Neveras', path: '/servicios/neveras/' },
       ]),
       servicio({
+        id: idOferta(
+          OFERTAS_CATALOGO.find((oferta) => oferta.slug === 'neveras')!
+        ),
         url: URL_PAGINA,
-        nombre: 'Neveras',
+        nombre: 'Reparación de neveras y refrigeradores',
+        tipo: 'Reparación de neveras y refrigeradores',
         descripcion: 'Reparación de neveras',
         imagen: `${SITE.url}/images/services/neveras.webp`,
         zonas,
       }),
+      ...OFERTAS_CATALOGO.filter(
+        (oferta) => oferta.slug !== 'neveras' || oferta.fragmento !== 'servicio'
+      ).map((oferta) =>
+        servicio({
+          id: idOferta(oferta),
+          url: `${SITE.url}/servicios/${oferta.slug}/`,
+          nombre: oferta.nombre,
+          tipo: oferta.tipo,
+          descripcion: oferta.descripcion,
+          zonas: ['Todo Cali'],
+        })
+      ),
       articulo({
         url: URL_PAGINA,
         titulo: 'Neveras',

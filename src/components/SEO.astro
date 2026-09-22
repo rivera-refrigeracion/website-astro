@@ -11,9 +11,13 @@ import {
   idArticulo,
   migas,
   negocio,
+  OFERTAS_CATALOGO,
+  idOferta,
   pagina,
   ref,
+  servicio as servicioSchema,
   sitio,
+  urlAbsoluta,
 } from '@/lib/schema';
 import type { SEOProps } from '@/types';
 
@@ -66,6 +70,29 @@ const servicios = (await getCollection('services'))
       SERVICES.findIndex((s) => s.id === a.slug) -
       SERVICES.findIndex((s) => s.id === b.slug)
   );
+const idsServicioPagina = new Set(
+  schemaNodes
+    .map((node) =>
+      typeof node === 'object' && node !== null
+        ? (node as { '@id'?: unknown })['@id']
+        : undefined
+    )
+    .filter((id): id is string => typeof id === 'string')
+);
+const nodosOferta = OFERTAS_CATALOGO.filter(
+  (oferta) => !idsServicioPagina.has(idOferta(oferta))
+).map((oferta) => {
+  const urlServicio = urlAbsoluta(`/servicios/${oferta.slug}/`);
+
+  return servicioSchema({
+    id: idOferta(oferta),
+    url: urlServicio,
+    nombre: oferta.nombre,
+    tipo: oferta.tipo,
+    descripcion: oferta.descripcion,
+    zonas: ['Todo Cali'],
+  });
+});
 // Google pide un logo de al menos 112 px en un formato que indexe; PNG es el
 // más seguro.
 const logo = await getImage({ src: logoMarca, format: 'png', width: 512 });
@@ -87,6 +114,7 @@ const nodos: Thing[] = [
     },
   }),
   ...(breadcrumbs.length > 0 ? [migas(url, breadcrumbs)] : []),
+  ...nodosOferta,
   ...(article && publishedTime
     ? [
         articulo({

@@ -23,7 +23,7 @@ const serviceImages: Record<string, string> = {
         SERVICES.map((service, i) => (
           <a
             href={`/servicios/${service.id}/`}
-            aria-label={service.title}
+            aria-label={service.anchorText}
             class="servicio card group flex flex-col text-center p-6 pb-7 text-neutral-900 hover:text-neutral-900"
             data-reveal
             style={`--reveal-i: ${i}`}
@@ -40,12 +40,12 @@ const serviceImages: Record<string, string> = {
                 alt={
                   service.id === 'aire-acondicionado' ||
                   service.id === 'instalacion-aire-acondicionado'
-                    ? 'Aire acondicionado'
+                    ? 'Unidad interior y condensadora de un aire acondicionado Samsung'
                     : service.id === 'lavadoras'
-                      ? 'Lavadora de carga frontal'
+                      ? 'Lavadora de carga frontal en acabado gris'
                       : service.id === 'neveras'
-                        ? 'Nevera de dos puertas'
-                        : 'Calentador de agua'
+                        ? 'Nevera de dos puertas con dispensador de agua'
+                        : 'Calentador de agua blanco de pared con pantalla digital'
                 }
                 class="servicio-imagen relative w-32 h-32 object-contain mix-blend-multiply"
                 width={128}
@@ -62,7 +62,7 @@ const serviceImages: Record<string, string> = {
               {service.description}
             </p>
             <span class="inline-flex items-center justify-center gap-1.5 text-secondary-950 font-semibold text-sm mt-auto">
-              {service.title}
+              {service.anchorText}
               <svg
                 class="servicio-flecha w-4 h-4"
                 fill="none"

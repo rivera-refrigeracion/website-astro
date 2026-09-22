@@ -1,13 +1,13 @@
 ---
-title: 'Instalación de calentadores en Cali'
-h1: 'Instalación de calentadores en Cali'
+title: 'Calentadores de Agua'
+h1: 'Instalación y reparación de calentadores de agua en Cali'
 shortDescription: 'Visita para revisar el equipo y el lugar, confirmar el alcance y entregar el presupuesto antes de empezar.'
 icon: 'water-heater'
-metaTitle: 'Instalación de calentadores en Cali'
-metaDescription: 'Instalación de calentadores en Cali. Rivera Refrigeración revisa el equipo y el lugar, confirma el alcance y presenta el presupuesto antes de empezar.'
+metaTitle: 'Calentadores de agua en Cali'
+metaDescription: 'Instalación y reparación de calentadores en Cali. Rivera Refrigeración confirma el alcance y presenta el presupuesto antes de empezar.'
 keywords:
   - 'instalación de calentadores Cali'
-  - 'instalación de calentadores en Cali'
+  - 'reparación de calentadores Cali'
   - 'servicio técnico de calentadores Cali'
 heroImage:
   url: '/images/services/calentadores.webp'
@@ -59,7 +59,7 @@ serviceAreas:
   - 'Meléndez'
 ---
 
-## Instalación y revisión de calentadores en Cali
+## Instalación de calentadores en Cali
 
 Rivera Refrigeración atiende solicitudes de instalación y revisión de
 calentadores en Cali. El alcance depende del equipo y de las condiciones del
@@ -71,6 +71,12 @@ Puede solicitar una revisión si el equipo no enciende, el agua no alcanza la
 temperatura habitual o el calentador presenta un cambio de funcionamiento.
 Describa el modelo y la situación al pedir la visita. No se detallan aquí
 trabajos específicos pendientes de confirmar.
+
+## Reparación de calentadores
+
+Cuando un calentador presenta cambios de funcionamiento, la visita permite
+revisar el equipo, explicar el diagnóstico y definir si procede una
+reparación. El alcance depende del equipo y de las condiciones del lugar.
 
 ## Proceso de la visita
 
