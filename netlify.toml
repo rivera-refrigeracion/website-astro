@@ -40,6 +40,14 @@
 # stats.g.doubleclick.net, y GTM abre sus propias conexiones a
 # www.googletagmanager.com (auditoría 2026-09-22, M9).
 #
+# Dos huecos que dejaba esa lista, vistos en la consola de producción: el
+# comodín *.analytics.google.com no cubre analytics.google.com a secas, y
+# GA4 también envía los hits a www.google.com/g/collect. Ambos quedaban
+# bloqueados.
+#
+# Las fuentes ya no vienen de Google Fonts sino de /fonts, así que style-src
+# y font-src se quedan en 'self'.
+#
 # Cloudflare Insights sigue deliberadamente fuera de script-src: hoy su beacon
 # se carga en cada visita y la CSP lo bloquea siempre. La decisión de apagarlo
 # o permitirlo es de Juan y está planteada en
@@ -53,7 +61,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://chatwoot.jjuanrivvera.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://chatwoot.jjuanrivvera.com wss://chatwoot.jjuanrivvera.com; frame-src https://chatwoot.jjuanrivvera.com; frame-ancestors 'none'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://chatwoot.jjuanrivvera.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://chatwoot.jjuanrivvera.com wss://chatwoot.jjuanrivvera.com; frame-src https://chatwoot.jjuanrivvera.com; frame-ancestors 'none'"
     Content-Language = "es"
 
 # HTML: No cache (always revalidate)
