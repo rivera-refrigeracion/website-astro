@@ -97,6 +97,15 @@ describe('Site Configuration', () => {
       expect(blogLink?.href).toBe('/blog/');
     });
 
+    it('should link directly to air conditioner installation', () => {
+      const installLink = NAVIGATION.find(
+        (item) => item.name === 'Instalación de aire'
+      );
+      expect(installLink?.href).toBe(
+        '/servicios/instalacion-aire-acondicionado/'
+      );
+    });
+
     it('all items should have name and href', () => {
       NAVIGATION.forEach((item) => {
         expect(item.name).toBeDefined();
@@ -106,8 +115,8 @@ describe('Site Configuration', () => {
   });
 
   describe('SERVICES', () => {
-    it('should have 4 services', () => {
-      expect(SERVICES.length).toBe(4);
+    it('should have 5 service pages', () => {
+      expect(SERVICES.length).toBe(5);
     });
 
     it('should include air conditioning service', () => {
@@ -115,7 +124,9 @@ describe('Site Configuration', () => {
         (service) => service.id === 'aire-acondicionado'
       );
       expect(acService).toBeDefined();
-      expect(acService?.title).toBe('Aire Acondicionado');
+      expect(acService?.title).toBe(
+        'Reparación de aires acondicionados en Cali'
+      );
     });
 
     it('should include refrigerator service', () => {
@@ -123,7 +134,7 @@ describe('Site Configuration', () => {
         (service) => service.id === 'neveras'
       );
       expect(fridgeService).toBeDefined();
-      expect(fridgeService?.title).toBe('Neveras');
+      expect(fridgeService?.title).toBe('Reparación de neveras en Cali');
     });
 
     it('should include washing machine service', () => {
@@ -131,7 +142,16 @@ describe('Site Configuration', () => {
         (service) => service.id === 'lavadoras'
       );
       expect(washerService).toBeDefined();
-      expect(washerService?.title).toBe('Lavadoras');
+      expect(washerService?.title).toBe('Reparación de lavadoras en Cali');
+    });
+
+    it('should include the separate air conditioner installation page', () => {
+      const installService = SERVICES.find(
+        (service) => service.id === 'instalacion-aire-acondicionado'
+      );
+      expect(installService?.title).toBe(
+        'Instalación de aire acondicionado en Cali'
+      );
     });
 
     it('all services should have id, title, description and icon', () => {

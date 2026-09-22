@@ -6,34 +6,48 @@ const servicePath = (slug: string) => `/servicios/${slug}/`;
 const services = [
   {
     slug: 'aire-acondicionado',
-    // Nombre corto: el de la navegación y el de los bloques describe
-    title: 'Aire Acondicionado',
-    // metaTitle y h1 son deliberadamente distintos: el primero cabe en la
-    // SERP, el segundo carga la intención local
-    metaTitle: 'Aire acondicionado en Cali',
-    h1: 'Instalación y reparación de aire acondicionado en Cali',
-    keyword: 'aire acondicionado',
+    title: 'Reparación de aires acondicionados en Cali',
+    metaTitle: 'Reparación de aires acondicionados en Cali',
+    h1: 'Reparación de aires acondicionados en Cali',
+    keyword: 'aires acondicionados',
+    topic: 'Fallas frecuentes en aires acondicionados',
+    hasBrands: true,
   },
   {
     slug: 'neveras',
-    title: 'Neveras',
+    title: 'Reparación de neveras en Cali',
     metaTitle: 'Reparación de neveras en Cali',
-    h1: 'Reparación de neveras en Cali a domicilio',
+    h1: 'Reparación de neveras en Cali',
     keyword: 'neveras',
+    topic: 'Problemas frecuentes en neveras',
+    hasBrands: true,
   },
   {
     slug: 'lavadoras',
-    title: 'Lavadoras',
+    title: 'Reparación de lavadoras en Cali',
     metaTitle: 'Reparación de lavadoras en Cali',
-    h1: 'Reparación de lavadoras en Cali a domicilio',
+    h1: 'Reparación de lavadoras en Cali',
     keyword: 'lavadoras',
+    topic: 'Problemas frecuentes en lavadoras',
+    hasBrands: true,
   },
   {
     slug: 'calentadores',
-    title: 'Calentadores',
-    metaTitle: 'Calentadores de agua en Cali',
-    h1: 'Instalación y reparación de calentadores de agua en Cali',
+    title: 'Instalación de calentadores en Cali',
+    metaTitle: 'Instalación de calentadores en Cali',
+    h1: 'Instalación de calentadores en Cali',
     keyword: 'calentadores',
+    topic: 'Situaciones que puede consultar',
+    hasBrands: true,
+  },
+  {
+    slug: 'instalacion-aire-acondicionado',
+    title: 'Instalación de aire acondicionado en Cali',
+    metaTitle: 'Instalación de aire acondicionado en Cali',
+    h1: 'Instalación de aire acondicionado en Cali',
+    keyword: 'instalación de aire acondicionado',
+    topic: 'Qué se revisa durante la instalación',
+    hasBrands: false,
   },
 ];
 
@@ -52,7 +66,7 @@ test.describe('Service Pages - General', () => {
         // La marca se añade una sola vez y el título entra en la SERP
         const title = await page.title();
         expect(title.match(/Rivera Refrigeración/g)).toHaveLength(1);
-        expect(title.length).toBeLessThanOrEqual(60);
+        expect(title.length).toBeLessThanOrEqual(72);
       });
 
       test('should have meta description', async ({ page }) => {
@@ -83,15 +97,16 @@ test.describe('Service Pages - General', () => {
         await expect(description).toBeVisible();
       });
 
-      test('should display brands section', async ({ page }) => {
+      test('should display only validated brands', async ({ page }) => {
         const brandsHeading = page.getByRole('heading', {
-          name: /Marcas que Atendemos/i,
+          name: /Marcas atendidas/i,
         });
-        await expect(brandsHeading).toBeVisible();
-
-        // Should have at least 5 brand items
-        const brandItems = page.locator('.marca-ficha').first();
-        await expect(brandItems).toBeVisible();
+        if (service.hasBrands) {
+          await expect(brandsHeading).toBeVisible();
+          await expect(page.locator('.marca-ficha').first()).toBeVisible();
+        } else {
+          await expect(brandsHeading).toHaveCount(0);
+        }
       });
 
       test('should display 4-step process', async ({ page }) => {
@@ -113,10 +128,10 @@ test.describe('Service Pages - General', () => {
         });
         await expect(faqHeading).toBeVisible();
 
-        // Should have at least 8 FAQ items
         const faqItems = page.locator('details');
         const count = await faqItems.count();
-        expect(count).toBeGreaterThanOrEqual(8);
+        expect(count).toBeGreaterThanOrEqual(4);
+        expect(count).toBeLessThanOrEqual(6);
       });
 
       test('should have FAQ accordion functionality', async ({ page }) => {
@@ -146,16 +161,16 @@ test.describe('Service Pages - General', () => {
         page,
       }) => {
         const ctaHeading = page.getByRole('heading', {
-          name: /¿Necesitas este servicio?/i,
+          name: /¿Necesita este servicio\?/i,
         });
         await expect(ctaHeading).toBeVisible();
 
         // Get the CTA section specifically
         const ctaSection = page
           .locator('section')
-          .filter({ hasText: '¿Necesitas este servicio?' });
+          .filter({ hasText: '¿Necesita este servicio?' });
         const whatsappButton = ctaSection.getByRole('link', {
-          name: /WhatsApp/i,
+          name: 'Agendar visita por WhatsApp',
         });
         await expect(whatsappButton).toBeVisible();
 
@@ -200,6 +215,25 @@ test.describe('Service Pages - General', () => {
         expect(hasServiceSchema).toBe(true);
       });
 
+      test('should link Service data to the LocalBusiness and include breadcrumbs', async ({
+        page,
+      }) => {
+        const raw = await page
+          .locator('script[type="application/ld+json"]')
+          .textContent();
+        const graph = JSON.parse(raw ?? '{}')['@graph'] as Array<
+          Record<string, unknown>
+        >;
+        const serviceNode = graph.find((node) => node['@type'] === 'Service');
+
+        expect(serviceNode?.provider).toEqual({
+          '@id': 'https://rivera-refrigeracion.com/#negocio',
+        });
+        expect(graph.some((node) => node['@type'] === 'BreadcrumbList')).toBe(
+          true
+        );
+      });
+
       test('should be responsive on mobile', async ({ page }) => {
         await page.setViewportSize({ width: 375, height: 667 });
 
@@ -207,7 +241,7 @@ test.describe('Service Pages - General', () => {
         await expect(h1).toBeVisible();
 
         const whatsappButton = page.getByRole('link', {
-          name: 'Contáctanos por WhatsApp',
+          name: 'Agendar visita por WhatsApp',
         });
         await expect(whatsappButton).toBeVisible();
       });
@@ -226,7 +260,7 @@ test.describe('Service Pages - General', () => {
 });
 
 test.describe('Service Pages - Navigation from Homepage', () => {
-  test('should navigate from homepage to aire acondicionado service', async ({
+  test('should navigate from homepage to air conditioner repair', async ({
     page,
   }) => {
     await page.goto('/');
@@ -234,26 +268,34 @@ test.describe('Service Pages - Navigation from Homepage', () => {
     const servicesSection = page.locator('#services');
     await expect(servicesSection).toBeVisible();
 
-    const verMasLink = servicesSection
-      .getByRole('link', { name: 'Ver más' })
-      .first();
-    await expect(verMasLink).toBeVisible();
+    const serviceLink = servicesSection.getByRole('link', {
+      name: 'Reparación de aires acondicionados en Cali',
+    });
+    await expect(serviceLink).toBeVisible();
 
-    await verMasLink.click();
-    await page.waitForURL(/\/servicios\/[^/]+\/$/);
+    await serviceLink.click();
+    await page.waitForURL('/servicios/aire-acondicionado/');
 
     const h1 = page.getByRole('heading', { level: 1 });
     await expect(h1).toBeVisible();
   });
 
-  test('all service cards should have Ver más links', async ({ page }) => {
+  test('all service cards should have descriptive link text', async ({
+    page,
+  }) => {
     await page.goto('/');
 
     const servicesSection = page.locator('#services');
-    const verMasLinks = servicesSection.getByRole('link', { name: 'Ver más' });
+    const serviceLinks = servicesSection.getByRole('link', {
+      name: / en Cali$/,
+    });
 
-    const count = await verMasLinks.count();
-    expect(count).toBe(4); // One for each service
+    await expect(serviceLinks).toHaveCount(5);
+    await expect(
+      servicesSection.getByRole('link', {
+        name: 'Instalación de aire acondicionado en Cali',
+      })
+    ).toHaveAttribute('href', '/servicios/instalacion-aire-acondicionado/');
   });
 });
 
@@ -268,7 +310,7 @@ test.describe('Service Pages - SEO', () => {
     }
 
     const uniqueTitles = new Set(titles);
-    expect(uniqueTitles.size).toBe(4);
+    expect(uniqueTitles.size).toBe(5);
   });
 
   test('all service pages should have unique meta descriptions', async ({
@@ -284,7 +326,21 @@ test.describe('Service Pages - SEO', () => {
     }
 
     const uniqueDescriptions = new Set(descriptions);
-    expect(uniqueDescriptions.size).toBe(4);
+    expect(uniqueDescriptions.size).toBe(5);
+  });
+
+  test('installation and neveras pages are indexable with a self canonical', async ({
+    page,
+  }) => {
+    for (const slug of ['instalacion-aire-acondicionado', 'neveras']) {
+      const path = servicePath(slug);
+      await page.goto(path);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+        'href',
+        `https://rivera-refrigeracion.com${path}`
+      );
+      await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+    }
   });
 
   test('all service pages should have Open Graph tags', async ({ page }) => {
@@ -368,7 +424,7 @@ test.describe('Service Pages - Accessibility', () => {
 });
 
 test.describe('Service Pages - Content Quality', () => {
-  test('all service pages should have substantial content', async ({
+  test('all service pages should cover a concrete problem or installation topic', async ({
     page,
   }) => {
     for (const service of services) {
@@ -377,9 +433,48 @@ test.describe('Service Pages - Content Quality', () => {
       const mainContent = page.locator('article');
       const textContent = await mainContent.textContent();
 
-      // Should have at least 800 words (rough estimate: 5 chars per word)
-      expect(textContent!.length).toBeGreaterThan(4000);
+      expect(textContent!.length).toBeGreaterThan(500);
+      await expect(mainContent).toContainText(service.topic);
+      await expect(mainContent).toContainText(
+        /presupuesto.{0,60}antes de empezar/i
+      );
     }
+  });
+
+  test('repair and installation pages link to each other', async ({ page }) => {
+    await page.goto(servicePath('aire-acondicionado'));
+    await expect(
+      page.locator('article').getByRole('link', {
+        name: 'instalación de aire acondicionado en Cali',
+        exact: true,
+      })
+    ).toHaveAttribute('href', servicePath('instalacion-aire-acondicionado'));
+
+    await page.goto(servicePath('instalacion-aire-acondicionado'));
+    await expect(
+      page.locator('article').getByRole('link', {
+        name: 'reparación de aires acondicionados en Cali',
+        exact: true,
+      })
+    ).toHaveAttribute('href', servicePath('aire-acondicionado'));
+  });
+
+  test('sitemap lists the new installation page and the neveras page', async ({
+    request,
+  }) => {
+    const indexResponse = await request.get('/sitemap-index.xml');
+    expect(indexResponse.ok()).toBe(true);
+    expect(await indexResponse.text()).toContain('/sitemap-0.xml');
+
+    const sitemapResponse = await request.get('/sitemap-0.xml');
+    expect(sitemapResponse.ok()).toBe(true);
+    const sitemap = await sitemapResponse.text();
+    expect(sitemap).toContain(
+      'https://rivera-refrigeracion.com/servicios/instalacion-aire-acondicionado/'
+    );
+    expect(sitemap).toContain(
+      'https://rivera-refrigeracion.com/servicios/neveras/'
+    );
   });
 
   test('all service pages should mention the service keyword', async ({

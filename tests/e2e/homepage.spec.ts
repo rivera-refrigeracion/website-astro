@@ -35,10 +35,12 @@ test.describe('Homepage', () => {
   test('should display hero section with CTA', async ({ page }) => {
     const heroHeading = page.getByRole('heading', { level: 1 });
     await expect(heroHeading).toBeVisible();
-    await expect(heroHeading).toContainText('Soluciones Confiables');
+    await expect(heroHeading).toContainText(
+      'Reparación de aire acondicionado y electrodomésticos en Cali'
+    );
 
     const ctaButton = page
-      .getByRole('link', { name: 'Agenda tu cita' })
+      .getByRole('link', { name: 'Agende una visita' })
       .first();
     await expect(ctaButton).toBeVisible();
   });
@@ -52,12 +54,35 @@ test.describe('Homepage', () => {
     });
     await expect(servicesHeading).toBeVisible();
 
-    const services = ['Aire Acondicionado', 'Neveras', 'Lavadoras'];
+    const services = [
+      'Reparación de aires acondicionados en Cali',
+      'Reparación de neveras en Cali',
+      'Reparación de lavadoras en Cali',
+      'Instalación de calentadores en Cali',
+      'Instalación de aire acondicionado en Cali',
+    ];
     for (const service of services) {
       await expect(
         servicesSection.getByRole('heading', { name: service })
       ).toBeVisible();
     }
+
+    const serviceLinks = servicesSection.getByRole('link', {
+      name: / en Cali$/,
+    });
+    await expect(serviceLinks).toHaveCount(5);
+  });
+
+  test('should include a direct menu link to air conditioner installation', async ({
+    page,
+  }) => {
+    const link = page
+      .getByRole('link', { name: 'Instalación de aire' })
+      .first();
+    await expect(link).toHaveAttribute(
+      'href',
+      '/servicios/instalacion-aire-acondicionado/'
+    );
   });
 
   test('should display about section', async ({ page }) => {
