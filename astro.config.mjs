@@ -44,8 +44,10 @@ export default defineConfig({
     defaultStrategy: 'viewport',
   },
 
+  // Todo el CSS va en línea: son unos 6 KiB comprimidos y como hoja externa
+  // era la única petición que bloqueaba el primer pintado.
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
   },
 
   compressHTML: true,
