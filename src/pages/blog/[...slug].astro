@@ -33,6 +33,11 @@ const formattedDate = new Intl.DateTimeFormat('es-CO', {
   section={post.data.category}
   tags={post.data.tags}
   image={post.data.image?.url}
+  breadcrumbs={[
+    { name: 'Inicio', path: '/' },
+    { name: 'Blog', path: '/blog/' },
+    { name: post.data.title, path: `/blog/${post.slug}/` },
+  ]}
 >
   <article class="py-12">
     <div class="container">

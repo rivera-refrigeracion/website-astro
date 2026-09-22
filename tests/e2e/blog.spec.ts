@@ -59,7 +59,7 @@ test.describe('Blog', () => {
     test('should display author and date', async ({ page }) => {
       await page.goto('/blog/por-que-tu-aire-acondicionado-no-enfria-bien/');
 
-      await expect(page.getByText('Rivera Refrigeracion')).toBeVisible();
+      await expect(page.getByText('Por Rivera Refrigeración')).toBeVisible();
     });
 
     test('should have WhatsApp CTA', async ({ page }) => {

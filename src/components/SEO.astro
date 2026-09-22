@@ -1,5 +1,18 @@
 ---
-import { SITE } from '@/lib/config';
+import { getCollection } from 'astro:content';
+import type { Thing } from 'schema-dts';
+import { ADDRESS, GEO, SERVICES, SITE } from '@/lib/config';
+import {
+  NEGOCIO_ID,
+  articulo,
+  grafo,
+  idArticulo,
+  migas,
+  negocio,
+  pagina,
+  ref,
+  sitio,
+} from '@/lib/schema';
 import type { SEOProps } from '@/types';
 
 interface Props extends SEOProps {}
@@ -21,6 +34,10 @@ const {
   section,
   tags = [],
   noindex = false,
+  pageType,
+  breadcrumbs = [],
+  pageSchema,
+  schemaNodes = [],
 } = Astro.props;
 
 const pageTitle = title ? `${title} | ${SITE.name}` : SITE.title;
@@ -34,76 +51,59 @@ const esOgPorDefecto = image === OG_POR_DEFECTO;
 const anchoOg = imageWidth ?? (esOgPorDefecto ? 1200 : undefined);
 const altoOg = imageHeight ?? (esOgPorDefecto ? 630 : undefined);
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': article ? 'Article' : 'WebPage',
-  name: pageTitle,
-  description,
-  url: canonicalURL.toString(),
-  image: imageURL.toString(),
-  ...(article && {
-    headline: title,
-    author: {
-      '@type': 'Person',
-      name: author,
+// Un solo @graph por página, con el negocio completo en todas: Google sólo
+// resuelve los @id dentro del mismo documento.
+const servicios = (await getCollection('services'))
+  .map((s) => ({
+    slug: s.slug,
+    title: s.data.title,
+    serviceAreas: s.data.serviceAreas,
+  }))
+  .sort(
+    (a, b) =>
+      SERVICES.findIndex((s) => s.id === a.slug) -
+      SERVICES.findIndex((s) => s.id === b.slug)
+  );
+const url = canonicalURL.toString();
+const nodos: Thing[] = [
+  negocio(servicios),
+  sitio(),
+  pagina({
+    url,
+    tipo: pageType,
+    nombre: pageTitle,
+    descripcion: description,
+    imagen: imageURL.toString(),
+    conMigas: breadcrumbs.length > 0,
+    extra: {
+      ...(article && { mainEntity: ref(idArticulo(url)) }),
+      ...(Astro.url.pathname === '/' && { about: ref(NEGOCIO_ID) }),
+      ...pageSchema,
     },
-    datePublished: publishedTime,
-    dateModified: modifiedTime || publishedTime,
   }),
-  publisher: {
-    '@type': 'LocalBusiness',
-    name: SITE.name,
-    description: SITE.description,
-    url: SITE.url,
-    telephone: '+573173095159',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Cali',
-      addressRegion: 'Valle del Cauca',
-      addressCountry: 'CO',
-    },
-    areaServed: {
-      '@type': 'City',
-      name: 'Cali',
-    },
-    priceRange: '$$',
-    openingHours: 'Mo-Fr 08:00-18:00',
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Servicios de reparación',
-      itemListElement: [
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Reparación de Aire Acondicionado',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Reparación de Neveras',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Reparación de Lavadoras',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Reparación de Calentadores',
-          },
-        },
-      ],
-    },
-  },
-};
+  ...(breadcrumbs.length > 0 ? [migas(url, breadcrumbs)] : []),
+  ...(article && publishedTime
+    ? [
+        articulo({
+          url,
+          titulo: title ?? pageTitle,
+          descripcion: description,
+          imagen: imageURL.toString(),
+          // Sólo la fecha: el contenido guarda días, no horas, y
+          // "T00:00:00Z" sería la tarde anterior en Cali.
+          publicado: publishedTime.slice(0, 10),
+          modificado: modifiedTime?.slice(0, 10),
+          autor: author,
+          seccion: section,
+          etiquetas: tags,
+        }),
+      ]
+    : []),
+  ...schemaNodes,
+];
+// Una página noindex (la 404) no describe ninguna entidad. Al serializar se
+// escapa "<" para que un texto con "</script>" no cierre el bloque.
+const jsonLd = noindex ? undefined : grafo(nodos);
 ---
 
 <!-- Primary Meta Tags -->
@@ -155,14 +155,18 @@ const jsonLd = {
 <meta name="twitter:image" content={imageURL} />
 
 <!-- Additional SEO Meta Tags -->
-<meta name="geo.region" content="CO-VAC" />
-<meta name="geo.placename" content="Cali" />
-<meta name="geo.position" content="3.4516467;-76.5319854" />
-<meta name="ICBM" content="3.4516467, -76.5319854" />
+<meta name="geo.region" content={ADDRESS.regionCode} />
+<meta name="geo.placename" content={ADDRESS.locality} />
+<meta name="geo.position" content={`${GEO.latitude};${GEO.longitude}`} />
+<meta name="ICBM" content={`${GEO.latitude}, ${GEO.longitude}`} />
 
 <!-- Structured Data -->
-<script
-  is:inline
-  type="application/ld+json"
-  set:html={JSON.stringify(jsonLd)}
-/>
+{
+  jsonLd && (
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')}
+    />
+  )
+}

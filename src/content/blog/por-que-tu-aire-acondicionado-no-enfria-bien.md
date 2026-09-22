@@ -3,7 +3,7 @@ title: '¿Por Qué tu Aire Acondicionado No Enfría Bien?'
 description: 'Descubre las razones más comunes por las que tu aire acondicionado puede no estar funcionando correctamente y qué medidas puedes tomar para arreglarlo.'
 pubDate: 2024-09-11
 category: 'Aire Acondicionado'
-author: 'Rivera Refrigeracion'
+author: 'Rivera Refrigeración'
 image:
   url: '/images/blog/aire-acondicionado-no-enfria.webp'
   alt: 'Aire acondicionado que no enfría'

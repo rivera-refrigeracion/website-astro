@@ -51,6 +51,38 @@ export const CONTACT = {
 } as const;
 
 /**
+ * Dirección pública del negocio. No hay dirección de calle porque el servicio
+ * es a domicilio; la ciudad es lo que se muestra en el pie y lo que declara el
+ * schema.
+ */
+export const ADDRESS = {
+  locality: 'Cali',
+  region: 'Valle del Cauca',
+  /** ISO 3166-1 alfa-2, el formato que pide Google en addressCountry */
+  country: 'CO',
+  /** ISO 3166-2, para la meta geo.region */
+  regionCode: 'CO-VAC',
+} as const;
+
+/** Coordenadas del centro de Cali, las mismas de las metas geo.* */
+export const GEO = {
+  latitude: 3.4516467,
+  longitude: -76.5319854,
+} as const;
+
+/**
+ * Horario de atención. El pie lo muestra y el schema lo declara: sale de aquí
+ * para que lo visible y lo estructurado no se separen.
+ */
+export const HOURS = {
+  days: 'Lunes - Viernes',
+  time: '8:00 AM - 6:00 PM',
+  dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+  opens: '08:00',
+  closes: '18:00',
+} as const;
+
+/**
  * Social media links for Rivera Refrigeración.
  * Used in the footer and for social sharing.
  */

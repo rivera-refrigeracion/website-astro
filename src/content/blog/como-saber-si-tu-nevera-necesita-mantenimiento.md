@@ -3,7 +3,7 @@ title: 'Cómo Saber si Tu Nevera Necesita Mantenimiento'
 description: 'Identifica las señales de que tu nevera necesita reparación o mantenimiento para conservar tus alimentos frescos y evitar gastos innecesarios.'
 pubDate: 2024-09-05
 category: 'Mantenimiento'
-author: 'Rivera Refrigeracion'
+author: 'Rivera Refrigeración'
 image:
   url: '/images/blog/nevera-mantenimiento.webp'
   alt: 'Nevera que necesita mantenimiento'

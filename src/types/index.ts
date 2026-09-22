@@ -1,3 +1,6 @@
+import type { Thing } from 'schema-dts';
+import type { Miga, TipoDePagina } from '@/lib/schema';
+
 /**
  * Represents a blog post entry with metadata and content.
  * Used for rendering blog articles and RSS feed generation.
@@ -112,4 +115,12 @@ export interface SEOProps {
   tags?: string[];
   /** Prevents search engine indexing if true */
   noindex?: boolean;
+  /** Tipo schema.org de la página en el @graph; por defecto WebPage. */
+  pageType?: TipoDePagina;
+  /** Ruta de migas desde el inicio; la última es la página actual. */
+  breadcrumbs?: Miga[];
+  /** Propiedades extra del nodo de la página (p. ej. mainEntity). */
+  pageSchema?: Record<string, unknown>;
+  /** Nodos que la página añade al @graph (Service, etc.). */
+  schemaNodes?: Thing[];
 }

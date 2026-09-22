@@ -10,6 +10,11 @@ const posts = (await getCollection('blog'))
 <Layout
   title="Blog"
   description="Artículos y consejos sobre aire acondicionado, neveras, lavadoras y calentadores. Aprende a cuidar tus electrodomésticos con Rivera Refrigeración."
+  pageType="CollectionPage"
+  breadcrumbs={[
+    { name: 'Inicio', path: '/' },
+    { name: 'Blog', path: '/blog/' },
+  ]}
 >
   <section class="section bg-neutral-50">
     <div class="container">
