@@ -27,6 +27,8 @@ const service: Props = Astro.props;
 const { Content } = await service.render();
 
 const url = urlAbsoluta(`/servicios/${service.slug}/`);
+// Nunca más ancha que el archivo: una foto de 500 px estirada a 896 se ve
+// borrosa (Lighthouse, image-size-responsive).
 const imagenPrincipal = imagenLocal(service.data.heroImage.url);
 
 // El schema necesita una URL que exista: el original ya no se publica en
@@ -83,7 +85,8 @@ const imagenSchema = await getImage({
           formats={['avif']}
           fallbackFormat="webp"
           alt={service.data.heroImage.alt}
-          class="w-full h-auto rounded-lg shadow-lg"
+          class="w-full h-auto mx-auto rounded-lg shadow-lg"
+          style={`max-width: ${imagenPrincipal.width}px`}
           widths={[400, 600, 800, 896, 1200]}
           sizes="(min-width: 944px) 896px, calc(100vw - 48px)"
           loading="eager"
