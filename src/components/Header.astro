@@ -5,6 +5,9 @@ import logo from '@/assets/images/logo.webp';
 import { whatsappUrl } from '@/lib/utils';
 
 const currentPath = Astro.url.pathname;
+
+const esActual = (href: string) =>
+  currentPath === href || (href !== '/' && currentPath.startsWith(href));
 ---
 
 <header
@@ -44,12 +47,12 @@ const currentPath = Astro.url.pathname;
               <li>
                 <a
                   href={item.href}
+                  aria-current={esActual(item.href) ? 'page' : undefined}
                   class:list={[
-                    'text-sm font-medium transition-colors hover:text-secondary-400',
-                    currentPath === item.href ||
-                    (item.href !== '/' && currentPath.startsWith(item.href))
-                      ? 'text-secondary-400'
-                      : 'text-white/90',
+                    'text-sm font-medium text-white transition-colors hover:text-secondary-200 border-b-2 pb-0.5',
+                    esActual(item.href)
+                      ? 'border-secondary-400'
+                      : 'border-transparent',
                   ]}
                 >
                   {item.name}
@@ -62,7 +65,7 @@ const currentPath = Astro.url.pathname;
           href={whatsappUrl('desde el menú')}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors text-sm font-medium"
+          class="inline-flex items-center gap-2 text-white hover:text-secondary-200 transition-colors text-sm font-medium"
           aria-label="Contactar por WhatsApp"
         >
           <svg
@@ -117,12 +120,12 @@ const currentPath = Astro.url.pathname;
             <li>
               <a
                 href={item.href}
+                aria-current={esActual(item.href) ? 'page' : undefined}
                 class:list={[
-                  'block py-2 text-base font-medium transition-colors hover:text-secondary-400',
-                  currentPath === item.href ||
-                  (item.href !== '/' && currentPath.startsWith(item.href))
-                    ? 'text-secondary-400'
-                    : 'text-white/90',
+                  'block py-2 text-base font-medium text-white transition-colors hover:text-secondary-200 border-l-4 pl-3',
+                  esActual(item.href)
+                    ? 'border-secondary-400'
+                    : 'border-transparent',
                 ]}
               >
                 {item.name}

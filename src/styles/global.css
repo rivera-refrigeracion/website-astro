@@ -101,6 +101,12 @@
   --color-secondary-700: #f57c00;
   --color-secondary-800: #ef6c00;
   --color-secondary-900: #e65100;
+  /*
+   * Añadido para texto naranja sobre blanco: ningún tono de la escala llega a
+   * AA (4,5:1); #b16200 es el secondary-600 oscurecido lo mínimo para
+   * lograrlo (4,55:1). Sólo para texto; los fondos siguen con la escala.
+   */
+  --color-secondary-950: #b16200;
 
   /* Neutral Colors */
   --color-neutral-50: #f9fafb;
@@ -210,14 +216,16 @@
     font-size: var(--text-h6);
   }
 
+  /* primary-600 sobre blanco da 3,7:1; primary-700 es el primer tono de la
+     escala que pasa AA (4,6:1). */
   a {
-    color: var(--color-primary-600);
+    color: var(--color-primary-700);
     text-decoration: none;
     transition: color var(--transition-fast);
   }
 
   a:hover {
-    color: var(--color-primary-700);
+    color: var(--color-primary-800);
   }
 
   img {
@@ -252,20 +260,21 @@
     text-decoration: none;
   }
 
+  /* Con texto blanco, primary-600 da 3,7:1; primary-700 pasa AA (4,6:1). */
   .btn-primary {
-    background-color: var(--color-primary-600);
+    background-color: var(--color-primary-700);
     color: white;
     box-shadow: var(--shadow-level1);
   }
 
   .btn-primary:hover {
-    background-color: var(--color-primary-700);
+    background-color: var(--color-primary-800);
   }
 
   .btn-secondary {
     background-color: transparent;
-    border: 2px solid var(--color-primary-600);
-    color: var(--color-primary-600);
+    border: 2px solid var(--color-primary-700);
+    color: var(--color-primary-700);
   }
 
   .btn-secondary:hover {
@@ -307,12 +316,16 @@
     text-align: center;
   }
 
-  /* WhatsApp Button */
+  /*
+   * WhatsApp Button. El verde de WhatsApp (#25d366) con texto blanco da
+   * 1,98:1; #188842 es ese verde oscurecido lo mínimo para llegar a AA
+   * (4,53:1). No es un color de la paleta de la marca.
+   */
   .whatsapp-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: #25d366;
+    background-color: #188842;
     color: white;
     padding: 0.75rem 1.5rem;
     border-radius: var(--radius-pill);
@@ -322,7 +335,7 @@
   }
 
   .whatsapp-btn:hover {
-    background-color: #128c7e;
+    background-color: #136c34;
     color: white;
     transform: translateY(-2px);
     box-shadow: var(--shadow-level3);
@@ -408,7 +421,7 @@
   }
 
   .prose a {
-    color: var(--color-primary-600);
+    color: var(--color-primary-700);
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-thickness: 2px;
@@ -417,7 +430,7 @@
   }
 
   .prose a:hover {
-    color: var(--color-primary-700);
+    color: var(--color-primary-800);
     text-decoration-color: var(--color-primary-500);
   }
 

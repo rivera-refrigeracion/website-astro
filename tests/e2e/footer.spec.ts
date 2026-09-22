@@ -13,33 +13,37 @@ test.describe('Footer', () => {
 
     test('should have 4 main sections', async ({ page }) => {
       const footer = page.locator('footer');
-      const sections = footer.locator('h3');
+      const sections = footer.locator('h2');
       await expect(sections).toHaveCount(4);
     });
 
     test('should have Company Info section', async ({ page }) => {
-      const heading = page.getByRole('heading', {
+      const heading = page.locator('footer').getByRole('heading', {
         name: 'Rivera Refrigeración',
-        level: 3,
+        level: 2,
       });
       await expect(heading).toBeVisible();
     });
 
     test('should have Services section', async ({ page }) => {
-      const heading = page.getByRole('heading', {
+      const heading = page.locator('footer').getByRole('heading', {
         name: 'Servicios',
-        level: 3,
+        level: 2,
       });
       await expect(heading).toBeVisible();
     });
 
     test('should have Contact section', async ({ page }) => {
-      const heading = page.getByRole('heading', { name: 'Contacto', level: 3 });
+      const heading = page
+        .locator('footer')
+        .getByRole('heading', { name: 'Contacto', level: 2 });
       await expect(heading).toBeVisible();
     });
 
     test('should have Operating Hours section', async ({ page }) => {
-      const heading = page.getByRole('heading', { name: 'Horario', level: 3 });
+      const heading = page
+        .locator('footer')
+        .getByRole('heading', { name: 'Horario', level: 2 });
       await expect(heading).toBeVisible();
     });
   });

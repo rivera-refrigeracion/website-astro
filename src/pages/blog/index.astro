@@ -45,11 +45,11 @@ const posts = (await getCollection('blog'))
                 </a>
               )}
 
-              <span class="inline-block text-sm text-primary-600 font-medium mb-2">
+              <span class="inline-block text-sm text-primary-700 font-medium mb-2">
                 {post.data.category}
               </span>
 
-              <h2 class="text-xl font-semibold mb-3 text-neutral-900 group-hover:text-primary-600 transition-colors">
+              <h2 class="text-xl font-semibold mb-3 text-neutral-900 group-hover:text-primary-700 transition-colors">
                 <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
               </h2>
 
