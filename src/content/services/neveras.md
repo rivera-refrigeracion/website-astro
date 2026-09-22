@@ -1,128 +1,92 @@
 ---
-title: 'Neveras y Refrigeradores'
-h1: 'Reparación de neveras en Cali a domicilio'
-shortDescription: 'Reparación y mantenimiento especializado de neveras y refrigeradores de todas las marcas en Cali'
+title: 'Reparación de neveras en Cali'
+h1: 'Reparación de neveras en Cali'
+shortDescription: 'Revisión a domicilio para identificar la falla y presupuestar la reparación antes de empezar.'
 icon: 'refrigerator'
-
-# SEO
 metaTitle: 'Reparación de neveras en Cali'
-metaDescription: 'Servicio técnico de neveras en Cali. Reparamos todas las marcas: Samsung, LG, Whirlpool, Haceb. +30 años de experiencia. Diagnóstico a domicilio.'
+metaDescription: 'Reparación de neveras en Cali. Rivera Refrigeración revisa el equipo, presenta el presupuesto antes de empezar y comprueba su funcionamiento.'
 keywords:
-  - 'reparación neveras Cali'
-  - 'técnico neveras Cali'
-  - 'arreglo refrigeradores Cali'
-  - 'mantenimiento neveras Valle del Cauca'
-  - 'servicio neveras domicilio Cali'
-
-# Images
+  - 'reparación de neveras Cali'
+  - 'reparación de neveras en Cali'
+  - 'servicio técnico de neveras Cali'
 heroImage:
   url: '/images/services/nevera.webp'
-  alt: 'Técnico especializado reparando nevera en Cali'
-
+  alt: 'Nevera Mabe de dos puertas con dispensador de agua'
 ogImage:
   url: '/images/og-neveras.jpg'
-  alt: 'Reparación de neveras en Cali - Rivera Refrigeración'
-
-# Brands serviced
+  alt: 'Gráfico con el texto reparación de neveras en Cali y datos de contacto'
 brands:
-  - name: 'Samsung'
   - name: 'LG'
+  - name: 'Samsung'
   - name: 'Whirlpool'
-  - name: 'Electrolux'
   - name: 'Haceb'
-  - name: 'Mabe'
   - name: 'Challenger'
-
-# Process (4 steps)
 process:
   - step: 1
-    title: 'Diagnóstico Profesional'
-    description: 'Visitamos su hogar y evaluamos el problema (costo aplicable a reparación)'
+    title: 'Diagnóstico en su domicilio'
+    description: 'Se revisa la nevera para identificar la causa de la falla reportada.'
     icon: '🔍'
   - step: 2
-    title: 'Cotización Clara'
-    description: 'Explicamos el diagnóstico y precio de reparación'
-    icon: '💰'
+    title: 'Presupuesto antes de empezar'
+    description: 'Rivera Refrigeración explica el trabajo y su costo. Usted decide si continúa.'
+    icon: '🧾'
   - step: 3
-    title: 'Reparación Experta'
-    description: 'Reparamos con repuestos garantizados'
+    title: 'Reparación acordada'
+    description: 'Se realiza el trabajo aprobado. Si hace falta otra gestión, se informa antes.'
     icon: '🔧'
   - step: 4
-    title: 'Verificación Final'
-    description: 'Comprobamos funcionamiento correcto'
-    icon: '✅'
-
-# FAQs
+    title: 'Prueba final'
+    description: 'Al terminar, se comprueba el funcionamiento de la nevera.'
+    icon: '✓'
 faqs:
-  - question: '¿Por qué mi nevera no enfría?'
-    answer: 'Las causas más comunes son: falta de gas refrigerante, compresor dañado, termostato defectuoso, o motor ventilador averiado. Realizamos diagnóstico completo para determinar la falla exacta.'
+  - question: '¿Por qué una nevera deja de enfriar?'
+    answer: 'Puede haber distintas causas. Durante la visita se revisa el equipo para determinar qué ocurre antes de proponer una reparación.'
   - question: '¿Cuánto cuesta reparar una nevera en Cali?'
-    answer: 'El costo depende del tipo de falla. El diagnóstico tiene un costo desde $25,000 COP. Luego del diagnóstico, le proporcionamos un presupuesto detallado antes de proceder.'
-  - question: '¿Cuánto tiempo toma la reparación?'
-    answer: 'La mayoría de reparaciones se completan en 1-2 horas. Si se requieren repuestos especiales, puede tomar de 1 a 3 días conseguirlos e instalarlos.'
-  - question: '¿Qué garantía ofrecen?'
-    answer: 'Ofrecemos garantía en todos los trabajos realizados y repuestos instalados. La duración específica se indica en la orden de servicio según el tipo de reparación.'
-  - question: '¿Reparan neveras No Frost?'
-    answer: 'Sí, estamos especializados en neveras No Frost de todas las marcas. Reparamos sistemas de deshielo automático, ventiladores, y componentes electrónicos.'
-  - question: '¿Por qué mi nevera hace mucho ruido?'
-    answer: 'Ruidos excesivos pueden indicar: compresor desgastado, ventilador obstruido, soportes flojos, o problemas en el motor. Identificamos la fuente exacta del ruido.'
-  - question: '¿Atienden neveras industriales?'
-    answer: 'Sí, atendemos tanto neveras domésticas como equipos comerciales e industriales. Tenemos experiencia con cuartos fríos, vitrinas refrigeradas, y equipos de gran capacidad.'
-  - question: '¿Por qué se forma escarcha en mi nevera?'
-    answer: 'Escarcha excesiva puede deberse a: empaque de puerta dañado, sistema de deshielo defectuoso, o termostato descalibrado. Solucionamos el problema y prevenimos daños mayores.'
-
-# Service areas
+    answer: 'El costo depende de la falla y del trabajo requerido. Rivera Refrigeración presenta el presupuesto después del diagnóstico y antes de empezar.'
+  - question: '¿Cuánto tarda la reparación?'
+    answer: 'El tiempo depende de la falla y de si se necesita conseguir un repuesto. Después de revisar la nevera, se informa el tiempo estimado antes de empezar.'
+  - question: '¿Atienden neveras No Frost?'
+    answer: 'Rivera Refrigeración revisa neveras No Frost en Cali. La visita permite identificar la falla y confirmar el trabajo que requiere el equipo.'
+  - question: '¿Qué debo tener listo para la visita?'
+    answer: 'Despeje el acceso al equipo y, si puede, tenga a mano la marca y el modelo. Describa cuándo notó la falla y qué cambios ha observado.'
 serviceAreas:
-  - 'Toda la ciudad de Cali'
+  - 'Todo Cali'
   - 'Valle del Lili'
   - 'Ciudad Jardín'
   - 'Granada'
   - 'San Fernando'
   - 'Limonar'
   - 'Meléndez'
-  - 'El Ingenio'
   - 'Pance'
-  - 'Jamundí'
 ---
 
-## Reparación Profesional de Neveras en Cali
+## Problemas frecuentes en neveras
 
-En **Rivera Refrigeración**, llevamos más de 30 años brindando servicios especializados de reparación y mantenimiento de neveras y refrigeradores en Cali. Nuestro compromiso es mantener sus alimentos frescos y seguros, reparando su nevera de manera rápida y efectiva.
+Rivera Refrigeración atiende solicitudes de reparación de neveras en Cali. La
+visita permite revisar el equipo; los síntomas siguientes no sustituyen un
+diagnóstico.
 
-### Expertos en Refrigeración Doméstica y Comercial
+### La nevera enfría poco o deja de enfriar
 
-Trabajamos con todas las marcas y modelos del mercado, desde neveras tradicionales hasta los más modernos sistemas No Frost y Side by Side. Nuestro equipo técnico cuenta con la capacitación y herramientas necesarias para diagnosticar y reparar cualquier falla.
+Observe si el cambio afecta el refrigerador, el congelador o ambos. Indique
+cuándo comenzó para que esa información se tenga en cuenta durante la revisión.
 
-## Problemas Más Frecuentes en Neveras
+### Se acumula agua o escarcha
 
-### 1. Nevera no enfría o enfría poco
+Describa dónde aparece el agua o el hielo y si ocurre de forma constante. Evite
+desconectar o desmontar piezas antes de la visita.
 
-El problema más común que atendemos. Puede originarse por múltiples causas: fuga de gas refrigerante, compresor defectuoso, evaporador bloqueado, o fallas en el sistema de control. Realizamos pruebas exhaustivas para identificar la causa raíz y aplicar la solución correcta.
+### Hace ruidos o trabaja de manera inusual
 
-### 2. Consumo excesivo de energía
+Señale cuándo escucha el ruido y si coincide con cambios de temperatura. La
+revisión permite valorar el estado del equipo.
 
-Si nota un aumento considerable en su factura eléctrica, su nevera puede estar trabajando de forma ineficiente. Esto puede deberse a empaques desgastados, termostato descalibrado, o compresor forzado. Optimizamos el funcionamiento para reducir el consumo.
+## Visita de reparación de neveras
 
-### 3. Nevera hace ruidos extraños
+En la visita se revisa la nevera y se explica el diagnóstico. Rivera
+Refrigeración entrega el presupuesto antes de empezar; con su aprobación,
+realiza la reparación acordada y comprueba el funcionamiento al terminar. El
+tiempo estimado depende de la falla y de la disponibilidad de repuestos.
 
-Ruidos anormales como golpes, chirridos o zumbidos fuertes indican problemas mecánicos. Puede tratarse de compresor desgastado, ventiladores obstruidos, tubería vibrando, o soportes flojos. Identificamos y reparamos la fuente del ruido.
-
-### 4. Acumulación de agua o hielo
-
-Si encuentra agua debajo de la nevera o hielo excesivo en el congelador, puede haber problemas con el drenaje, sistema de deshielo, o empaques de puerta. Solucionamos fugas y prevenimos daños por humedad.
-
-### 5. Nevera no enciende
-
-Cuando su nevera no arranca, puede deberse a fallas eléctricas, relay defectuoso, compresor bloqueado, o problemas en la tarjeta de control. Diagnosticamos el componente fallido y lo reparamos o reemplazamos.
-
-### 6. Congelador funciona pero nevera no
-
-En neveras de dos puertas, este problema suele relacionarse con el ventilador evaporador, termostato de nevera, o problemas en el damper. Restauramos el funcionamiento correcto de ambos compartimientos.
-
-### 7. Escarcha excesiva
-
-Formación anormal de hielo puede indicar: sistema de deshielo automático dañado, timer defectuoso, resistencia quemada, o sensores averiados. Reparamos el sistema No Frost completamente.
-
-### 8. Mal olor persistente
-
-Olores desagradables pueden provenir de alimentos descompuestos, drenaje obstruido, o crecimiento bacteriano. Realizamos limpieza profunda y eliminamos la causa del olor.
+También puede leer la guía sobre
+[señales de que una nevera necesita mantenimiento](/blog/como-saber-si-tu-nevera-necesita-mantenimiento/).

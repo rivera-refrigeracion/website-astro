@@ -32,8 +32,7 @@ const ALTO = 630;
 /** Se captura al doble y se reduce: el texto queda nítido sin subpíxeles sucios. */
 const ESCALA = 2;
 
-const CHROME =
-  process.env.CHROME_BIN ?? '/usr/bin/google-chrome-stable';
+const CHROME = process.env.CHROME_BIN ?? '/usr/bin/google-chrome-stable';
 
 // Paleta de src/styles/global.css
 const COLORES = {
@@ -60,14 +59,19 @@ const IMAGENES = [
     apoyo: 'Instalación, mantenimiento y reparación a domicilio',
   },
   {
+    archivo: 'public/images/og-instalacion-aire-acondicionado.jpg',
+    titular: 'Instalación de aire acondicionado en Cali',
+    apoyo: 'Evaluación del equipo y el espacio, presupuesto previo',
+  },
+  {
     archivo: 'public/images/og-neveras.jpg',
     titular: 'Reparación de neveras en Cali',
-    apoyo: 'Servicio técnico a domicilio, todas las marcas',
+    apoyo: 'Atención a equipos LG, Samsung, Whirlpool, Haceb y Challenger',
   },
   {
     archivo: 'public/images/og-lavadoras.jpg',
     titular: 'Reparación de lavadoras en Cali',
-    apoyo: 'Servicio técnico a domicilio, todas las marcas',
+    apoyo: 'Atención a equipos LG, Samsung, Whirlpool, Haceb y Challenger',
   },
   {
     archivo: 'public/images/og-calentadores.jpg',
@@ -131,8 +135,14 @@ function plantilla({ titular, apoyo, logo, montserrat, openSans }) {
 }
 
 const logo = await aDataUri('src/assets/brand/logo-mark.png', 'image/png');
-const montserrat = await aDataUri('scripts/fonts/Montserrat-latin.woff2', 'font/woff2');
-const openSans = await aDataUri('scripts/fonts/OpenSans-latin.woff2', 'font/woff2');
+const montserrat = await aDataUri(
+  'scripts/fonts/Montserrat-latin.woff2',
+  'font/woff2'
+);
+const openSans = await aDataUri(
+  'scripts/fonts/OpenSans-latin.woff2',
+  'font/woff2'
+);
 
 const trabajo = await mkdtemp(join(tmpdir(), 'og-rivera-'));
 
@@ -140,7 +150,10 @@ try {
   for (const { archivo, titular, apoyo } of IMAGENES) {
     const html = join(trabajo, 'og.html');
     const captura = join(trabajo, 'og.png');
-    await writeFile(html, plantilla({ titular, apoyo, logo, montserrat, openSans }));
+    await writeFile(
+      html,
+      plantilla({ titular, apoyo, logo, montserrat, openSans })
+    );
 
     await ejecutar(CHROME, [
       '--headless=new',

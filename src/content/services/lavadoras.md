@@ -1,77 +1,54 @@
 ---
-title: 'Lavadoras'
-h1: 'Reparación de lavadoras en Cali a domicilio'
-shortDescription: 'Servicio técnico especializado en reparación y mantenimiento de lavadoras de todas las marcas en Cali'
+title: 'Reparación de lavadoras en Cali'
+h1: 'Reparación de lavadoras en Cali'
+shortDescription: 'Servicio a domicilio con diagnóstico, presupuesto previo y prueba de funcionamiento.'
 icon: 'washing-machine'
-
-# SEO
 metaTitle: 'Reparación de lavadoras en Cali'
-metaDescription: 'Reparación de lavadoras en Cali. Atendemos Samsung, LG, Whirlpool, Mabe, Haceb y todas las marcas. Servicio a domicilio. +30 años de experiencia.'
+metaDescription: 'Reparación de lavadoras en Cali. Rivera Refrigeración identifica la falla, entrega el presupuesto antes de empezar y prueba el equipo.'
 keywords:
-  - 'reparación lavadoras Cali'
-  - 'servicio lavadoras Cali'
-  - 'técnico lavadoras Valle del Cauca'
-  - 'arreglo lavadoras domicilio'
-  - 'mantenimiento lavadoras Cali'
-
-# Images
+  - 'reparación de lavadoras Cali'
+  - 'reparación de lavadoras en Cali'
+  - 'servicio técnico de lavadoras Cali'
 heroImage:
   url: '/images/services/lavadora.webp'
-  alt: 'Técnico reparando lavadora a domicilio en Cali'
-
+  alt: 'Lavadora de carga frontal LG en acabado gris'
 ogImage:
   url: '/images/og-lavadoras.jpg'
-  alt: 'Reparación de lavadoras en Cali - Rivera Refrigeración'
-
-# Brands serviced
+  alt: 'Gráfico con el texto reparación de lavadoras en Cali y datos de contacto'
 brands:
-  - name: 'Samsung'
   - name: 'LG'
+  - name: 'Samsung'
   - name: 'Whirlpool'
-  - name: 'Mabe'
   - name: 'Haceb'
-  - name: 'Electrolux'
   - name: 'Challenger'
-
-# Process (4 steps)
 process:
   - step: 1
-    title: 'Diagnóstico Profesional'
-    description: 'Visitamos su hogar y evaluamos el problema (costo aplicable a reparación)'
+    title: 'Diagnóstico en su domicilio'
+    description: 'Se revisa la lavadora para identificar la causa de la falla reportada.'
     icon: '🔍'
   - step: 2
-    title: 'Cotización Transparente'
-    description: 'Explicamos el diagnóstico y presupuesto de reparación'
-    icon: '💰'
+    title: 'Presupuesto antes de empezar'
+    description: 'Rivera Refrigeración explica el trabajo y su costo. Usted decide si continúa.'
+    icon: '🧾'
   - step: 3
-    title: 'Reparación Inmediata'
-    description: 'Reparamos en el momento con repuestos de calidad'
+    title: 'Reparación acordada'
+    description: 'Se realiza el trabajo aprobado. Si hace falta otra gestión, se informa antes.'
     icon: '🔧'
   - step: 4
-    title: 'Prueba de Funcionamiento'
-    description: 'Verificamos que todo funcione perfectamente'
-    icon: '✅'
-
-# FAQs
+    title: 'Prueba final'
+    description: 'Al terminar, se comprueba el funcionamiento de la lavadora.'
+    icon: '✓'
 faqs:
-  - question: '¿Por qué mi lavadora no centrifuga?'
-    answer: 'Las causas más comunes son: correa rota, embrague dañado, motor defectuoso, o tarjeta electrónica con fallas. También puede deberse a sobrecarga o desbalanceo. Diagnosticamos la causa exacta.'
+  - question: '¿Qué fallas puede tener una lavadora?'
+    answer: 'Entre los problemas que se revisan están las fallas de centrifugado, llenado o drenaje, las fugas, el ruido inusual y los problemas de encendido.'
   - question: '¿Cuánto cuesta reparar una lavadora en Cali?'
-    answer: 'El costo varía según el tipo de falla. La visita diagnóstica tiene un costo desde $25,000 COP. Después del diagnóstico, proporcionamos presupuesto detallado antes de realizar la reparación.'
-  - question: '¿Reparan lavadoras automáticas y semiautomáticas?'
-    answer: 'Sí, reparamos todo tipo de lavadoras: automáticas, semiautomáticas, carga frontal, carga superior, y lavadoras-secadoras. Tenemos experiencia con todos los sistemas.'
-  - question: '¿Cuánto tiempo toma la reparación?'
-    answer: 'La mayoría de reparaciones se realizan el mismo día de la visita. Si se requieren repuestos específicos, la reparación puede completarse en 2-3 días.'
-  - question: '¿Por qué mi lavadora bota agua?'
-    answer: 'Fugas de agua pueden originarse por: mangueras rotas, empaques desgastados, bomba de drenaje dañada, o tanque agrietado. Localizamos y reparamos la fuga.'
-  - question: '¿Ofrecen servicio de instalación?'
-    answer: 'Sí, realizamos instalación profesional de lavadoras nuevas, incluyendo conexiones de agua, drenaje, y nivelación correcta para evitar vibraciones excesivas.'
-  - question: '¿Por qué mi lavadora hace mucho ruido?'
-    answer: 'Ruidos anormales pueden indicar: rodamientos desgastados, objetos atrapados en el tambor, amortiguadores dañados, o desbalanceo. Identificamos y solucionamos el problema.'
-  - question: '¿Qué garantía tienen las reparaciones?'
-    answer: 'Todas nuestras reparaciones incluyen garantía en mano de obra y repuestos instalados. Los términos específicos se detallan en la orden de servicio según el tipo de trabajo.'
-
-# Service areas
+    answer: 'El costo depende de la falla y del trabajo requerido. Rivera Refrigeración presenta el presupuesto después del diagnóstico y antes de empezar.'
+  - question: '¿Reparan lavadoras de carga frontal y superior?'
+    answer: 'Se atienden lavadoras de carga frontal y superior. Al solicitar la visita, indique la marca y el tipo de carga de su equipo.'
+  - question: '¿Cuánto tarda la reparación?'
+    answer: 'El tiempo depende de la falla y de si se necesita conseguir un repuesto. Después de revisar la lavadora, se informa el tiempo estimado antes de empezar.'
+  - question: '¿Qué debo preparar para la visita?'
+    answer: 'Deje despejado el acceso a la lavadora y tenga a mano la marca y el modelo si están disponibles. Puede describir cuándo aparece la falla.'
 serviceAreas:
   - 'Cali y alrededores'
   - 'Valle del Lili'
@@ -82,47 +59,32 @@ serviceAreas:
   - 'Meléndez'
   - 'Tequendama'
   - 'Normandía'
-  - 'Versalles'
 ---
 
-## Servicio Técnico de Lavadoras a Domicilio en Cali
+## Problemas frecuentes en lavadoras
 
-**Rivera Refrigeración** es su solución confiable para la reparación y mantenimiento de lavadoras en Cali. Con más de 30 años de experiencia, nuestro equipo técnico garantiza reparaciones efectivas que prolongan la vida útil de su electrodoméstico.
+Rivera Refrigeración revisa lavadoras a domicilio en Cali. Estos síntomas sirven
+para explicar lo que ocurre; el diagnóstico determina la causa específica.
 
-### Especialistas en Todo Tipo de Lavadoras
+### No centrifuga o deja la ropa mojada
 
-Atendemos lavadoras automáticas, semiautomáticas, carga frontal, carga superior, y lavadoras-secadoras combinadas. Trabajamos con todas las marcas del mercado y contamos con acceso a repuestos originales y compatibles de alta calidad.
+Indique si el ciclo termina normalmente y si aparece algún mensaje en el panel.
+Una carga desequilibrada también puede cambiar el resultado del ciclo.
 
-## Fallas Comunes en Lavadoras que Reparamos
+### No llena o no evacúa el agua
 
-### 1. Lavadora no centrifuga o no exprime
+Describa si el problema aparece al inicio o al final del lavado. Mantenga libre
+el área alrededor de las mangueras para que puedan revisarse en la visita.
 
-Uno de los problemas más frecuentes. Puede deberse a correa de transmisión rota, embrague desgastado, motor defectuoso, capacitor dañado, o fallas en la tarjeta electrónica. También puede ser causado por sobrecarga o ropa mal distribuida. Realizamos diagnóstico completo del sistema de centrifugado.
+### Se mueve, hace ruido o presenta una fuga
 
-### 2. No llena agua o llena muy lento
+Anote en qué etapa del ciclo sucede. Si observa agua cerca del equipo, informe
+dónde aparece antes de volver a usarlo.
 
-Si su lavadora no carga agua adecuadamente, puede ser por: electroválvula obstruida, filtros sucios, presión de agua baja, o sensor de nivel dañado. Verificamos el sistema completo de entrada de agua.
+## Visita de reparación de lavadoras
 
-### 3. No desagua o desagua lento
-
-Problemas de drenaje suelen originarse por: bomba de desagüe bloqueada, manguera obstruida, filtro tapado con pelusas, o motor de bomba dañado. Limpiamos y reparamos el sistema de drenaje.
-
-### 4. Hace ruido excesivo o vibra mucho
-
-Ruidos fuertes y vibraciones anormales pueden indicar: rodamientos desgastados, amortiguadores rotos, resortes flojos, tornillos de transporte sin retirar, o desnivelación. Eliminamos ruidos y estabilizamos la lavadora.
-
-### 5. Fuga de agua por debajo
-
-Pérdidas de agua pueden provenir de: mangueras deterioradas, empaques de bomba desgastados, tanque agrietado, o conexiones flojas. Identificamos el punto exacto de fuga y lo reparamos.
-
-### 6. No enciende o no arranca
-
-Si su lavadora no responde al presionar el botón de encendido, puede deberse a: problemas eléctricos, fusibles quemados, interruptor de puerta defectuoso, o tarjeta de control dañada. Diagnosticamos y reparamos el sistema eléctrico.
-
-### 7. Programa no avanza o se detiene
-
-Cuando la lavadora se queda congelada en un ciclo, puede ser por: timer mecánico dañado, programador electrónico con fallas, sensores defectuosos, o problemas de software. Reparamos o reemplazamos componentes según sea necesario.
-
-### 8. Daña o rompe la ropa
-
-Si nota que su ropa sale dañada del lavado, puede haber: objetos metálicos sueltos en el tambor, superficie del agitador áspera, o gancho de ropa atrapado. Inspeccionamos y reparamos para proteger su ropa.
+En la visita se revisa el equipo y se explica el diagnóstico. Rivera
+Refrigeración entrega el presupuesto antes de empezar; con su aprobación,
+realiza la reparación acordada y comprueba el funcionamiento al final. El
+tiempo se estima después de identificar la falla y confirmar si hace falta un
+repuesto.
