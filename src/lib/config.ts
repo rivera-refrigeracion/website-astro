@@ -74,7 +74,7 @@ export const NAVIGATION = [
   { name: 'Sobre nosotros', href: '/#about' },
   { name: 'Testimonios', href: '/#reviews' },
   { name: '¿Por qué nosotros?', href: '/#whyus' },
-  { name: 'Blog', href: '/blog' },
+  { name: 'Blog', href: '/blog/' },
 ] as const;
 
 /**

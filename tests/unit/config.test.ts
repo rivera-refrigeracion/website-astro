@@ -94,7 +94,7 @@ describe('Site Configuration', () => {
     it('should include Blog link', () => {
       const blogLink = NAVIGATION.find((item) => item.name === 'Blog');
       expect(blogLink).toBeDefined();
-      expect(blogLink?.href).toBe('/blog');
+      expect(blogLink?.href).toBe('/blog/');
     });
 
     it('all items should have name and href', () => {

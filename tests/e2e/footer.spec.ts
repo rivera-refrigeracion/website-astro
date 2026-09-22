@@ -165,7 +165,7 @@ test.describe('Footer', () => {
         .getByRole('link', { name: 'Aire Acondicionado' });
       await expect(link).toHaveAttribute(
         'href',
-        '/servicios/aire-acondicionado'
+        '/servicios/aire-acondicionado/'
       );
     });
 
@@ -173,21 +173,21 @@ test.describe('Footer', () => {
       const link = page
         .locator('footer')
         .getByRole('link', { name: 'Neveras' });
-      await expect(link).toHaveAttribute('href', '/servicios/neveras');
+      await expect(link).toHaveAttribute('href', '/servicios/neveras/');
     });
 
     test('should link to washing machine service', async ({ page }) => {
       const link = page
         .locator('footer')
         .getByRole('link', { name: 'Lavadoras' });
-      await expect(link).toHaveAttribute('href', '/servicios/lavadoras');
+      await expect(link).toHaveAttribute('href', '/servicios/lavadoras/');
     });
 
     test('should link to water heater service', async ({ page }) => {
       const link = page
         .locator('footer')
         .getByRole('link', { name: 'Calentadores' });
-      await expect(link).toHaveAttribute('href', '/servicios/calentadores');
+      await expect(link).toHaveAttribute('href', '/servicios/calentadores/');
     });
   });
 
