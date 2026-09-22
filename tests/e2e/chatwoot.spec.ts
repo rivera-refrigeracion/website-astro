@@ -53,7 +53,7 @@ test.describe('Chatwoot', () => {
   });
 
   test('should be present on blog pages too', async ({ page }) => {
-    await page.goto('/por-que-tu-aire-acondicionado-no-enfria-bien');
+    await page.goto('/blog/por-que-tu-aire-acondicionado-no-enfria-bien/');
 
     const chatwootSettings = await page.evaluate(() => {
       return (window as unknown as { chatwootSettings: object })

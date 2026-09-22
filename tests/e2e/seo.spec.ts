@@ -69,7 +69,7 @@ test.describe('SEO', () => {
 
   test.describe('Blog post SEO', () => {
     test('should have article meta tags', async ({ page }) => {
-      await page.goto('/por-que-tu-aire-acondicionado-no-enfria-bien');
+      await page.goto('/blog/por-que-tu-aire-acondicionado-no-enfria-bien/');
 
       const ogType = page.locator('meta[property="og:type"]');
       await expect(ogType).toHaveAttribute('content', 'article');

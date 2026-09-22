@@ -6,6 +6,32 @@
   NODE_VERSION = "20"
   PNPM_VERSION = "9"
 
+# Redirecciones 301 del blog
+#
+# Los artículos colgaban de la raíz y pasaron a /blog/ para que el silo
+# temático sea legible (auditoría 2026-09-22, M4). Estas tres URL son las que
+# ya estaban publicadas e indexadas: hay que conservarlas mientras existan
+# enlaces externos apuntando a ellas. Los artículos nuevos nacen bajo /blog/ y
+# no necesitan una entrada aquí.
+
+[[redirects]]
+  from = "/por-que-tu-aire-acondicionado-no-enfria-bien/"
+  to = "/blog/por-que-tu-aire-acondicionado-no-enfria-bien/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/como-saber-si-tu-nevera-necesita-mantenimiento/"
+  to = "/blog/como-saber-si-tu-nevera-necesita-mantenimiento/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/5-errores-comunes-al-usar-lavadoras-y-como-evitarlos/"
+  to = "/blog/5-errores-comunes-al-usar-lavadoras-y-como-evitarlos/"
+  status = 301
+  force = true
+
 # Security Headers
 [[headers]]
   for = "/*"
