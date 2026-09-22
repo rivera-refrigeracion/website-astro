@@ -20,7 +20,10 @@ const { Content } = await service.render();
 <Layout
   title={service.data.metaTitle}
   description={service.data.metaDescription}
-  image={service.data.heroImage.url}
+  image={service.data.ogImage.url}
+  imageAlt={service.data.ogImage.alt}
+  imageWidth={1200}
+  imageHeight={630}
 >
   <article class="py-12">
     <div class="container">

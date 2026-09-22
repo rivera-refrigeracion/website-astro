@@ -18,6 +18,10 @@ heroImage:
   url: '/images/services/calentadores.webp'
   alt: 'Instalación profesional de calentador de agua en Cali'
 
+ogImage:
+  url: '/images/og-calentadores.jpg'
+  alt: 'Calentadores de agua en Cali - Rivera Refrigeración'
+
 # Brands serviced
 brands:
   - name: 'Haceb'

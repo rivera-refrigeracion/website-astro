@@ -18,6 +18,10 @@ heroImage:
   url: '/images/services/nevera.webp'
   alt: 'Técnico especializado reparando nevera en Cali'
 
+ogImage:
+  url: '/images/og-neveras.jpg'
+  alt: 'Reparación de neveras en Cali - Rivera Refrigeración'
+
 # Brands serviced
 brands:
   - name: 'Samsung'

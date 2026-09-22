@@ -18,6 +18,10 @@ heroImage:
   url: '/images/services/aire-acondicionado.jpg'
   alt: 'Técnico reparando aire acondicionado en Cali'
 
+ogImage:
+  url: '/images/og-aire-acondicionado.jpg'
+  alt: 'Aire acondicionado en Cali - Rivera Refrigeración'
+
 # Brands serviced
 brands:
   - name: 'LG'

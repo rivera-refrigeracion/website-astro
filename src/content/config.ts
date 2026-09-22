@@ -40,6 +40,15 @@ const services = defineCollection({
       alt: z.string(),
     }),
 
+    // Imagen de previsualización social. Va separada de heroImage porque las
+    // dos tienen requisitos distintos: el hero es cuadrado y en WebP, y
+    // WhatsApp —el canal por el que cierra este negocio— necesita JPEG de
+    // 1200x630 (auditoría 2026-09-22, A5).
+    ogImage: z.object({
+      url: z.string(),
+      alt: z.string(),
+    }),
+
     // Brands serviced
     brands: z.array(
       z.object({

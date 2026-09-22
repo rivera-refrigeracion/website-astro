@@ -18,6 +18,10 @@ heroImage:
   url: '/images/services/lavadora.webp'
   alt: 'Técnico reparando lavadora a domicilio en Cali'
 
+ogImage:
+  url: '/images/og-lavadoras.jpg'
+  alt: 'Reparación de lavadoras en Cali - Rivera Refrigeración'
+
 # Brands serviced
 brands:
   - name: 'Samsung'

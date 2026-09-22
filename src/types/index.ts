@@ -88,6 +88,16 @@ export interface SEOProps {
   description?: string;
   /** Open Graph image URL for social media sharing */
   image?: string;
+  /** Alt text for the Open Graph image */
+  imageAlt?: string;
+  /**
+   * Real pixel width of the Open Graph image. Only declare it when it is
+   * known: announcing 1200x630 for an image that is not that size makes
+   * some platforms crop it badly.
+   */
+  imageWidth?: number;
+  /** Real pixel height of the Open Graph image. See `imageWidth`. */
+  imageHeight?: number;
   /** Whether this is an article page (enables article-specific meta tags) */
   article?: boolean;
   /** ISO 8601 publication date for articles */
