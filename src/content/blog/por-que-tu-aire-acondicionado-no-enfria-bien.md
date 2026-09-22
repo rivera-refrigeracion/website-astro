@@ -1,68 +1,72 @@
 ---
-title: '¿Por Qué tu Aire Acondicionado No Enfría Bien?'
-description: 'Descubre las razones más comunes por las que tu aire acondicionado puede no estar funcionando correctamente y qué medidas puedes tomar para arreglarlo.'
-pubDate: 2024-09-11
-category: 'Aire Acondicionado'
+title: 'Por qué el aire acondicionado deja de enfriar'
+description: 'Señales para describir una falla de enfriamiento y preparar una revisión de aire acondicionado en Cali.'
+pubDate: 2026-09-22
+updatedDate: 2026-09-22
+category: 'Aire acondicionado'
 author: 'Rivera Refrigeración'
 image:
   url: '/images/blog/aire-acondicionado-no-enfria.webp'
-  alt: 'Ilustración de un aire acondicionado con un técnico y señales de falta de frío'
-tags: ['aire acondicionado', 'reparación', 'mantenimiento', 'problemas comunes']
+  alt: 'Unidad de aire acondicionado con señales de falta de enfriamiento'
 imagePosition: 'top'
+relatedService: 'aire-acondicionado'
+tags: ['aire acondicionado', 'falta de enfriamiento', 'reparación']
 ---
 
-Cuando el calor aumenta, esperamos que nuestro aire acondicionado nos proporcione ese alivio fresco y cómodo que necesitamos. Sin embargo, a veces parece que el aire acondicionado no enfría como debería, y esto puede deberse a una serie de problemas. Antes de considerar reemplazarlo, es importante entender las posibles causas y cómo solucionarlas.
+Cuando un aire acondicionado funciona distinto a lo habitual, describir el cambio ayuda a orientar la visita. Rivera Refrigeración presta el servicio de [reparación de aire acondicionado en Cali](/servicios/aire-acondicionado/). El diagnóstico determina qué ocurre en cada equipo; un síntoma aislado no permite confirmar una causa.
 
-En **Rivera Refrigeración**, hemos identificado las razones más comunes por las que tu aire acondicionado puede no estar funcionando correctamente y qué medidas puedes tomar para arreglarlo.
+## Qué significa que no enfríe como antes
 
-## 1. Filtros de Aire Obstruidos
+La frase «no enfría» puede referirse a situaciones distintas. Puede salir aire, pero el ambiente tarda más en cambiar. El equipo puede enfriar al comienzo y dejar de hacerlo después. También puede encender y apagarse en momentos diferentes a los habituales. Registrar cuál de estas situaciones observa es más útil que intentar nombrar una pieza como responsable.
 
-Los filtros de aire son esenciales para mantener el flujo de aire adecuado y la calidad del aire en tu hogar. Si los filtros están sucios u obstruidos, el aire acondicionado tendrá dificultades para enfriar el ambiente.
+Compare con el funcionamiento normal del mismo equipo. Anote si el cambio se presenta todos los días o solo en ciertos momentos, cuánto tiempo lleva ocurriendo y si afecta una habitación o varias. No hace falta medir ni calcular nada. Una descripción simple permite que el técnico conozca el motivo de la solicitud.
 
-**Cómo solucionarlo:**
+### Hay flujo de aire, pero se siente menos frío
 
-- Limpia o reemplaza los filtros regularmente, según las indicaciones del fabricante. Un mantenimiento adecuado de los filtros puede mejorar considerablemente la eficiencia del aire acondicionado.
+Indique si el flujo parece igual o más débil y si la diferencia se nota desde que enciende el equipo. Señale si el cambio se mantiene durante todo el uso o aparece después de un rato. Esa descripción no confirma una avería concreta, pero ayuda a delimitar lo que debe revisarse.
 
-## 2. Fugas de Refrigerante
+### El enfriamiento cambia durante el uso
 
-El refrigerante es el fluido responsable de absorber el calor y permitir que tu aire acondicionado enfríe el ambiente. Si hay una fuga, el aire acondicionado no tendrá suficiente refrigerante para hacer su trabajo.
+Si el aire enfría por momentos, anote cuándo ocurre y si coincide con el encendido, una pausa o un cambio en el ambiente. Si la unidad se apaga, registre cuánto tarda en volver a funcionar, sin forzar ciclos ni abrir el equipo. Los detalles sobre el momento de la falla ayudan a reproducir el reporte durante la revisión.
 
-**Cómo solucionarlo:**
+### El equipo no responde o muestra un aviso
 
-- Este problema debe ser diagnosticado y reparado por un técnico profesional. Es importante que no intentes recargar el refrigerante por tu cuenta, ya que una fuga puede ser peligrosa.
+Anote si enciende, si responde al control y si aparece un código o una luz distinta. Si puede, copie el texto exacto del aviso o tome una foto desde una distancia segura. No retire cubiertas para buscar etiquetas mientras el aparato está conectado. La información visible suele ser suficiente para describir lo ocurrido al solicitar la visita.
 
-## 3. Problemas con el Compresor
+## Falta de frío, goteo y ruido son reportes distintos
 
-El compresor es el corazón del sistema de aire acondicionado. Si el compresor no está funcionando bien, el aire no se enfriará de manera adecuada, e incluso el sistema podría dejar de funcionar por completo.
+Un goteo, un sonido diferente o un apagado son datos que conviene contar junto con la falta de enfriamiento. No necesariamente tienen una sola causa. Describa de dónde parece venir el ruido, en qué momento aparece el agua y si estos cambios comenzaron al mismo tiempo que la falta de frío.
 
-**Cómo solucionarlo:**
+Evite asumir que limpiar una pieza o cambiar un ajuste resolverá todos los síntomas. Los equipos varían y una misma señal puede requerir revisiones distintas. La página de [reparación de aires acondicionados](/servicios/aire-acondicionado/) explica el proceso de diagnóstico, presupuesto previo y prueba final que ofrece Rivera Refrigeración.
 
-- Si sospechas que el compresor está fallando, contacta a un técnico especializado para una revisión y reparación profesional.
+## Información útil antes de solicitar una revisión
 
-## 4. Unidad Exterior Bloqueada o Sucia
+Tenga a mano la marca y el modelo si puede leerlos sin mover el equipo ni retirar partes. Indique en qué lugar está instalado, cuándo notó el cambio y si el funcionamiento ha variado desde entonces. Si el equipo se usa en un negocio, puede decir en qué horario suele aparecer el síntoma.
 
-La unidad exterior de tu aire acondicionado es responsable de disipar el calor, pero si está bloqueada por hojas, polvo u otros desechos, no podrá enfriar de manera eficiente.
+También ayuda mencionar los cambios que ya observó: respuesta al control, avisos en pantalla, ruidos, goteo o apagados. No necesita diagnosticar, describir componentes internos ni hacer pruebas eléctricas. No abra las unidades ni manipule conexiones. El diagnóstico corresponde a la visita técnica.
 
-**Cómo solucionarlo:**
+## Qué ocurre durante la atención
 
-- Asegúrate de que la unidad exterior esté libre de obstrucciones y límpiala regularmente para mantener su rendimiento.
+Rivera Refrigeración revisa el equipo para identificar la falla reportada. Después explica el diagnóstico y presenta el presupuesto antes de iniciar una reparación. Usted decide si aprueba el trabajo propuesto. Si lo aprueba, se realiza el alcance acordado y se comprueba el funcionamiento al terminar.
 
-## 5. Termostato Mal Ajustado o Defectuoso
+La información que usted comparta al pedir la visita sirve para entender la solicitud, pero no reemplaza la revisión del aparato. El alcance y el tiempo se confirman a partir de la falla encontrada y de las condiciones del equipo. No se puede indicar a distancia qué pieza requiere reparación ni asegurar de antemano un resultado específico.
 
-Un termostato mal calibrado o defectuoso puede hacer que el aire acondicionado no funcione como debería, enfriando demasiado poco o demasiado.
+## Preguntas frecuentes
 
-**Cómo solucionarlo:**
+### ¿Qué hago si el aire enciende, pero no enfría?
 
-- Verifica que el termostato esté ajustado correctamente. Si sigue sin funcionar, un técnico puede ayudarte a calibrarlo o reemplazarlo si es necesario.
+Anote cuándo aparece el cambio, si el flujo de aire se mantiene y si hay otros síntomas. Evite desmontar las unidades. Rivera Refrigeración puede revisar el equipo durante una visita y explicar el diagnóstico antes de proponer un trabajo.
 
-## Si el aire acondicionado sigue sin enfriar
+### ¿Un ruido significa que el compresor está dañado?
 
-Cuando los filtros y los ajustes no explican la falla, una revisión puede
-ayudar a identificar qué ocurre. Rivera Refrigeración presta el servicio de
-[reparación de aires acondicionados en Cali](/servicios/aire-acondicionado/).
+No por sí solo. El sonido es una señal que debe describirse y revisarse junto con el resto del funcionamiento. No es posible identificar una pieza defectuosa solo por una descripción general del ruido.
 
-## Solicite una revisión
+### ¿Debo limpiar o abrir el aire acondicionado antes de la visita?
 
-Para coordinar una visita, llame al +57 317 309 5159 o escriba por WhatsApp.
+No abra la unidad ni retire piezas para buscar la causa. Si tiene una recomendación de cuidado del fabricante, consulte el manual del modelo. La revisión técnica permite definir qué intervención corresponde al equipo.
 
-[Agende su visita por WhatsApp](https://wa.me/573016963313).
+### ¿Cuánto cuesta la reparación?
+
+El costo depende de la falla y del trabajo necesario. Rivera Refrigeración presenta el presupuesto después de revisar el equipo y antes de comenzar la reparación. Usted puede decidir si autoriza el alcance propuesto.
+
+Para coordinar una revisión de aire acondicionado en Cali, escriba por [WhatsApp al 301 696 3313](https://wa.me/573016963313).
