@@ -37,7 +37,10 @@ const posts = (await getCollection('blog'))
                     fallbackFormat="webp"
                     alt={post.data.image.alt}
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    widths={[400, 704]}
+                    width={704}
+                    height={396}
+                    fit="cover"
+                    widths={[400, 560, 704]}
                     sizes="(min-width: 1024px) 336px, (min-width: 768px) calc(50vw - 88px), calc(100vw - 96px)"
                     loading={indice === 0 ? 'eager' : 'lazy'}
                     fetchpriority={indice === 0 ? 'high' : 'auto'}
