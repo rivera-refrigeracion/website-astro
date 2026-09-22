@@ -3,7 +3,7 @@ import { test, expect } from './fixtures';
 test.describe('Blog', () => {
   test.describe('Blog listing page', () => {
     test.beforeEach(async ({ page }) => {
-      await page.goto('/blog');
+      await page.goto('/blog/');
     });
 
     test('should have correct title', async ({ page }) => {
@@ -39,7 +39,7 @@ test.describe('Blog', () => {
         .first()
         .getByRole('link')
         .first();
-      await expect(firstPostLink).toHaveAttribute('href', /^\//);
+      await expect(firstPostLink).toHaveAttribute('href', /^\/blog\/[^/]+\/$/);
     });
   });
 
