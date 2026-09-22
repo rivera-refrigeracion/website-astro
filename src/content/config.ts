@@ -8,7 +8,7 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     category: z.string(),
-    author: z.string().default('Rivera Refrigeracion'),
+    author: z.string().default('Rivera Refrigeración'),
     image: z
       .object({
         url: z.string(),

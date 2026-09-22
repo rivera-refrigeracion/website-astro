@@ -93,63 +93,44 @@ test.describe('Footer', () => {
     });
   });
 
+  // El negocio se describe una sola vez, en el JSON-LD del <head>. El pie
+  // tuvo microdata y validator.schema.org lo rechazaba: el itemprop="email"
+  // en el <a> tomaba el href "mailto:" como valor.
   test.describe('Schema.org Markup', () => {
-    test('should have LocalBusiness schema on footer', async ({ page }) => {
+    test('should not carry microdata', async ({ page }) => {
+      await expect(page.locator('[itemscope], [itemprop]')).toHaveCount(0);
+    });
+
+    test('should describe the business once, with the footer data', async ({
+      page,
+    }) => {
+      const json = await page
+        .locator('script[type="application/ld+json"]')
+        .textContent();
+      const nodos: Array<Record<string, unknown>> = JSON.parse(json ?? '{}')[
+        '@graph'
+      ];
+      const negocios = nodos.filter((n) => n['@type'] === 'LocalBusiness');
+      expect(negocios).toHaveLength(1);
+
+      const [negocio] = negocios;
+      expect(negocio).toMatchObject({
+        '@id': 'https://rivera-refrigeracion.com/#negocio',
+        name: 'Rivera Refrigeración',
+        telephone: '+573173095159',
+        email: 'ruben@rivera-refrigeracion.com',
+        address: {
+          addressLocality: 'Cali',
+          addressRegion: 'Valle del Cauca',
+          addressCountry: 'CO',
+        },
+        openingHoursSpecification: { opens: '08:00', closes: '18:00' },
+      });
+
       const footer = page.locator('footer');
-      await expect(footer).toHaveAttribute('itemscope');
-      await expect(footer).toHaveAttribute(
-        'itemtype',
-        'https://schema.org/LocalBusiness'
-      );
-    });
-
-    test('should have business name with itemprop', async ({ page }) => {
-      const businessName = page.locator('[itemprop="name"]');
-      await expect(businessName).toBeVisible();
-      await expect(businessName).toContainText('Rivera Refrigeración');
-    });
-
-    test('should have PostalAddress schema', async ({ page }) => {
-      const address = page.locator(
-        '[itemtype="https://schema.org/PostalAddress"]'
-      );
-      await expect(address).toHaveAttribute('itemscope');
-    });
-
-    test('should have addressLocality in schema', async ({ page }) => {
-      const locality = page.locator('[itemprop="addressLocality"]');
-      await expect(locality).toContainText('Cali');
-    });
-
-    test('should have addressRegion in schema', async ({ page }) => {
-      const region = page.locator('[itemprop="addressRegion"]');
-      await expect(region).toContainText('Valle del Cauca');
-    });
-
-    test('should have telephone with itemprop', async ({ page }) => {
-      const phone = page.locator('[itemprop="telephone"]');
-      await expect(phone).toBeVisible();
-    });
-
-    test('should have email with itemprop', async ({ page }) => {
-      const email = page.locator('[itemprop="email"]');
-      await expect(email).toBeVisible();
-    });
-
-    test('should have openingHours meta tag', async ({ page }) => {
-      const openingHours = page.locator('meta[itemprop="openingHours"]');
-      await expect(openingHours).toHaveAttribute(
-        'content',
-        'Mo-Fr 08:00-18:00'
-      );
-    });
-
-    test('should have website URL meta tag', async ({ page }) => {
-      const url = page.locator('meta[itemprop="url"]');
-      await expect(url).toHaveAttribute(
-        'content',
-        'https://rivera-refrigeracion.com'
-      );
+      await expect(footer).toContainText('ruben@rivera-refrigeracion.com');
+      await expect(footer).toContainText('+57 317 309 5159');
+      await expect(footer).toContainText('Cali, Valle del Cauca');
     });
   });
 

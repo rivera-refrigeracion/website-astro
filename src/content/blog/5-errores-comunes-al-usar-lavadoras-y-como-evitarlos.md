@@ -3,7 +3,7 @@ title: '5 Errores Que Debes Evitar Al Usar Tu Lavadora'
 description: 'Descubre los errores más comunes que pueden afectar el rendimiento y la vida útil de tu lavadora, y aprende cómo evitarlos.'
 pubDate: 2024-08-30
 category: 'Consejos'
-author: 'Rivera Refrigeracion'
+author: 'Rivera Refrigeración'
 image:
   url: '/images/blog/errores-lavadora.webp'
   alt: 'Errores comunes al usar la lavadora'

@@ -1,37 +1,27 @@
 ---
-import { SITE, CONTACT, SERVICES, SOCIAL } from '@/lib/config';
+import { ADDRESS, CONTACT, HOURS, SERVICES, SITE, SOCIAL } from '@/lib/config';
 import { formatPhoneNumber, whatsappUrl } from '@/lib/utils';
 
 const currentYear = new Date().getFullYear();
+
+// Sin microdata a propósito: el negocio se describe una sola vez, en el
+// JSON-LD del <head> (src/lib/schema.ts). Dos fuentes eran dos LocalBusiness
+// distintos para Google, y el itemprop="email" en el <a> tomaba el href
+// "mailto:" como valor.
 ---
 
-<footer
-  class="bg-neutral-900 text-white py-12"
-  itemscope
-  itemtype="https://schema.org/LocalBusiness"
->
+<footer class="bg-neutral-900 text-white py-12">
   <div class="container">
     <!-- Main Footer Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
       <!-- Company Info -->
       <div>
-        <h3 class="text-xl font-bold mb-4" itemprop="name">{SITE.name}</h3>
+        <h3 class="text-xl font-bold mb-4">{SITE.name}</h3>
         <p class="text-white/80 mb-4">
           Más de 30 años de experiencia en reparación y mantenimiento de
           electrodomésticos.
         </p>
-        <div
-          itemprop="address"
-          itemscope
-          itemtype="https://schema.org/PostalAddress"
-        >
-          <p class="text-white/80">
-            <span itemprop="addressLocality">Cali</span>,
-            <span itemprop="addressRegion">Valle del Cauca</span>
-          </p>
-          <meta itemprop="addressCountry" content="CO" />
-        </div>
-        <meta itemprop="url" content={SITE.url} />
+        <p class="text-white/80">{ADDRESS.locality}, {ADDRESS.region}</p>
       </div>
 
       <!-- Services -->
@@ -63,7 +53,6 @@ const currentYear = new Date().getFullYear();
             <strong class="block text-sm text-white/60">Llamadas:</strong>
             <a
               href={`tel:${CONTACT.phone}`}
-              itemprop="telephone"
               class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-1"
             >
               ☎ {formatPhoneNumber(CONTACT.phone)}
@@ -86,7 +75,6 @@ const currentYear = new Date().getFullYear();
             <strong class="block text-sm text-white/60">Email:</strong>
             <a
               href={`mailto:${CONTACT.email}`}
-              itemprop="email"
               class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-1"
             >
               📧 {CONTACT.email}
@@ -99,9 +87,8 @@ const currentYear = new Date().getFullYear();
       <div>
         <h3 class="text-xl font-bold mb-4">Horario</h3>
         <div class="text-white/80">
-          <meta itemprop="openingHours" content="Mo-Fr 08:00-18:00" />
-          <p class="inline-flex items-center gap-1">🕐 Lunes - Viernes</p>
-          <p class="ml-5">8:00 AM - 6:00 PM</p>
+          <p class="inline-flex items-center gap-1">🕐 {HOURS.days}</p>
+          <p class="ml-5">{HOURS.time}</p>
         </div>
       </div>
     </div>

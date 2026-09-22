@@ -24,9 +24,15 @@ importers:
         specifier: ^4.1.18
         version: 4.1.18
     devDependencies:
+      '@adobe/structured-data-validator':
+        specifier: ^1.7.0
+        version: 1.7.0
       '@astrojs/check':
         specifier: ^0.9.6
         version: 0.9.6(prettier-plugin-astro@0.14.1)(prettier@3.7.4)(typescript@5.9.3)
+      '@marbec/web-auto-extractor':
+        specifier: ^2.2.1
+        version: 2.2.1
       '@playwright/test':
         specifier: ^1.57.0
         version: 1.57.0
@@ -75,6 +81,9 @@ importers:
       rollup-plugin-visualizer:
         specifier: ^6.0.5
         version: 6.0.5(rollup@4.54.0)
+      schema-dts:
+        specifier: ^2.0.0
+        version: 2.0.0(typescript@5.9.3)
       sharp:
         specifier: ^0.35.4
         version: 0.35.4(@types/node@22.19.3)
@@ -86,6 +95,10 @@ importers:
         version: 4.0.16(@types/node@22.19.3)(@vitest/ui@4.0.16)(happy-dom@20.0.11)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.2)
 
 packages:
+
+  '@adobe/structured-data-validator@1.7.0':
+    resolution: {integrity: sha512-7z4MDfbYUBeMW2XyDzcpEh5FtDYaXmuERBCdmeDOkcsrOuLe0NJb97tAKoqoe+qll17fX9C5V8zgU1z+7hIWMg==}
+    engines: {node: '>=18.0.0'}
 
   '@astrojs/check@0.9.6':
     resolution: {integrity: sha512-jlaEu5SxvSgmfGIFfNgcn5/f+29H61NJzEMfAZ82Xopr4XBchXB1GVlcJsE+elUlsYSbXlptZLX+JMG3b/wZEA==}
@@ -699,6 +712,10 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@marbec/web-auto-extractor@2.2.1':
+    resolution: {integrity: sha512-xfUFMFH9+XoW/0vOknCcGtHSQMpwuzN/udMB1ZM8lHGOPxMlgPj0mAbpCQxdxlZ/BcgRKprVK4FZOL1+O7EO0A==}
+    engines: {node: '>=18.0.0'}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2496,6 +2513,15 @@ packages:
   sax@1.4.3:
     resolution: {integrity: sha512-yqYn1JhPczigF94DMS+shiDMjDowYO6y9+wB/4WgO0Y19jWYk0lQ4tuG5KI7kj4FTp1wxPj5IFfcrz/s1c3jjQ==}
 
+  schema-dts-lib@1.0.0:
+    resolution: {integrity: sha512-9MEO5vpQH9JdBioUupqluzxSYxPLjhmqRUudk15adUl/ypnRsM2/M1kN3AmVJQeG7nZqcL68H8JlGqQQT6vy9A==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      typescript: '>=4.9.5'
+
+  schema-dts@2.0.0:
+    resolution: {integrity: sha512-t7NoCy3Rn5GHGx6p7s1qIYK/AeIb8ZxJNR9WUNFkwMv2CiiGZBmqqYWc2FlZVm5ZbiHMY4OvBWhj7QtyrFO2Jw==}
+
   section-matter@1.0.0:
     resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
     engines: {node: '>=4'}
@@ -3118,6 +3144,8 @@ packages:
 
 snapshots:
 
+  '@adobe/structured-data-validator@1.7.0': {}
+
   '@astrojs/check@0.9.6(prettier-plugin-astro@0.14.1)(prettier@3.7.4)(typescript@5.9.3)':
     dependencies:
       '@astrojs/language-server': 2.16.2(prettier-plugin-astro@0.14.1)(prettier@3.7.4)(typescript@5.9.3)
@@ -3632,6 +3660,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@marbec/web-auto-extractor@2.2.1': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -5791,6 +5821,16 @@ snapshots:
       suf-log: 2.5.3
 
   sax@1.4.3: {}
+
+  schema-dts-lib@1.0.0(typescript@5.9.3):
+    dependencies:
+      typescript: 5.9.3
+
+  schema-dts@2.0.0(typescript@5.9.3):
+    dependencies:
+      schema-dts-lib: 1.0.0(typescript@5.9.3)
+    transitivePeerDependencies:
+      - typescript
 
   section-matter@1.0.0:
     dependencies:

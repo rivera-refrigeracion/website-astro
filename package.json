@@ -12,6 +12,8 @@
     "astro": "astro",
     "check": "astro check",
     "test": "vitest run",
+    "test:schema": "node scripts/validar-schema.mjs",
+    "schema:check": "astro build --silent && node scripts/validar-schema.mjs",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
@@ -31,7 +33,9 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
+    "@adobe/structured-data-validator": "^1.7.0",
     "@astrojs/check": "^0.9.6",
+    "@marbec/web-auto-extractor": "^2.2.1",
     "@playwright/test": "^1.57.0",
     "@testing-library/dom": "^10.4.1",
     "@types/node": "^22.15.2",
@@ -48,6 +52,7 @@
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
     "rollup-plugin-visualizer": "^6.0.5",
+    "schema-dts": "^2.0.0",
     "sharp": "^0.35.4",
     "typescript": "^5.8.0",
     "vitest": "^4.0.16"
