@@ -145,6 +145,11 @@ jobs:
       - name: Build site
         run: pnpm build
 
+      # Recorre dist/**/*.html y valida JSON-LD y microdata contra el
+      # vocabulario de schema.org fijado en scripts/schema-org/ (sin red).
+      - name: Validate structured data
+        run: pnpm test:schema
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
