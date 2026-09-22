@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { formatPhoneNumber } from '../../src/lib/utils';
+import { formatPhoneNumber, whatsappUrl } from '../../src/lib/utils';
+import { CONTACT } from '../../src/lib/config';
 
 describe('formatPhoneNumber', () => {
   it('should format Colombian phone number correctly', () => {
@@ -36,5 +37,33 @@ describe('formatPhoneNumber', () => {
     expect(formatPhoneNumber('573001234567')).toBe('+57 300 123 4567');
     expect(formatPhoneNumber('573101234567')).toBe('+57 310 123 4567');
     expect(formatPhoneNumber('573201234567')).toBe('+57 320 123 4567');
+  });
+});
+
+describe('whatsappUrl', () => {
+  it('should always use the wa.me format that the GTM trigger matches', () => {
+    expect(whatsappUrl()).toMatch(/^https:\/\/wa\.me\/573016963313\?text=/);
+    expect(whatsappUrl('desde el menú')).toMatch(
+      /^https:\/\/wa\.me\/573016963313\?text=/
+    );
+  });
+
+  it('should prefill the default message when there is no origin', () => {
+    const texto = new URL(whatsappUrl()).searchParams.get('text');
+    expect(texto).toBe(CONTACT.whatsappMessage);
+  });
+
+  it('should carry the origin inside the message', () => {
+    const texto = new URL(
+      whatsappUrl('desde la página de neveras')
+    ).searchParams.get('text');
+    expect(texto).toBe(
+      '¡Hola! Quiero contratar sus servicios (desde la página de neveras).'
+    );
+  });
+
+  it('should percent-encode the message so the link is not broken', () => {
+    expect(whatsappUrl('desde el menú')).not.toContain(' ');
+    expect(whatsappUrl('desde el menú')).toContain('men%C3%BA');
   });
 });

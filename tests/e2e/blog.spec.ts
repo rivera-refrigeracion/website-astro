@@ -3,7 +3,7 @@ import { test, expect } from './fixtures';
 test.describe('Blog', () => {
   test.describe('Blog listing page', () => {
     test.beforeEach(async ({ page }) => {
-      await page.goto('/blog');
+      await page.goto('/blog/');
     });
 
     test('should have correct title', async ({ page }) => {
@@ -39,13 +39,13 @@ test.describe('Blog', () => {
         .first()
         .getByRole('link')
         .first();
-      await expect(firstPostLink).toHaveAttribute('href', /^\//);
+      await expect(firstPostLink).toHaveAttribute('href', /^\/blog\/[^/]+\/$/);
     });
   });
 
   test.describe('Individual blog post', () => {
     test('should display blog post content', async ({ page }) => {
-      await page.goto('/por-que-tu-aire-acondicionado-no-enfria-bien');
+      await page.goto('/blog/por-que-tu-aire-acondicionado-no-enfria-bien/');
 
       await expect(page).toHaveTitle(
         /¿Por Qué tu Aire Acondicionado No Enfría Bien\?/
@@ -57,13 +57,13 @@ test.describe('Blog', () => {
     });
 
     test('should display author and date', async ({ page }) => {
-      await page.goto('/por-que-tu-aire-acondicionado-no-enfria-bien');
+      await page.goto('/blog/por-que-tu-aire-acondicionado-no-enfria-bien/');
 
       await expect(page.getByText('Rivera Refrigeracion')).toBeVisible();
     });
 
     test('should have WhatsApp CTA', async ({ page }) => {
-      await page.goto('/por-que-tu-aire-acondicionado-no-enfria-bien');
+      await page.goto('/blog/por-que-tu-aire-acondicionado-no-enfria-bien/');
 
       const whatsappLink = page
         .getByRole('link', { name: /WhatsApp/i })

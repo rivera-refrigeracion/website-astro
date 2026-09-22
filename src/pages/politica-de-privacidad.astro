@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { SITE, CONTACT } from '@/lib/config';
+import { whatsappUrl } from '@/lib/utils';
 ---
 
 <Layout
@@ -154,7 +155,7 @@ import { SITE, CONTACT } from '@/lib/config';
             <li>
               <strong>WhatsApp:</strong>{' '}
               <a
-                href={CONTACT.whatsappLink}
+                href={whatsappUrl('desde la política de privacidad')}
                 target="_blank"
                 rel="noopener noreferrer"
               >

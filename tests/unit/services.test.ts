@@ -48,7 +48,7 @@ describe('Services Collection', () => {
     });
 
     it('should have SEO metadata', () => {
-      expect(service.data.metaTitle).toContain('Aire Acondicionado');
+      expect(service.data.metaTitle).toMatch(/aire acondicionado/i);
       expect(service.data.metaTitle).toContain('Cali');
       expect(service.data.metaDescription.length).toBeGreaterThan(50);
       expect(service.data.keywords.length).toBeGreaterThanOrEqual(3);

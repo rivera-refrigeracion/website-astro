@@ -4,10 +4,16 @@ import type { SEOProps } from '@/types';
 
 interface Props extends SEOProps {}
 
+/** Generada por scripts/generar-og.mjs: JPEG de 1200x630. */
+const OG_POR_DEFECTO = '/images/og-default.jpg';
+
 const {
   title,
   description = SITE.description,
-  image = '/images/og-default.jpg',
+  image = OG_POR_DEFECTO,
+  imageAlt,
+  imageWidth,
+  imageHeight,
   article = false,
   publishedTime,
   modifiedTime,
@@ -20,6 +26,13 @@ const {
 const pageTitle = title ? `${title} | ${SITE.name}` : SITE.title;
 const canonicalURL = new URL(Astro.url.pathname, SITE.url);
 const imageURL = new URL(image, SITE.url);
+
+// Sólo se anuncian las dimensiones cuando se conocen de verdad. Declarar
+// 1200x630 para una imagen que no lo es empeora el recorte en algunas
+// plataformas (auditoría 2026-09-22, B4).
+const esOgPorDefecto = image === OG_POR_DEFECTO;
+const anchoOg = imageWidth ?? (esOgPorDefecto ? 1200 : undefined);
+const altoOg = imageHeight ?? (esOgPorDefecto ? 630 : undefined);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -113,9 +126,9 @@ const jsonLd = {
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={pageTitle} />
+{anchoOg && <meta property="og:image:width" content={String(anchoOg)} />}
+{altoOg && <meta property="og:image:height" content={String(altoOg)} />}
+<meta property="og:image:alt" content={imageAlt ?? pageTitle} />
 <meta property="og:site_name" content={SITE.name} />
 
 {

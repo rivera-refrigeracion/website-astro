@@ -1,3 +1,23 @@
+import { CONTACT } from '@/lib/config';
+
+/**
+ * Builds the canonical WhatsApp link for a call-to-action.
+ *
+ * El `origen` viaja dentro del propio mensaje ("…desde la página de neveras")
+ * para poder atribuir de dónde salió el contacto leyendo la conversación, sin
+ * depender de que GTM esté bien configurado ni de un acortador de terceros.
+ *
+ * @param origen - Dónde se pulsó el botón, en minúsculas y sin punto final
+ * @returns URL de wa.me con el mensaje ya codificado
+ */
+export function whatsappUrl(origen?: string): string {
+  const mensaje = origen
+    ? `${CONTACT.whatsappMessage.replace(/\.$/, '')} (${origen}).`
+    : CONTACT.whatsappMessage;
+
+  return `${CONTACT.whatsappLink}?text=${encodeURIComponent(mensaje)}`;
+}
+
 /**
  * Formats a Colombian phone number to a readable format
  * @param phoneNumber - Phone number in format '573016963313' or '+573016963313'

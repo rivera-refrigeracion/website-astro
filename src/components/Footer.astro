@@ -1,6 +1,6 @@
 ---
 import { SITE, CONTACT, SERVICES, SOCIAL } from '@/lib/config';
-import { formatPhoneNumber } from '@/lib/utils';
+import { formatPhoneNumber, whatsappUrl } from '@/lib/utils';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -43,7 +43,7 @@ const currentYear = new Date().getFullYear();
               SERVICES.map((service) => (
                 <li>
                   <a
-                    href={`/servicios/${service.id}`}
+                    href={`/servicios/${service.id}/`}
                     class="text-white/80 hover:text-white transition-colors"
                   >
                     {service.title}
@@ -74,7 +74,7 @@ const currentYear = new Date().getFullYear();
               >WhatsApp (Agendamiento):</strong
             >
             <a
-              href={`https://wa.me/${CONTACT.whatsapp}`}
+              href={whatsappUrl('desde el pie de página')}
               target="_blank"
               rel="noopener noreferrer"
               class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-1"

@@ -1,12 +1,74 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
-# Sitemap
 Sitemap: https://rivera-refrigeracion.com/sitemap-index.xml
 
-# Disallow admin and private paths
-Disallow: /api/
-Disallow: /_astro/
+# ---------------------------------------------------------------------------
+# GEO: los rastreadores de motores de respuesta son bienvenidos.
+#
+# El sitio ya recibió al menos un cliente que llegó citado por ChatGPT, y ese
+# canal entra por dos puertas distintas: los agentes de respuesta en vivo
+# (OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-User), que hoy pasan, y
+# los rastreadores de índice (GPTBot, ClaudeBot, CCBot), que hoy NO pasan.
+#
+# AVISO IMPORTANTE: este archivo no es suficiente por sí solo. Cloudflare está
+# delante de Netlify y devuelve 403 a GPTBot, ClaudeBot, CCBot, Amazonbot y
+# Bytespider ANTES de que la petición llegue al origen, así que estos grupos no
+# se leen siquiera. Comprobado el 2026-09-22:
+#
+#   curl -A "GPTBot/1.2 (+https://openai.com/gptbot)" -o /dev/null -w '%{http_code}' \
+#     https://rivera-refrigeracion.com/servicios/neveras/   ->  403
+#
+# El paso a paso para quitar ese bloqueo está en docs/CLOUDFLARE-RASTREADORES-IA.md
+# y sólo se puede hacer desde el panel de Cloudflare. Este archivo es el
+# complemento correcto en el origen para cuando ese ajuste esté desactivado.
+#
+# El convenio /llms.txt que estos motores consultan está documentado en
+# https://llmstxt.org — el resumen citable del negocio vive en /llms.txt.
+# ---------------------------------------------------------------------------
 
-# Crawl delay for bots
-Crawl-delay: 1
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /api/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /api/
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+
+# Google-Extended no es un user-agent: es un TOKEN que sólo se lee en
+# robots.txt. Google no rastrea con una cabecera propia para él, comparte la
+# infraestructura de Googlebot y consulta este token del lado del servidor.
+# Escribirlo mal (por ejemplo "Googlebot-Extended") deja el grupo muerto en
+# silencio.
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/

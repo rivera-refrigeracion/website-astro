@@ -1,24 +1,38 @@
 import { test, expect } from './fixtures';
 
+// Misma forma que la URL publicada: con barra final.
+const servicePath = (slug: string) => `/servicios/${slug}/`;
+
 const services = [
   {
     slug: 'aire-acondicionado',
+    // Nombre corto: el de la navegación y el de los bloques describe
     title: 'Aire Acondicionado',
+    // metaTitle y h1 son deliberadamente distintos: el primero cabe en la
+    // SERP, el segundo carga la intención local
+    metaTitle: 'Aire acondicionado en Cali',
+    h1: 'Instalación y reparación de aire acondicionado en Cali',
     keyword: 'aire acondicionado',
   },
   {
     slug: 'neveras',
     title: 'Neveras',
+    metaTitle: 'Reparación de neveras en Cali',
+    h1: 'Reparación de neveras en Cali a domicilio',
     keyword: 'neveras',
   },
   {
     slug: 'lavadoras',
     title: 'Lavadoras',
+    metaTitle: 'Reparación de lavadoras en Cali',
+    h1: 'Reparación de lavadoras en Cali a domicilio',
     keyword: 'lavadoras',
   },
   {
     slug: 'calentadores',
     title: 'Calentadores',
+    metaTitle: 'Calentadores de agua en Cali',
+    h1: 'Instalación y reparación de calentadores de agua en Cali',
     keyword: 'calentadores',
   },
 ];
@@ -27,13 +41,18 @@ test.describe('Service Pages - General', () => {
   for (const service of services) {
     test.describe(`${service.title} Service Page`, () => {
       test.beforeEach(async ({ page }) => {
-        await page.goto(`/servicios/${service.slug}`);
+        await page.goto(servicePath(service.slug));
       });
 
       test('should have correct page title', async ({ page }) => {
-        await expect(page).toHaveTitle(new RegExp(service.title));
+        await expect(page).toHaveTitle(new RegExp(service.metaTitle));
         await expect(page).toHaveTitle(/Rivera Refrigeración/);
         await expect(page).toHaveTitle(/Cali/);
+
+        // La marca se añade una sola vez y el título entra en la SERP
+        const title = await page.title();
+        expect(title.match(/Rivera Refrigeración/g)).toHaveLength(1);
+        expect(title.length).toBeLessThanOrEqual(60);
       });
 
       test('should have meta description', async ({ page }) => {
@@ -48,7 +67,7 @@ test.describe('Service Pages - General', () => {
       test('should display hero section with title', async ({ page }) => {
         const h1 = page.getByRole('heading', { level: 1 });
         await expect(h1).toBeVisible();
-        await expect(h1).toContainText(service.title);
+        await expect(h1).toContainText(service.h1);
       });
 
       test('should display hero image', async ({ page }) => {
@@ -221,7 +240,7 @@ test.describe('Service Pages - Navigation from Homepage', () => {
     await expect(verMasLink).toBeVisible();
 
     await verMasLink.click();
-    await page.waitForURL(/\/servicios\//);
+    await page.waitForURL(/\/servicios\/[^/]+\/$/);
 
     const h1 = page.getByRole('heading', { level: 1 });
     await expect(h1).toBeVisible();
@@ -243,7 +262,7 @@ test.describe('Service Pages - SEO', () => {
     const titles: string[] = [];
 
     for (const service of services) {
-      await page.goto(`/servicios/${service.slug}`);
+      await page.goto(servicePath(service.slug));
       const title = await page.title();
       titles.push(title);
     }
@@ -258,7 +277,7 @@ test.describe('Service Pages - SEO', () => {
     const descriptions: string[] = [];
 
     for (const service of services) {
-      await page.goto(`/servicios/${service.slug}`);
+      await page.goto(servicePath(service.slug));
       const metaDescription = page.locator('meta[name="description"]');
       const content = await metaDescription.getAttribute('content');
       descriptions.push(content || '');
@@ -270,7 +289,7 @@ test.describe('Service Pages - SEO', () => {
 
   test('all service pages should have Open Graph tags', async ({ page }) => {
     for (const service of services) {
-      await page.goto(`/servicios/${service.slug}`);
+      await page.goto(servicePath(service.slug));
 
       const ogTitle = page.locator('meta[property="og:title"]');
       await expect(ogTitle).toHaveAttribute('content', /.+/);
@@ -285,7 +304,7 @@ test.describe('Service Pages - SEO', () => {
 
   test('all service pages should have Twitter Card tags', async ({ page }) => {
     for (const service of services) {
-      await page.goto(`/servicios/${service.slug}`);
+      await page.goto(servicePath(service.slug));
 
       const twitterCard = page.locator('meta[name="twitter:card"]');
       await expect(twitterCard).toHaveAttribute(
@@ -301,7 +320,7 @@ test.describe('Service Pages - SEO', () => {
 
 test.describe('Service Pages - Accessibility', () => {
   test('all FAQ accordions should be keyboard accessible', async ({ page }) => {
-    await page.goto('/servicios/aire-acondicionado');
+    await page.goto(servicePath('aire-acondicionado'));
 
     const firstFaqSummary = page.locator('details summary').first();
     await firstFaqSummary.focus();
@@ -316,7 +335,7 @@ test.describe('Service Pages - Accessibility', () => {
 
   test('all images should have alt text', async ({ page }) => {
     for (const service of services) {
-      await page.goto(`/servicios/${service.slug}`);
+      await page.goto(servicePath(service.slug));
 
       const images = page.locator('img');
       const count = await images.count();
@@ -331,7 +350,7 @@ test.describe('Service Pages - Accessibility', () => {
   });
 
   test('WhatsApp links should have proper aria-label', async ({ page }) => {
-    await page.goto('/servicios/aire-acondicionado');
+    await page.goto(servicePath('aire-acondicionado'));
 
     // Check that at least one WhatsApp link exists
     const whatsappLinks = page.getByRole('link', { name: /WhatsApp/i });
@@ -345,7 +364,7 @@ test.describe('Service Pages - Content Quality', () => {
     page,
   }) => {
     for (const service of services) {
-      await page.goto(`/servicios/${service.slug}`);
+      await page.goto(servicePath(service.slug));
 
       const mainContent = page.locator('article');
       const textContent = await mainContent.textContent();
@@ -359,7 +378,7 @@ test.describe('Service Pages - Content Quality', () => {
     page,
   }) => {
     for (const service of services) {
-      await page.goto(`/servicios/${service.slug}`);
+      await page.goto(servicePath(service.slug));
 
       const mainContent = page.locator('article');
       await expect(mainContent).toContainText(service.keyword, {
@@ -370,7 +389,7 @@ test.describe('Service Pages - Content Quality', () => {
 
   test('all service pages should mention Cali', async ({ page }) => {
     for (const service of services) {
-      await page.goto(`/servicios/${service.slug}`);
+      await page.goto(servicePath(service.slug));
 
       const mainContent = page.locator('article');
       await expect(mainContent).toContainText('Cali');
@@ -381,7 +400,7 @@ test.describe('Service Pages - Content Quality', () => {
     page,
   }) => {
     for (const service of services) {
-      await page.goto(`/servicios/${service.slug}`);
+      await page.goto(servicePath(service.slug));
 
       const mainContent = page.locator('article');
       await expect(mainContent).toContainText('Rivera Refrigeración');
@@ -393,7 +412,7 @@ test.describe('Service Pages - Performance', () => {
   test('calentadores page should use optimized WebP image', async ({
     page,
   }) => {
-    await page.goto('/servicios/calentadores');
+    await page.goto(servicePath('calentadores'));
 
     const heroImage = page.locator('figure').first().locator('img').first();
     const src = await heroImage.getAttribute('src');
@@ -404,7 +423,7 @@ test.describe('Service Pages - Performance', () => {
   test('images should have loading="lazy" or loading="eager" attribute', async ({
     page,
   }) => {
-    await page.goto('/servicios/aire-acondicionado');
+    await page.goto(servicePath('aire-acondicionado'));
 
     const images = page.locator('img');
     const count = await images.count();

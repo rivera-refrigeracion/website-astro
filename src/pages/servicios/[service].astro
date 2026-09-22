@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import { CONTACT } from '@/lib/config';
+import { whatsappUrl } from '@/lib/utils';
 
 export async function getStaticPaths() {
   const services = await getCollection('services');
@@ -13,21 +14,41 @@ export async function getStaticPaths() {
 
 type Props = CollectionEntry<'services'>;
 
-const service = Astro.props;
+const service: Props = Astro.props;
 const { Content } = await service.render();
+
+/**
+ * serviceAreas mezcla municipios con barrios de Cali. Para `areaServed` la
+ * distinción importa: un consumidor de schema espera `City` para un municipio
+ * y `Place` para un barrio, que además se declara contenido en Cali.
+ */
+const CALI = { '@type': 'City', name: 'Cali' } as const;
+const MUNICIPIOS: Record<string, string> = {
+  'Toda la ciudad de Cali': 'Cali',
+  Jamundí: 'Jamundí',
+};
+
+const areaServed = service.data.serviceAreas.map((zona) =>
+  MUNICIPIOS[zona]
+    ? { '@type': 'City', name: MUNICIPIOS[zona] }
+    : { '@type': 'Place', name: zona, containedInPlace: CALI }
+);
 ---
 
 <Layout
   title={service.data.metaTitle}
   description={service.data.metaDescription}
-  image={service.data.heroImage.url}
+  image={service.data.ogImage.url}
+  imageAlt={service.data.ogImage.alt}
+  imageWidth={1200}
+  imageHeight={630}
 >
   <article class="py-12">
     <div class="container">
       <!-- Hero Section -->
       <header class="max-w-4xl mx-auto text-center mb-12">
         <h1 class="text-3xl lg:text-5xl font-bold mb-4 text-neutral-900">
-          {service.data.title}
+          {service.data.h1}
         </h1>
         <p class="text-lg lg:text-xl text-neutral-600">
           {service.data.shortDescription}
@@ -106,6 +127,25 @@ const { Content } = await service.render();
           </div>
         </section>
 
+        <!-- Service Areas -->
+        <section class="mb-16">
+          <h2 class="text-2xl lg:text-3xl font-bold mb-4 text-center">
+            Zonas donde atendemos
+          </h2>
+          <p class="text-neutral-600 text-center mb-6">
+            Servicio a domicilio en Cali y alrededores.
+          </p>
+          <ul class="flex flex-wrap justify-center gap-3">
+            {
+              service.data.serviceAreas.map((zona) => (
+                <li class="bg-primary-50 text-primary-800 rounded-full px-4 py-2 text-sm font-medium">
+                  {zona}
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
         <!-- FAQ Section -->
         <section class="mb-16">
           <h2 class="text-2xl lg:text-3xl font-bold mb-8 text-center">
@@ -149,7 +189,9 @@ const { Content } = await service.render();
             experiencia nos respaldan.
           </p>
           <a
-            href={CONTACT.whatsappLink}
+            href={whatsappUrl(
+              `desde la página de ${service.data.title.toLowerCase()}`
+            )}
             target="_blank"
             rel="noopener noreferrer"
             class="whatsapp-btn whatsapp-cta-service inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
@@ -217,10 +259,7 @@ const { Content } = await service.render();
           addressCountry: 'CO',
         },
       },
-      areaServed: {
-        '@type': 'City',
-        name: 'Cali',
-      },
+      areaServed,
     })}
   />
 </Layout>

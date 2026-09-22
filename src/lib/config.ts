@@ -30,10 +30,20 @@ export const CONTACT = {
   phone: '+573173095159',
   /** WhatsApp number (without + or country code prefix) */
   whatsapp: '573016963313',
-  /** Direct WhatsApp API link for initiating conversations */
-  whatsappLink: 'https://api.whatsapp.com/send?phone=573016963313',
-  /** URL for booking appointments */
-  appointmentLink: 'https://bit.ly/3XomYEV',
+  /**
+   * Enlace canónico de WhatsApp, sin mensaje. Para los botones usa
+   * `whatsappUrl()` de `@/lib/utils`, que añade el mensaje y el origen.
+   *
+   * Todo el sitio usa el formato `wa.me`: antes convivían
+   * `api.whatsapp.com/send`, `wa.me` y un acortador de bit.ly, y el disparador
+   * de `whatsapp_click` en GTM sólo reconocía el primero.
+   */
+  whatsappLink: 'https://wa.me/573016963313',
+  /**
+   * Mensaje con el que arranca la conversación desde los botones de "Agenda
+   * tu cita". Es el texto al que ya redirigía el acortador bit.ly/3XomYEV.
+   */
+  whatsappMessage: '¡Hola! Quiero contratar sus servicios.',
   /** Business location displayed in footer and NAP schema */
   location: 'Cali, Valle del Cauca, Colombia',
   /** Contact email address */
@@ -46,7 +56,7 @@ export const CONTACT = {
  */
 export const SOCIAL = {
   /** WhatsApp contact link */
-  whatsapp: 'https://api.whatsapp.com/send?phone=573016963313',
+  whatsapp: 'https://wa.me/573016963313',
   /** Facebook business page URL */
   facebook: 'https://www.facebook.com/profile.php?id=61564032905797',
   /** Instagram profile URL */
@@ -64,7 +74,7 @@ export const NAVIGATION = [
   { name: 'Sobre nosotros', href: '/#about' },
   { name: 'Testimonios', href: '/#reviews' },
   { name: '¿Por qué nosotros?', href: '/#whyus' },
-  { name: 'Blog', href: '/blog' },
+  { name: 'Blog', href: '/blog/' },
 ] as const;
 
 /**

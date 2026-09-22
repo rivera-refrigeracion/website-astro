@@ -1,10 +1,11 @@
 ---
 title: 'Lavadoras'
+h1: 'Reparación de lavadoras en Cali a domicilio'
 shortDescription: 'Servicio técnico especializado en reparación y mantenimiento de lavadoras de todas las marcas en Cali'
 icon: 'washing-machine'
 
 # SEO
-metaTitle: 'Reparación de Lavadoras en Cali | Servicio Técnico Experto | Rivera Refrigeración'
+metaTitle: 'Reparación de lavadoras en Cali'
 metaDescription: 'Reparación de lavadoras en Cali. Atendemos Samsung, LG, Whirlpool, Mabe, Haceb y todas las marcas. Servicio a domicilio. +30 años de experiencia.'
 keywords:
   - 'reparación lavadoras Cali'
@@ -17,6 +18,10 @@ keywords:
 heroImage:
   url: '/images/services/lavadora.webp'
   alt: 'Técnico reparando lavadora a domicilio en Cali'
+
+ogImage:
+  url: '/images/og-lavadoras.jpg'
+  alt: 'Reparación de lavadoras en Cali - Rivera Refrigeración'
 
 # Brands serviced
 brands:

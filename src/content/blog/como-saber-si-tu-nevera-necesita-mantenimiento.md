@@ -83,4 +83,4 @@ Si tu nevera presenta alguno de estos síntomas, es importante actuar de inmedia
 
 Si tu nevera está fallando, no esperes más. Llámanos al +573173095159 o agenda tu cita:
 
-[¡Agenda tu cita AQUÍ!](https://bit.ly/3XomYEV)
+[¡Agenda tu cita AQUÍ!](https://wa.me/573016963313)
