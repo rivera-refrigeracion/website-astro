@@ -13,8 +13,25 @@ export async function getStaticPaths() {
 
 type Props = CollectionEntry<'services'>;
 
-const service = Astro.props;
+const service: Props = Astro.props;
 const { Content } = await service.render();
+
+/**
+ * serviceAreas mezcla municipios con barrios de Cali. Para `areaServed` la
+ * distinción importa: un consumidor de schema espera `City` para un municipio
+ * y `Place` para un barrio, que además se declara contenido en Cali.
+ */
+const CALI = { '@type': 'City', name: 'Cali' } as const;
+const MUNICIPIOS: Record<string, string> = {
+  'Toda la ciudad de Cali': 'Cali',
+  Jamundí: 'Jamundí',
+};
+
+const areaServed = service.data.serviceAreas.map((zona) =>
+  MUNICIPIOS[zona]
+    ? { '@type': 'City', name: MUNICIPIOS[zona] }
+    : { '@type': 'Place', name: zona, containedInPlace: CALI }
+);
 ---
 
 <Layout
@@ -107,6 +124,25 @@ const { Content } = await service.render();
               ))
             }
           </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-16">
+          <h2 class="text-2xl lg:text-3xl font-bold mb-4 text-center">
+            Zonas donde atendemos
+          </h2>
+          <p class="text-neutral-600 text-center mb-6">
+            Servicio a domicilio en Cali y alrededores.
+          </p>
+          <ul class="flex flex-wrap justify-center gap-3">
+            {
+              service.data.serviceAreas.map((zona) => (
+                <li class="bg-primary-50 text-primary-800 rounded-full px-4 py-2 text-sm font-medium">
+                  {zona}
+                </li>
+              ))
+            }
+          </ul>
         </section>
 
         <!-- FAQ Section -->
@@ -220,10 +256,7 @@ const { Content } = await service.render();
           addressCountry: 'CO',
         },
       },
-      areaServed: {
-        '@type': 'City',
-        name: 'Cali',
-      },
+      areaServed,
     })}
   />
 </Layout>
