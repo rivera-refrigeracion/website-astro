@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync, readdirSync } from 'fs';
+import { existsSync, readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 
@@ -20,6 +20,95 @@ function getAllServices() {
 
 describe('Service pages', () => {
   const services = getAllServices();
+  const servicesWithBrands = services.filter(
+    ({ slug }) => slug !== 'instalacion-aire-acondicionado'
+  );
+
+  it.each(services)('$slug has a unique title', (service) => {
+    expect(
+      services.filter(({ data }) => data.title === service.data.title)
+    ).toHaveLength(1);
+  });
+
+  it.each(services)('$slug has a unique meta title', (service) => {
+    expect(
+      services.filter(({ data }) => data.metaTitle === service.data.metaTitle)
+    ).toHaveLength(1);
+  });
+
+  it.each(services)('$slug has a unique short meta description', (service) => {
+    expect(service.data.metaDescription.length).toBeLessThan(160);
+    expect(
+      services.filter(
+        ({ data }) => data.metaDescription === service.data.metaDescription
+      )
+    ).toHaveLength(1);
+  });
+
+  it.each(services)('$slug mentions Cali in its SEO metadata', (service) => {
+    expect(
+      service.data.metaTitle.includes('Cali') ||
+        service.data.metaDescription.includes('Cali')
+    ).toBe(true);
+  });
+
+  it.each(services)('$slug has at least three SEO keywords', (service) => {
+    expect(service.data.keywords.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it.each(services)('$slug has a published main image', (service) => {
+    const imageUrl = service.data.heroImage.url;
+    const imagePath = join(
+      process.cwd(),
+      'src/assets',
+      imageUrl.replace(/^\//, '')
+    );
+
+    expect(imageUrl).toMatch(/^\/images\/.+\.(jpg|webp|png)$/);
+    expect(existsSync(imagePath)).toBe(true);
+    expect(service.data.heroImage.alt.trim().length).toBeGreaterThan(0);
+
+    if (['calentadores', 'lavadoras', 'neveras'].includes(service.slug)) {
+      expect(imageUrl).toMatch(/\.webp$/);
+    }
+  });
+
+  it.each(services)('$slug has a complete four-step process', (service) => {
+    expect(service.data.process).toHaveLength(4);
+    service.data.process.forEach(
+      (
+        step: { step: number; title: string; description: string },
+        index: number
+      ) => {
+        expect(step.step).toBe(index + 1);
+        expect(step.title.trim().length).toBeGreaterThan(0);
+        expect(step.description.trim().length).toBeGreaterThan(0);
+      }
+    );
+  });
+
+  it.each(services)('$slug has non-empty Markdown content', (service) => {
+    expect(service.content.trim().length).toBeGreaterThan(0);
+  });
+
+  it.each(services)('$slug has between four and six FAQs', (service) => {
+    expect(service.data.faqs.length).toBeGreaterThanOrEqual(4);
+    expect(service.data.faqs.length).toBeLessThanOrEqual(6);
+    service.data.faqs.forEach((faq: { question: string; answer: string }) => {
+      expect(faq.question.trim().length).toBeGreaterThan(10);
+      expect(faq.answer.trim().length).toBeGreaterThan(20);
+    });
+  });
+
+  it.each(servicesWithBrands)(
+    '$slug has a populated brands list',
+    (service) => {
+      expect(service.data.brands.length).toBeGreaterThanOrEqual(5);
+      service.data.brands.forEach((brand: { name: string }) => {
+        expect(brand.name.trim().length).toBeGreaterThan(0);
+      });
+    }
+  );
 
   it('contains the four existing pages and the separate air installation page', () => {
     expect(services.map((service) => service.slug).sort()).toEqual([
