@@ -294,5 +294,5 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 📍 **Ubicación:** Cali, Valle del Cauca, Colombia  
 📞 **Teléfono:** +57 317 309 5159  
-💬 **WhatsApp:** [Contáctanos](https://api.whatsapp.com/send?phone=573016963313)  
+💬 **WhatsApp:** [Contáctanos](https://wa.me/573016963313)  
 🌐 **Sitio Web:** [rivera-refrigeracion.com](https://rivera-refrigeracion.com)

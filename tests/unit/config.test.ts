@@ -42,8 +42,8 @@ describe('Site Configuration', () => {
       expect(CONTACT.whatsappLink).toMatch(/whatsapp\.com|wa\.me/);
     });
 
-    it('should have appointment link', () => {
-      expect(CONTACT.appointmentLink).toMatch(/^https?:\/\//);
+    it('should have an appointment message to prefill', () => {
+      expect(CONTACT.whatsappMessage.length).toBeGreaterThan(0);
     });
 
     it('should have location in Cali, Colombia', () => {

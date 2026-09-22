@@ -71,7 +71,7 @@ test.describe('Footer', () => {
       await expect(whatsappLink).toBeVisible();
       await expect(whatsappLink).toHaveAttribute(
         'href',
-        'https://wa.me/573016963313'
+        /^https:\/\/wa\.me\/573016963313\?text=/
       );
     });
 
@@ -228,7 +228,7 @@ test.describe('Footer', () => {
       await expect(whatsappLink).toBeVisible();
       await expect(whatsappLink).toHaveAttribute(
         'href',
-        'https://api.whatsapp.com/send?phone=573016963313'
+        'https://wa.me/573016963313'
       );
     });
 

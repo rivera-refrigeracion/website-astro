@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import { CONTACT } from '@/lib/config';
+import { whatsappUrl } from '@/lib/utils';
 
 export async function getStaticPaths() {
   const services = await getCollection('services');
@@ -188,7 +189,9 @@ const areaServed = service.data.serviceAreas.map((zona) =>
             experiencia nos respaldan.
           </p>
           <a
-            href={CONTACT.whatsappLink}
+            href={whatsappUrl(
+              `desde la página de ${service.data.title.toLowerCase()}`
+            )}
             target="_blank"
             rel="noopener noreferrer"
             class="whatsapp-btn whatsapp-cta-service inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"

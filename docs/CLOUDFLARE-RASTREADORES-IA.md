@@ -171,3 +171,92 @@ y deja un error en la consola. Hay que elegir una de dos:
 
 Dado que el sitio ya tiene GA4 y GTM, apagarlo es lo más limpio. Dejarlo como está hoy es la
 única opción que no sirve para nada.
+
+---
+
+---
+
+# GTM: arreglar el disparador de `whatsapp_click`
+
+**Para:** Juan · **Contenedor:** `GTM-WGKFDPTD` · **Tiempo:** ~10 minutos
+**Origen:** auditoría SEO y GEO del 2026-09-22, hallazgos A10 y M19.
+
+Igual que lo de Cloudflare, esto no se puede cambiar desde el repositorio: vive dentro del
+contenedor de GTM. Lo que sí se hizo en el repositorio está al final de este documento.
+
+## 7. El problema
+
+El disparador de `whatsapp_click` exige que `gtm.elementUrl` **contenga la cadena literal
+`whatsapp`**. El sitio tenía tres formatos de enlace distintos conviviendo:
+
+| Dónde                           | Enlace que había                | ¿Disparaba?                            |
+| ------------------------------- | ------------------------------- | -------------------------------------- |
+| Cabecera, hero, CTA de servicio | `api.whatsapp.com/send?phone=…` | Sí                                     |
+| Pie de página                   | `wa.me/573016963313`            | **No**                                 |
+| Botón "Agenda tu cita"          | `bit.ly/3XomYEV`                | **No** (lo cubría `appointment_click`) |
+
+El repositorio ya unificó **todos** los enlaces a `https://wa.me/573016963313?text=…`, que es el
+formato correcto. El efecto secundario es que, si no se toca GTM, **`whatsapp_click` deja de
+dispararse en todo el sitio**, porque ya no queda ninguna URL con la cadena `whatsapp`.
+
+Hay que hacer el cambio de GTM **antes o a la vez** que el despliegue de este PR.
+
+## 8. El cambio exacto en GTM
+
+1. Entra a <https://tagmanager.google.com> y abre el contenedor `GTM-WGKFDPTD`.
+2. **Triggers** (Activadores) → abre **`whatsapp_click`**.
+3. En la condición, hoy dice:
+
+   ```
+   Click URL   contains   whatsapp
+   ```
+
+   Cámbiala por:
+
+   ```
+   Click URL   matches RegEx   whatsapp\.com|wa\.me
+   ```
+
+   (el operador se llama _coincide con la expresión regular_ en la interfaz en español).
+   Deja el resto del activador igual.
+
+4. **Triggers** → abre **`appointment_click`**. Hoy dice:
+
+   ```
+   Click URL   contains   bit.ly/3XomYEV
+   ```
+
+   El acortador ya no se usa en ninguna parte, así que esa condición no se cumple nunca.
+   Cámbiala por:
+
+   ```
+   Click URL   matches RegEx   wa\.me/573016963313\?text=.*portada
+   ```
+
+   Eso captura los dos botones "Agenda tu cita" (el del hero y el del cierre de la home), que
+   son los que llevaban al acortador, y sólo esos.
+
+5. **Preview** → abre el sitio, pulsa un botón de WhatsApp del pie y otro de la cabecera, y
+   comprueba en el panel de depuración que **`whatsapp_click` aparece en los dos casos**.
+6. **Submit** / Publicar.
+
+## 9. Lo que ya no depende de GTM
+
+Los enlaces del sitio ahora llevan el origen dentro del propio mensaje de WhatsApp:
+
+```
+https://wa.me/573016963313?text=¡Hola! Quiero contratar sus servicios (desde la página de neveras).
+```
+
+Los orígenes que se emiten hoy son: `desde el menú`, `desde la portada`, `desde el cierre de la
+portada`, `desde la página de <servicio>`, `desde el blog`, `desde el pie de página`, `desde la
+política de privacidad` y `desde una página no encontrada`.
+
+Eso significa que, aunque GTM esté mal configurado, **Rubén puede ver en la propia conversación
+de WhatsApp de dónde salió el contacto**. La medición deja de ser un único punto de fallo.
+
+## 10. Pendiente aparte (GA4)
+
+El único evento clave de la propiedad GA4 `453760445` es `purchase`, que este negocio no dispara
+nunca. Una vez `whatsapp_click` funcione de verdad, hay que marcarlo como evento clave en
+**Administrar → Eventos** y quitar `purchase`. No forma parte de esta tanda.

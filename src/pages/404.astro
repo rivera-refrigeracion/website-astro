@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { CONTACT } from '@/lib/config';
+import { whatsappUrl } from '@/lib/utils';
 ---
 
 <Layout
@@ -21,7 +21,7 @@ import { CONTACT } from '@/lib/config';
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="/" class="btn btn-primary"> Volver al inicio </a>
           <a
-            href={CONTACT.whatsappLink}
+            href={whatsappUrl('desde una página no encontrada')}
             target="_blank"
             rel="noopener noreferrer"
             class="whatsapp-btn"

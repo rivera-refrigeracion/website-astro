@@ -63,4 +63,4 @@ Si tu aire acondicionado no está enfriando como debería, es posible que haya u
 
 No dejes que el calor te gane. Si tu aire acondicionado no está funcionando correctamente, agenda una revisión profesional: **llámanos al +573173095159** o chatea con nuestro servicio automatizado.
 
-[¡Agenda tu cita AQUÍ!](https://bit.ly/3XomYEV)
+[¡Agenda tu cita AQUÍ!](https://wa.me/573016963313)
