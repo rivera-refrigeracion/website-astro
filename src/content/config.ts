@@ -25,7 +25,15 @@ const services = defineCollection({
   type: 'content',
   schema: z.object({
     // Basic info
+    /** Nombre corto del servicio: navegación, pie y tarjetas de la home. */
     title: z.string(),
+    /**
+     * Encabezado de la página de servicio. Va aparte de `title` porque el H1
+     * es la señal de tema más fuerte que tiene la página y necesita intención
+     * local ("Reparación de neveras en Cali a domicilio"), mientras que en una
+     * tarjeta o en el menú eso sobra (auditoría 2026-09-22, A8).
+     */
+    h1: z.string(),
     shortDescription: z.string(),
     icon: z.string(),
 

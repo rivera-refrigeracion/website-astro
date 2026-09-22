@@ -3,22 +3,33 @@ import { test, expect } from './fixtures';
 const services = [
   {
     slug: 'aire-acondicionado',
+    // Nombre corto: el de la navegación y el de los bloques describe
     title: 'Aire Acondicionado',
+    // metaTitle y h1 son deliberadamente distintos: el primero cabe en la
+    // SERP, el segundo carga la intención local
+    metaTitle: 'Aire acondicionado en Cali',
+    h1: 'Instalación y reparación de aire acondicionado en Cali',
     keyword: 'aire acondicionado',
   },
   {
     slug: 'neveras',
     title: 'Neveras',
+    metaTitle: 'Reparación de neveras en Cali',
+    h1: 'Reparación de neveras en Cali a domicilio',
     keyword: 'neveras',
   },
   {
     slug: 'lavadoras',
     title: 'Lavadoras',
+    metaTitle: 'Reparación de lavadoras en Cali',
+    h1: 'Reparación de lavadoras en Cali a domicilio',
     keyword: 'lavadoras',
   },
   {
     slug: 'calentadores',
     title: 'Calentadores',
+    metaTitle: 'Calentadores de agua en Cali',
+    h1: 'Instalación y reparación de calentadores de agua en Cali',
     keyword: 'calentadores',
   },
 ];
@@ -31,9 +42,14 @@ test.describe('Service Pages - General', () => {
       });
 
       test('should have correct page title', async ({ page }) => {
-        await expect(page).toHaveTitle(new RegExp(service.title));
+        await expect(page).toHaveTitle(new RegExp(service.metaTitle));
         await expect(page).toHaveTitle(/Rivera Refrigeración/);
         await expect(page).toHaveTitle(/Cali/);
+
+        // La marca se añade una sola vez y el título entra en la SERP
+        const title = await page.title();
+        expect(title.match(/Rivera Refrigeración/g)).toHaveLength(1);
+        expect(title.length).toBeLessThanOrEqual(60);
       });
 
       test('should have meta description', async ({ page }) => {
@@ -48,7 +64,7 @@ test.describe('Service Pages - General', () => {
       test('should display hero section with title', async ({ page }) => {
         const h1 = page.getByRole('heading', { level: 1 });
         await expect(h1).toBeVisible();
-        await expect(h1).toContainText(service.title);
+        await expect(h1).toContainText(service.h1);
       });
 
       test('should display hero image', async ({ page }) => {

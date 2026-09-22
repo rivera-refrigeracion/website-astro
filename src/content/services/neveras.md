@@ -1,10 +1,11 @@
 ---
 title: 'Neveras y Refrigeradores'
+h1: 'Reparación de neveras en Cali a domicilio'
 shortDescription: 'Reparación y mantenimiento especializado de neveras y refrigeradores de todas las marcas en Cali'
 icon: 'refrigerator'
 
 # SEO
-metaTitle: 'Reparación de Neveras en Cali | Técnico Especializado | Rivera Refrigeración'
+metaTitle: 'Reparación de neveras en Cali'
 metaDescription: 'Servicio técnico de neveras en Cali. Reparamos todas las marcas: Samsung, LG, Whirlpool, Haceb. +30 años de experiencia. Diagnóstico a domicilio.'
 keywords:
   - 'reparación neveras Cali'

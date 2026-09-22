@@ -1,10 +1,11 @@
 ---
 title: 'Calentadores de Agua'
+h1: 'Instalación y reparación de calentadores de agua en Cali'
 shortDescription: 'Instalación, reparación y mantenimiento de calentadores de agua a gas y eléctricos en Cali'
 icon: 'water-heater'
 
 # SEO
-metaTitle: 'Instalación y Reparación de Calentadores en Cali | Rivera Refrigeración'
+metaTitle: 'Calentadores de agua en Cali'
 metaDescription: 'Servicio técnico de calentadores de agua en Cali. Instalación, reparación y mantenimiento. Calentadores a gas y eléctricos. Todas las marcas.'
 keywords:
   - 'instalación calentadores Cali'

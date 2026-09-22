@@ -1,10 +1,11 @@
 ---
 title: 'Aire Acondicionado'
+h1: 'Instalación y reparación de aire acondicionado en Cali'
 shortDescription: 'Servicios profesionales de instalación, mantenimiento y reparación de aires acondicionados en Cali'
 icon: 'air-conditioner'
 
 # SEO
-metaTitle: 'Reparación de Aire Acondicionado en Cali | Rivera Refrigeración'
+metaTitle: 'Aire acondicionado en Cali'
 metaDescription: 'Servicio técnico especializado en aire acondicionado en Cali. Instalación, mantenimiento y reparación. +30 años de experiencia. Todas las marcas.'
 keywords:
   - 'reparación aire acondicionado Cali'
