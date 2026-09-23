@@ -1,0 +1,38 @@
+---
+/**
+ * La turbina del logo, redibujada en vectores para usarla como decoración de
+ * fondo: gira, escala sin perder nitidez y no cuesta una petición. Las aspas
+ * alternan dos tonos, como en el logo.
+ */
+interface Props {
+  class?: string;
+  /** Tono de las aspas pares; las impares usan `currentColor`. */
+  tone?: string;
+}
+
+const { class: className, tone = 'currentColor' } = Astro.props;
+const ASPAS = 12;
+const angulos = Array.from({ length: ASPAS }, (_, i) => (i * 360) / ASPAS);
+---
+
+<svg
+  class={className}
+  viewBox="-100 -100 200 200"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <circle r="95" stroke="currentColor" stroke-width="4" opacity="0.7"></circle>
+  <g>
+    {
+      angulos.map((angulo, i) => (
+        <path
+          d="M4-19C23-32 40-54 36-79 52-67 58-40 45-22 36-11 20-7 11-13Z"
+          fill={i % 2 ? 'currentColor' : tone}
+          transform={`rotate(${angulo})`}
+        />
+      ))
+    }
+  </g>
+  <circle r="16" stroke="currentColor" stroke-width="3"></circle>
+</svg>

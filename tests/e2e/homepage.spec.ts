@@ -13,8 +13,12 @@ test.describe('Homepage', () => {
     const header = page.locator('header');
     await expect(header).toBeVisible();
 
-    const logo = header.getByRole('img', { name: /Rivera Refrigeración/i });
-    await expect(logo).toBeVisible();
+    // El logo es decorativo (alt vacío): el nombre lo da el enlace.
+    const marca = header.getByRole('link', {
+      name: 'Rivera Refrigeración',
+      exact: true,
+    });
+    await expect(marca.locator('img')).toBeVisible();
 
     // On mobile, nav items are hidden until menu is opened
     const viewport = page.viewportSize();

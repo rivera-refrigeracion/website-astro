@@ -1,6 +1,8 @@
 ---
 import { getImage } from 'astro:assets';
 import electrodomesticos from '@/assets/images/hero-appliances.webp';
+import Turbine from '@/components/ui/Turbine.astro';
+import Wave from '@/components/ui/Wave.astro';
 import { whatsappUrl } from '@/lib/utils';
 
 // La ilustración sólo se ve desde lg (1024 px). Con <source media> el
@@ -17,20 +19,31 @@ const PIXEL_VACIO =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 ---
 
-<section
-  class="relative bg-gradient-to-br from-primary-700 via-primary-800 to-primary-900 text-white overflow-hidden"
->
-  <div class="container relative py-16 lg:py-24">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
+<section class="hero on-dark relative isolate overflow-hidden">
+  <!-- Fondo: capas decorativas, todas en absoluto -->
+  <div class="absolute inset-0 -z-10" aria-hidden="true">
+    <div class="hero-brillo-calor respirar"></div>
+    <div class="hero-brillo-frio"></div>
+    <div class="hero-puntos"></div>
+    <Turbine
+      class="hero-turbina girar text-primary-300"
+      tone="var(--color-primary-500)"
+    />
+  </div>
+
+  <div class="container relative pt-14 pb-24 sm:pt-20 lg:pt-24 lg:pb-36">
+    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
       <!-- Content -->
       <div class="text-center lg:text-left">
         <h1
-          class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight text-balance"
+          class="text-[2rem] sm:text-5xl lg:text-[3.4rem] font-bold text-white mb-6 leading-[1.1] text-balance"
         >
           Soluciones Confiables para Aire Acondicionado, Neveras, Lavadoras y
           Más
         </h1>
-        <p class="text-lg text-white/90 mb-8 max-w-xl mx-auto lg:mx-0">
+        <p
+          class="text-lg lg:text-xl text-primary-50/90 leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0"
+        >
           En Rivera Refrigeración, somos expertos en brindar soluciones de
           calidad para todas tus necesidades de climatización y
           electrodomésticos. Con más de 30 años de experiencia en el sector,
@@ -38,20 +51,40 @@ const PIXEL_VACIO =
           mantenimiento y reparación de aire acondicionado, neveras, lavadoras y
           calentadores.
         </p>
-        <a
-          href={whatsappUrl('desde la portada')}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-lg bg-secondary-500 hover:bg-secondary-600 text-neutral-900 font-semibold shadow-lg hover:shadow-xl transition-all"
-        >
-          Agenda tu cita
-        </a>
+        <div>
+          <a
+            href={whatsappUrl('desde la portada')}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-lg btn-accent"
+          >
+            Agenda tu cita
+            <svg
+              class="btn-flecha w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.25"
+                d="M5 12h14m-6-6 6 6-6 6"></path>
+            </svg>
+          </a>
+        </div>
       </div>
 
       <!-- Hero Image -->
       <div class="relative hidden lg:block">
         <div class="relative w-full aspect-square max-w-md mx-auto">
-          <picture>
+          <div class="hero-halo" aria-hidden="true"></div>
+          <Turbine
+            class="absolute -inset-6 w-[calc(100%+3rem)] h-[calc(100%+3rem)] text-white/15 girar-inverso"
+            tone="rgb(255 255 255 / 0.06)"
+          />
+          <picture class="flotar block relative">
             <source
               media={ESCRITORIO}
               type="image/avif"
@@ -67,7 +100,7 @@ const PIXEL_VACIO =
             <img
               src={PIXEL_VACIO}
               alt="Aire acondicionado, nevera y lavadora - Servicios de Rivera Refrigeración"
-              class="w-full h-full object-contain drop-shadow-2xl"
+              class="hero-imagen w-full h-full object-contain"
               width="448"
               height="448"
               fetchpriority="high"
@@ -77,4 +110,108 @@ const PIXEL_VACIO =
       </div>
     </div>
   </div>
+
+  <Wave />
 </section>
+
+<style>
+  .hero {
+    background: linear-gradient(
+      165deg,
+      var(--color-primary-950) 0%,
+      #0a2e6b 45%,
+      var(--color-primary-900) 100%
+    );
+  }
+
+  .hero-brillo-calor,
+  .hero-brillo-frio {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* El resplandor naranja de arriba, como en las piezas de marca. */
+  .hero-brillo-calor {
+    width: 70rem;
+    height: 40rem;
+    top: -22rem;
+    right: -18rem;
+    background: radial-gradient(
+      closest-side,
+      rgb(255 122 26 / 0.38),
+      rgb(255 122 26 / 0)
+    );
+  }
+
+  .hero-brillo-frio {
+    width: 56rem;
+    height: 40rem;
+    bottom: -20rem;
+    left: -20rem;
+    background: radial-gradient(
+      closest-side,
+      rgb(100 181 246 / 0.28),
+      rgb(100 181 246 / 0)
+    );
+  }
+
+  .hero-puntos {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      rgb(255 255 255 / 0.09) 1px,
+      transparent 1px
+    );
+    background-size: 26px 26px;
+    mask-image: radial-gradient(
+      ellipse 80% 70% at 70% 40%,
+      black,
+      transparent 75%
+    );
+  }
+
+  :global(.hero-turbina) {
+    position: absolute;
+    width: 34rem;
+    height: 34rem;
+    top: -9rem;
+    right: -13rem;
+    opacity: 0.1;
+    --giro: 80s;
+  }
+
+  @media (min-width: 1024px) {
+    :global(.hero-turbina) {
+      width: 52rem;
+      height: 52rem;
+      top: -8rem;
+      right: -22rem;
+      opacity: 0.07;
+    }
+  }
+
+  .hero-halo {
+    position: absolute;
+    inset: 8%;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      rgb(144 202 249 / 0.35),
+      rgb(144 202 249 / 0.08) 60%,
+      transparent
+    );
+  }
+
+  .hero-imagen {
+    filter: drop-shadow(0 30px 40px rgb(3 14 36 / 0.55));
+  }
+
+  .btn-flecha {
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .btn:hover .btn-flecha {
+    transform: translateX(4px);
+  }
+</style>

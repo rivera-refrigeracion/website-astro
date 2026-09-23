@@ -12,7 +12,7 @@ export default defineConfig({
     plugins: [
       tailwindcss(),
       visualizer({
-        open: true,
+        open: false,
         filename: 'stats.html',
         gzipSize: true,
         brotliSize: true,

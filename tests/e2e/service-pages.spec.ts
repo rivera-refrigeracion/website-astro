@@ -90,7 +90,7 @@ test.describe('Service Pages - General', () => {
         await expect(brandsHeading).toBeVisible();
 
         // Should have at least 5 brand items
-        const brandItems = page.locator('.bg-neutral-50').first();
+        const brandItems = page.locator('.marca-ficha').first();
         await expect(brandItems).toBeVisible();
       });
 
@@ -343,8 +343,16 @@ test.describe('Service Pages - Accessibility', () => {
       for (let i = 0; i < count; i++) {
         const img = images.nth(i);
         const alt = await img.getAttribute('alt');
-        expect(alt).toBeTruthy();
-        expect(alt!.length).toBeGreaterThan(0);
+        expect(alt).not.toBeNull();
+
+        // Un alt vacío sólo vale para una imagen decorativa dentro de un
+        // enlace que ya tiene nombre propio (el logo del encabezado).
+        if (alt === '') {
+          const nombreEnlace = await img.evaluate(
+            (el) => el.closest('a')?.getAttribute('aria-label') ?? ''
+          );
+          expect(nombreEnlace.length).toBeGreaterThan(0);
+        }
       }
     }
   });

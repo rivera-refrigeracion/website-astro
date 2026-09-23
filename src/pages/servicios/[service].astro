@@ -1,6 +1,8 @@
 ---
 import { getImage, Picture } from 'astro:assets';
 import { type CollectionEntry, getCollection } from 'astro:content';
+import Turbine from '@/components/ui/Turbine.astro';
+import Wave from '@/components/ui/Wave.astro';
 import Layout from '@/layouts/Layout.astro';
 import { CONTACT } from '@/lib/config';
 import { imagenLocal } from '@/lib/images';
@@ -66,26 +68,42 @@ const imagenSchema = await getImage({
     }),
   ]}
 >
-  <article class="py-12">
-    <div class="container">
-      <!-- Hero Section -->
-      <header class="max-w-4xl mx-auto text-center mb-12">
-        <h1 class="text-3xl lg:text-5xl font-bold mb-4 text-neutral-900">
+  <article class="pb-16 lg:pb-24">
+    <!-- Hero Section -->
+    <header class="servicio-cabecera on-dark relative isolate overflow-hidden">
+      <div class="absolute inset-0 -z-10" aria-hidden="true">
+        <div class="servicio-brillo respirar"></div>
+        <Turbine
+          class="servicio-turbina girar text-primary-300"
+          tone="var(--color-primary-600)"
+        />
+      </div>
+      <div
+        class="container max-w-4xl mx-auto text-center pt-14 pb-40 lg:pt-20 lg:pb-56"
+      >
+        <h1
+          class="text-3xl lg:text-5xl font-bold mb-5 text-white leading-tight text-balance"
+        >
           {service.data.h1}
         </h1>
-        <p class="text-lg lg:text-xl text-neutral-600">
+        <p class="text-lg lg:text-xl text-primary-50/90 leading-relaxed">
           {service.data.shortDescription}
         </p>
-      </header>
+      </div>
+      <Wave />
+    </header>
 
+    <div class="container">
       <!-- Hero Image -->
-      <figure class="max-w-4xl mx-auto mb-12">
+      <figure
+        class="servicio-foto relative z-10 max-w-4xl mx-auto -mt-32 lg:-mt-44 mb-16"
+      >
         <Picture
           src={imagenPrincipal}
           formats={['avif']}
           fallbackFormat="webp"
           alt={service.data.heroImage.alt}
-          class="w-full h-auto mx-auto rounded-lg shadow-lg"
+          class="w-full h-auto mx-auto rounded-[var(--radius-xl)]"
           style={`max-width: ${imagenPrincipal.width}px`}
           widths={[400, 600, 800, 896, 1200]}
           sizes="(min-width: 944px) 896px, calc(100vw - 48px)"
@@ -102,16 +120,18 @@ const imagenSchema = await getImage({
         </div>
 
         <!-- Brands Section -->
-        <section class="mb-16">
-          <h2 class="text-2xl lg:text-3xl font-bold mb-6 text-center">
+        <section class="mb-20" data-reveal>
+          <h2
+            class="title-accent text-2xl lg:text-3xl font-bold mb-8 text-center"
+          >
             Marcas que Atendemos
           </h2>
           <div
-            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 items-center"
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 items-center"
           >
             {
               service.data.brands.map((brand) => (
-                <div class="text-center p-4 bg-neutral-50 rounded-lg">
+                <div class="marca-ficha">
                   {brand.logo ? (
                     <img
                       src={brand.logo}
@@ -125,25 +145,34 @@ const imagenSchema = await getImage({
                 </div>
               ))
             }
-            <div class="text-center p-4 bg-neutral-50 rounded-lg">
-              <p class="font-semibold text-neutral-700">Y más...</p>
+            <div class="marca-ficha marca-ficha-mas">
+              <p class="font-semibold text-primary-800">Y más...</p>
             </div>
           </div>
         </section>
 
         <!-- Process Section -->
-        <section class="mb-16 bg-primary-50 rounded-lg p-8">
-          <h2 class="text-2xl lg:text-3xl font-bold mb-8 text-center">
+        <section class="proceso mb-20 rounded-[var(--radius-xl)] p-6 sm:p-10">
+          <h2
+            class="title-accent text-2xl lg:text-3xl font-bold mb-10 text-center"
+            data-reveal
+          >
             Nuestro Proceso de Trabajo
           </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div
+            class="proceso-pasos relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
+          >
             {
-              service.data.process.map((step) => (
-                <div class="text-center">
-                  <div class="text-4xl mb-3" aria-hidden="true">
+              service.data.process.map((step, i) => (
+                <div
+                  class="paso relative text-center"
+                  data-reveal
+                  style={`--reveal-i: ${i}`}
+                >
+                  <div class="paso-icono text-3xl mb-4" aria-hidden="true">
                     {step.icon}
                   </div>
-                  <div class="text-sm font-semibold text-primary-800 mb-2">
+                  <div class="text-xs uppercase tracking-[0.12em] font-bold text-primary-800 mb-2">
                     Paso {step.step}
                   </div>
                   <h3 class="font-bold text-lg mb-2">{step.title}</h3>
@@ -155,8 +184,10 @@ const imagenSchema = await getImage({
         </section>
 
         <!-- Service Areas -->
-        <section class="mb-16">
-          <h2 class="text-2xl lg:text-3xl font-bold mb-4 text-center">
+        <section class="mb-20" data-reveal>
+          <h2
+            class="title-accent text-2xl lg:text-3xl font-bold mb-6 text-center"
+          >
             Zonas donde atendemos
           </h2>
           <p class="text-neutral-600 text-center mb-6">
@@ -165,7 +196,7 @@ const imagenSchema = await getImage({
           <ul class="flex flex-wrap justify-center gap-3">
             {
               service.data.serviceAreas.map((zona) => (
-                <li class="bg-primary-50 text-primary-800 rounded-full px-4 py-2 text-sm font-medium">
+                <li class="zona inline-flex items-center gap-2 bg-primary-50 text-primary-800 rounded-full px-4 py-2 text-sm font-medium">
                   {zona}
                 </li>
               ))
@@ -174,18 +205,21 @@ const imagenSchema = await getImage({
         </section>
 
         <!-- FAQ Section -->
-        <section class="mb-16">
-          <h2 class="text-2xl lg:text-3xl font-bold mb-8 text-center">
+        <section class="mb-20">
+          <h2
+            class="title-accent text-2xl lg:text-3xl font-bold mb-10 text-center"
+            data-reveal
+          >
             Preguntas Frecuentes
           </h2>
-          <div class="space-y-4">
+          <div class="space-y-3" data-reveal>
             {
               service.data.faqs.map((faq) => (
-                <details class="group bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
-                  <summary class="cursor-pointer p-4 font-semibold text-lg hover:bg-neutral-50 transition-colors list-none flex items-center justify-between">
+                <details class="faq group bg-white rounded-2xl border border-neutral-200 overflow-hidden">
+                  <summary class="cursor-pointer px-5 py-4 sm:px-6 sm:py-5 font-semibold text-lg list-none flex items-center justify-between gap-4">
                     <span>{faq.question}</span>
                     <svg
-                      class="w-5 h-5 text-neutral-500 transition-transform group-open:rotate-180"
+                      class="faq-chevron shrink-0 w-8 h-8 p-1.5 rounded-full bg-primary-50 text-primary-800 group-open:rotate-180"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -199,7 +233,9 @@ const imagenSchema = await getImage({
                       />
                     </svg>
                   </summary>
-                  <div class="p-4 pt-0 text-neutral-700">{faq.answer}</div>
+                  <div class="faq-respuesta px-5 pb-5 sm:px-6 sm:pb-6 text-neutral-700 leading-relaxed">
+                    {faq.answer}
+                  </div>
                 </details>
               ))
             }
@@ -207,11 +243,18 @@ const imagenSchema = await getImage({
         </section>
 
         <!-- CTA Section -->
-        <section class="text-center bg-primary-800 text-white rounded-lg p-8">
+        <section
+          class="servicio-cierre on-dark relative isolate overflow-hidden text-center text-white rounded-[var(--radius-xl)] px-6 py-12 sm:p-14"
+          data-reveal="zoom"
+        >
+          <Turbine
+            class="servicio-cierre-turbina girar-inverso text-primary-300"
+            tone="var(--color-primary-600)"
+          />
           <h2 class="text-2xl lg:text-3xl font-bold mb-4">
             ¿Necesitas este servicio?
           </h2>
-          <p class="text-lg mb-6 opacity-90">
+          <p class="text-lg mb-8 text-primary-50/90 max-w-xl mx-auto">
             Contáctanos ahora y recibe atención inmediata. Más de 30 años de
             experiencia nos respaldan.
           </p>
@@ -221,7 +264,7 @@ const imagenSchema = await getImage({
             )}
             target="_blank"
             rel="noopener noreferrer"
-            class="whatsapp-btn whatsapp-cta-service inline-flex items-center gap-2 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
+            class="whatsapp-btn whatsapp-cta-service inline-flex items-center gap-2 text-white px-8 py-4 font-semibold text-lg"
             data-service={service.slug}
           >
             <svg
@@ -236,7 +279,7 @@ const imagenSchema = await getImage({
             </svg>
             Contáctanos por WhatsApp
           </a>
-          <p class="text-sm mt-4 opacity-90">
+          <p class="text-sm mt-6 text-primary-100">
             Llamadas: <a
               href={`tel:${CONTACT.phone}`}
               class="phone-link phone-link-service text-white underline hover:no-underline"
@@ -248,3 +291,185 @@ const imagenSchema = await getImage({
     </div>
   </article>
 </Layout>
+
+<style>
+  .servicio-cabecera {
+    background: linear-gradient(
+      165deg,
+      var(--color-primary-950) 0%,
+      #0a2e6b 50%,
+      var(--color-primary-900) 100%
+    );
+  }
+
+  .servicio-brillo {
+    position: absolute;
+    width: 64rem;
+    height: 36rem;
+    top: -22rem;
+    left: 50%;
+    margin-left: -32rem;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      rgb(255 122 26 / 0.3),
+      rgb(255 122 26 / 0)
+    );
+  }
+
+  :global(.servicio-turbina) {
+    position: absolute;
+    width: 36rem;
+    height: 36rem;
+    top: -10rem;
+    right: -14rem;
+    opacity: 0.08;
+    --giro: 90s;
+  }
+
+  .servicio-foto :global(img) {
+    box-shadow: var(--shadow-level3);
+  }
+
+  .marca-ficha {
+    display: grid;
+    place-items: center;
+    min-height: 4.5rem;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 1rem;
+    background: white;
+    border: 1px solid rgb(7 31 71 / 0.08);
+    box-shadow: var(--shadow-level1);
+    transition:
+      box-shadow 0.35s var(--ease-out),
+      transform 0.35s var(--ease-out);
+  }
+
+  .marca-ficha:hover {
+    box-shadow: var(--shadow-level2);
+  }
+
+  .marca-ficha-mas {
+    background: var(--color-primary-50);
+    border-style: dashed;
+    border-color: var(--color-primary-200);
+    box-shadow: none;
+  }
+
+  .proceso {
+    background:
+      radial-gradient(
+        30rem 16rem at 100% 0%,
+        rgb(255 152 0 / 0.1),
+        transparent 70%
+      ),
+      var(--color-primary-50);
+  }
+
+  /* El hilo que une los pasos en escritorio, detrás de las tarjetas. */
+  @media (min-width: 1024px) {
+    .proceso-pasos::before {
+      content: '';
+      position: absolute;
+      top: 3.25rem;
+      left: 12%;
+      right: 12%;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        var(--color-primary-400),
+        var(--color-primary-200)
+      );
+    }
+  }
+
+  .paso {
+    padding: 1.5rem 1.25rem;
+    border-radius: 1.25rem;
+    background: white;
+    box-shadow: var(--shadow-level1);
+    transition:
+      box-shadow 0.35s var(--ease-out),
+      transform 0.35s var(--ease-out);
+  }
+
+  .paso:hover {
+    box-shadow: var(--shadow-level2);
+  }
+
+  .paso-icono {
+    display: inline-grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: linear-gradient(
+      145deg,
+      var(--color-secondary-50),
+      var(--color-secondary-100)
+    );
+    box-shadow:
+      0 0 0 6px white,
+      inset 0 0 0 1px rgb(255 152 0 / 0.2);
+  }
+
+  .zona::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-secondary-500);
+  }
+
+  .faq {
+    transition:
+      box-shadow 0.35s var(--ease-out),
+      border-color 0.35s var(--ease-out);
+  }
+
+  .faq:hover,
+  .faq[open] {
+    border-color: var(--color-primary-200);
+    box-shadow: var(--shadow-level2);
+  }
+
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-chevron {
+    transition: rotate 0.4s var(--ease-out);
+  }
+
+  .servicio-cierre {
+    background: linear-gradient(
+      150deg,
+      var(--color-primary-800),
+      var(--color-primary-950) 75%
+    );
+    box-shadow: var(--shadow-level3);
+  }
+
+  :global(.servicio-cierre-turbina) {
+    position: absolute;
+    z-index: -1;
+    width: 26rem;
+    height: 26rem;
+    right: -8rem;
+    bottom: -10rem;
+    opacity: 0.1;
+    --giro: 90s;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .marca-ficha:hover,
+    .paso:hover {
+      transform: translateY(-4px);
+    }
+
+    .faq[open] .faq-respuesta {
+      animation: subir 0.45s var(--ease-out) backwards;
+    }
+  }
+</style>
