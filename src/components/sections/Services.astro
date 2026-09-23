@@ -11,18 +11,21 @@ const serviceImages: Record<string, string> = {
 };
 ---
 
-<section id="services" class="section bg-white">
+<section id="services" class="section bg-white relative">
   <div class="container">
-    <h2 class="section-title">Nuestros servicios</h2>
+    <h2 class="section-title" data-reveal>Nuestros servicios</h2>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 auto-rows-fr">
       {
-        SERVICES.map((service) => (
+        SERVICES.map((service, i) => (
           <a
             href={`/servicios/${service.id}/`}
-            class="card text-center hover:shadow-[var(--shadow-level2)] transition-all hover:scale-105 flex flex-col group"
+            class="servicio card group flex flex-col text-center p-6 pb-7 text-neutral-900 hover:text-neutral-900"
+            data-reveal
+            style={`--reveal-i: ${i}`}
           >
-            <figure class="mb-4">
+            <figure class="servicio-figura relative mx-auto mb-6 grid place-items-center w-40 h-40">
+              <span class="servicio-halo" aria-hidden="true" />
               <Picture
                 src={imagenLocal(
                   serviceImages[service.id] ||
@@ -31,7 +34,7 @@ const serviceImages: Record<string, string> = {
                 formats={['avif']}
                 fallbackFormat="webp"
                 alt={service.title}
-                class="w-32 h-32 object-contain mx-auto"
+                class="servicio-imagen relative w-32 h-32 object-contain mix-blend-multiply"
                 width={128}
                 height={128}
                 widths={[128, 256]}
@@ -42,22 +45,23 @@ const serviceImages: Record<string, string> = {
             <h3 class="text-xl font-semibold mb-3 text-neutral-900">
               {service.title}
             </h3>
-            <p class="text-neutral-600 leading-relaxed mb-4 flex-grow">
+            <p class="text-neutral-600 leading-relaxed mb-6 flex-grow">
               {service.description}
             </p>
-            <span class="inline-flex items-center gap-1 text-secondary-950 font-medium text-sm transition-colors mt-auto group-hover:gap-2">
+            <span class="inline-flex items-center justify-center gap-1.5 text-secondary-950 font-semibold text-sm mt-auto">
               Ver más
               <svg
-                class="w-4 h-4"
+                class="servicio-flecha w-4 h-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
+                  stroke-width="2.25"
+                  d="M5 12h14m-6-6 6 6-6 6"
                 />
               </svg>
             </span>
@@ -67,3 +71,84 @@ const serviceImages: Record<string, string> = {
     </div>
   </div>
 </section>
+
+<style>
+  .servicio {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Barra frío-calor al pie de la tarjeta, que crece al pasar el puntero. */
+  .servicio::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary-500),
+      var(--color-secondary-500)
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  .servicio-halo {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 50% 45%,
+      var(--color-primary-50),
+      rgb(227 242 253 / 0.6) 55%,
+      rgb(227 242 253 / 0) 72%
+    );
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .servicio-imagen {
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .servicio-flecha {
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .servicio:hover,
+  .servicio:focus-visible {
+    box-shadow: var(--shadow-level3);
+  }
+
+  .servicio:hover,
+  .servicio:focus-visible {
+    transform: translateY(-6px);
+  }
+
+  .servicio:hover::after,
+  .servicio:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .servicio:hover .servicio-imagen {
+    transform: scale(1.08) translateY(-4px);
+  }
+
+  .servicio:hover .servicio-halo {
+    transform: scale(1.12);
+  }
+
+  .servicio:hover .servicio-flecha {
+    transform: translateX(4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .servicio:hover,
+    .servicio:focus-visible,
+    .servicio:hover .servicio-imagen,
+    .servicio:hover .servicio-halo,
+    .servicio:hover .servicio-flecha {
+      transform: none;
+    }
+  }
+</style>

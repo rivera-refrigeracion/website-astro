@@ -1,16 +1,25 @@
 ---
 import { Picture } from 'astro:assets';
 import tecnico from '@/assets/images/about-technician.jpg';
+import Turbine from '@/components/ui/Turbine.astro';
 ---
 
-<section id="about" class="section bg-neutral-50">
-  <div class="container">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
-      <div>
-        <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-neutral-900">
+<section id="about" class="section sobre relative overflow-hidden">
+  <Turbine
+    class="sobre-turbina girar text-primary-200"
+    tone="var(--color-primary-100)"
+  />
+  <div class="container relative">
+    <div class="grid lg:grid-cols-[1fr_1.05fr] gap-14 lg:gap-20 items-center">
+      <div data-reveal>
+        <h2
+          class="title-accent title-accent-start text-3xl lg:text-4xl font-bold mb-8 text-neutral-900"
+        >
           Sobre nosotros
         </h2>
-        <div class="space-y-4 text-neutral-700 leading-relaxed">
+        <div
+          class="space-y-5 text-neutral-700 text-[1.0625rem] leading-relaxed"
+        >
           <p>
             <strong class="text-neutral-900">Rivera Refrigeración</strong> es un negocio
             familiar con más de 30 años de experiencia, fundado por <strong
@@ -34,16 +43,17 @@ import tecnico from '@/assets/images/about-technician.jpg';
         </div>
       </div>
 
-      <div class="relative">
+      <div class="relative lg:order-first" data-reveal="zoom">
+        <div class="sobre-marco" aria-hidden="true"></div>
         <figure
-          class="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg"
+          class="sobre-foto relative aspect-[4/3] rounded-[var(--radius-xl)] overflow-hidden"
         >
           <Picture
             src={tecnico}
             formats={['avif']}
             fallbackFormat="webp"
             alt="Rubén Darío Rivera - Técnico especialista"
-            class="w-full h-full object-cover"
+            class="sobre-imagen w-full h-full object-cover"
             widths={[400, 600, 800, 962]}
             sizes="(min-width: 1224px) 552px, (min-width: 1024px) calc(50vw - 60px), calc(100vw - 48px)"
             loading="lazy"
@@ -53,3 +63,61 @@ import tecnico from '@/assets/images/about-technician.jpg';
     </div>
   </div>
 </section>
+
+<style>
+  .sobre {
+    background:
+      radial-gradient(
+        60rem 30rem at 100% 0%,
+        rgb(255 152 0 / 0.07),
+        transparent 70%
+      ),
+      var(--color-neutral-50);
+  }
+
+  :global(.sobre-turbina) {
+    position: absolute;
+    width: 30rem;
+    height: 30rem;
+    bottom: -12rem;
+    right: -10rem;
+    opacity: 0.5;
+    --giro: 120s;
+  }
+
+  /*
+   * Marco frío-calor desplazado detrás de la foto, como una segunda hoja.
+   * Queda fijo; la foto es la que se mueve al pasar el puntero.
+   */
+  .sobre-marco {
+    position: absolute;
+    inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-500),
+      var(--color-primary-800) 55%,
+      var(--color-secondary-500)
+    );
+    opacity: 0.9;
+  }
+
+  .sobre-foto {
+    box-shadow: var(--shadow-level3);
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .sobre-imagen {
+    transition: transform 1.2s var(--ease-out);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .sobre-foto:hover {
+      transform: translate(-4px, -4px);
+    }
+
+    .sobre-foto:hover .sobre-imagen {
+      transform: scale(1.04);
+    }
+  }
+</style>
