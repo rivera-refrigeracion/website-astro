@@ -1,5 +1,6 @@
 ---
 import { ADDRESS, CONTACT, HOURS, SERVICES, SITE, SOCIAL } from '@/lib/config';
+import Turbine from '@/components/ui/Turbine.astro';
 import { formatPhoneNumber, whatsappUrl } from '@/lib/utils';
 
 const currentYear = new Date().getFullYear();
@@ -10,13 +11,21 @@ const currentYear = new Date().getFullYear();
 // "mailto:" como valor.
 ---
 
-<footer class="bg-neutral-900 text-white py-12">
+<footer
+  class="pie on-dark relative isolate overflow-hidden text-white pt-16 pb-10 lg:pt-20"
+>
+  <Turbine
+    class="pie-turbina girar text-primary-300"
+    tone="var(--color-primary-700)"
+  />
   <div class="container">
     <!-- Main Footer Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1.2fr_1fr] gap-10 mb-12"
+    >
       <!-- Company Info -->
       <div>
-        <h2 class="text-xl font-bold mb-4">{SITE.name}</h2>
+        <h2 class="pie-titulo text-lg font-bold mb-5">{SITE.name}</h2>
         <p class="text-white/80 mb-4">
           Más de 30 años de experiencia en reparación y mantenimiento de
           electrodomésticos.
@@ -26,7 +35,7 @@ const currentYear = new Date().getFullYear();
 
       <!-- Services -->
       <div>
-        <h2 class="text-xl font-bold mb-4">Servicios</h2>
+        <h2 class="pie-titulo text-lg font-bold mb-5">Servicios</h2>
         <nav aria-label="Enlaces a servicios">
           <ul class="space-y-2">
             {
@@ -34,7 +43,7 @@ const currentYear = new Date().getFullYear();
                 <li>
                   <a
                     href={`/servicios/${service.id}/`}
-                    class="text-white/80 hover:text-white transition-colors"
+                    class="pie-enlace text-white/80 hover:text-white"
                   >
                     {service.title}
                   </a>
@@ -47,37 +56,76 @@ const currentYear = new Date().getFullYear();
 
       <!-- Contact -->
       <div>
-        <h2 class="text-xl font-bold mb-4">Contacto</h2>
+        <h2 class="pie-titulo text-lg font-bold mb-5">Contacto</h2>
         <ul class="space-y-3">
           <li>
-            <strong class="block text-sm text-white/60">Llamadas:</strong>
+            <strong class="block text-sm text-primary-200">Llamadas:</strong>
             <a
               href={`tel:${CONTACT.phone}`}
-              class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-1"
+              class="pie-enlace text-white/80 hover:text-white inline-flex items-center gap-2"
             >
-              ☎ {formatPhoneNumber(CONTACT.phone)}
+              <svg
+                class="w-4 h-4 shrink-0 text-secondary-300"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                ></path></svg
+              >
+              {formatPhoneNumber(CONTACT.phone)}
             </a>
           </li>
           <li>
-            <strong class="block text-sm text-white/60"
+            <strong class="block text-sm text-primary-200"
               >WhatsApp (Agendamiento):</strong
             >
             <a
               href={whatsappUrl('desde el pie de página')}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-1"
+              class="pie-enlace text-white/80 hover:text-white inline-flex items-center gap-2"
             >
-              💬 {formatPhoneNumber(CONTACT.whatsapp)}
+              <svg
+                class="w-4 h-4 shrink-0 text-secondary-300"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                ></path></svg
+              >
+              {formatPhoneNumber(CONTACT.whatsapp)}
             </a>
           </li>
           <li>
-            <strong class="block text-sm text-white/60">Email:</strong>
+            <strong class="block text-sm text-primary-200">Email:</strong>
             <a
               href={`mailto:${CONTACT.email}`}
-              class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-1"
+              class="pie-enlace text-white/80 hover:text-white inline-flex items-center gap-2"
             >
-              📧 {CONTACT.email}
+              <svg
+                class="w-4 h-4 shrink-0 text-secondary-300"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path></svg
+              >
+              {CONTACT.email}
             </a>
           </li>
         </ul>
@@ -85,10 +133,24 @@ const currentYear = new Date().getFullYear();
 
       <!-- Hours -->
       <div>
-        <h2 class="text-xl font-bold mb-4">Horario</h2>
-        <div class="text-white/80">
-          <p class="inline-flex items-center gap-1">🕐 {HOURS.days}</p>
-          <p class="ml-5">{HOURS.time}</p>
+        <h2 class="pie-titulo text-lg font-bold mb-5">Horario</h2>
+        <div class="text-white/80 leading-relaxed">
+          <p class="inline-flex items-center gap-2">
+            <svg
+              class="w-4 h-4 shrink-0 text-secondary-300"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+            >
+            {HOURS.days}
+          </p>
+          <p class="ml-6">{HOURS.time}</p>
         </div>
       </div>
     </div>
@@ -99,17 +161,17 @@ const currentYear = new Date().getFullYear();
     >
       <!-- Social Media -->
       <div class="flex items-center gap-4">
-        <span class="text-white/60 text-sm">Síguenos:</span>
+        <span class="text-primary-200 text-sm">Síguenos:</span>
         <a
           href={SOCIAL.facebook}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Facebook"
-          class="text-white/80 hover:text-white transition-colors"
+          class="pie-social"
           title="Síguenos en Facebook"
         >
           <svg
-            class="w-6 h-6"
+            class="w-5 h-5"
             fill="currentColor"
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -124,11 +186,11 @@ const currentYear = new Date().getFullYear();
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Instagram"
-          class="text-white/80 hover:text-white transition-colors"
+          class="pie-social"
           title="Síguenos en Instagram"
         >
           <svg
-            class="w-6 h-6"
+            class="w-5 h-5"
             fill="currentColor"
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -143,11 +205,11 @@ const currentYear = new Date().getFullYear();
           target="_blank"
           rel="noopener noreferrer"
           aria-label="WhatsApp"
-          class="text-white/80 hover:text-white transition-colors"
+          class="pie-social"
           title="Contáctanos por WhatsApp"
         >
           <svg
-            class="w-6 h-6"
+            class="w-5 h-5"
             fill="currentColor"
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -160,10 +222,98 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <!-- Copyright -->
-      <p class="text-white/60 text-sm text-center">
+      <p class="text-primary-200 text-sm text-center">
         Copyright &copy; {currentYear}
         {SITE.name}. Todos los derechos reservados.
       </p>
     </div>
   </div>
 </footer>
+
+<style>
+  .pie {
+    background:
+      radial-gradient(
+        50rem 20rem at 85% 0%,
+        rgb(255 122 26 / 0.12),
+        transparent 70%
+      ),
+      var(--color-primary-950);
+  }
+
+  /* La franja de calor de las piezas de marca, igual que en el encabezado. */
+  .pie::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary-500),
+      var(--color-secondary-500),
+      var(--color-secondary-300)
+    );
+  }
+
+  :global(.pie-turbina) {
+    position: absolute;
+    z-index: -1;
+    width: 28rem;
+    height: 28rem;
+    right: -9rem;
+    bottom: -9rem;
+    opacity: 0.06;
+    --giro: 140s;
+  }
+
+  .pie-titulo {
+    font-family: var(--font-heading);
+    letter-spacing: 0.01em;
+  }
+
+  .pie-enlace {
+    position: relative;
+    transition: color var(--transition-fast);
+  }
+
+  .pie-enlace::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -2px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  .pie-enlace:hover::after {
+    transform: scaleX(1);
+  }
+
+  .pie-social {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    color: rgb(255 255 255 / 0.85);
+    background: rgb(255 255 255 / 0.06);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast),
+      transform 0.3s var(--ease-out);
+  }
+
+  .pie-social:hover {
+    color: var(--color-primary-950);
+    background: var(--color-secondary-400);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pie-social:hover {
+      transform: translateY(-3px);
+    }
+  }
+</style>

@@ -6,19 +6,22 @@ import { whatsappUrl } from '@/lib/utils';
 
 const currentPath = Astro.url.pathname;
 
+const WHATSAPP_ICONO =
+  'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z';
+
 const esActual = (href: string) =>
   currentPath === href || (href !== '/' && currentPath.startsWith(href));
 ---
 
-<header
-  class="sticky top-0 z-50 bg-primary-700 text-white shadow-[var(--shadow-level2)]"
->
-  <div class="container">
+<div id="header-centinela" class="absolute top-0 h-px w-px" aria-hidden="true">
+</div>
+<header id="sitio-header" class="sitio-header on-dark sticky top-0 z-50">
+  <div class="container relative">
     <nav class="flex items-center justify-between h-16 lg:h-20">
       <!-- Logo -->
       <a
         href="/"
-        class="flex items-center gap-3 hover:opacity-90 transition-opacity"
+        class="marca group flex items-center gap-3 text-white hover:text-white"
         aria-label={SITE.name}
       >
         <Picture
@@ -26,7 +29,7 @@ const esActual = (href: string) =>
           formats={['avif']}
           fallbackFormat="webp"
           alt={SITE.name}
-          class="h-10 lg:h-12 w-auto"
+          class="marca-logo h-10 lg:h-12 w-auto rounded-full"
           width={48}
           height={48}
           widths={[96]}
@@ -34,27 +37,23 @@ const esActual = (href: string) =>
           loading="eager"
         />
         <span
-          class="hidden sm:block text-xl lg:text-2xl font-bold text-secondary-200"
+          class="hidden sm:flex gap-[0.35em] font-heading text-base lg:text-lg font-bold uppercase tracking-[0.08em]"
         >
-          Rivera Refrigeración
+          <span>Rivera</span>
+          <span class="text-primary-300">Refrigeración</span>
         </span>
       </a>
 
       <!-- Desktop Navigation -->
-      <div class="hidden lg:flex items-center gap-4 xl:gap-8">
-        <ul class="flex flex-wrap items-center gap-x-4 gap-y-1 xl:gap-6">
+      <div class="hidden lg:flex items-center gap-6 xl:gap-8">
+        <ul class="flex flex-wrap items-center gap-x-5 gap-y-1 xl:gap-7">
           {
             NAVIGATION.map((item) => (
               <li>
                 <a
                   href={item.href}
                   aria-current={esActual(item.href) ? 'page' : undefined}
-                  class:list={[
-                    'text-sm font-medium text-white transition-colors hover:text-secondary-200 border-b-2 pb-0.5',
-                    esActual(item.href)
-                      ? 'border-secondary-400'
-                      : 'border-transparent',
-                  ]}
+                  class="nav-link text-sm font-medium text-white/85 hover:text-white"
                 >
                   {item.name}
                 </a>
@@ -66,7 +65,7 @@ const esActual = (href: string) =>
           href={whatsappUrl('desde el menú')}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 text-white hover:text-secondary-200 transition-colors text-sm font-medium"
+          class="whatsapp-btn text-sm py-2.5 px-5"
           aria-label="Contactar por WhatsApp"
         >
           <svg
@@ -75,72 +74,19 @@ const esActual = (href: string) =>
             viewBox="0 0 24 24"
             aria-hidden="true"
           >
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-            ></path>
+            <path d={WHATSAPP_ICONO}></path>
           </svg>
           <span>WhatsApp</span>
         </a>
       </div>
 
-      <!-- Mobile Menu Button -->
-      <button
-        type="button"
-        class="lg:hidden p-2 text-white hover:text-secondary-400 transition-colors"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        id="mobile-menu-button"
-      >
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </nav>
-  </div>
-
-  <!-- Mobile Menu -->
-  <div
-    id="mobile-menu"
-    class="lg:hidden hidden bg-primary-800 border-t border-primary-600"
-  >
-    <div class="container py-4">
-      <ul class="flex flex-col gap-4">
-        {
-          NAVIGATION.map((item) => (
-            <li>
-              <a
-                href={item.href}
-                aria-current={esActual(item.href) ? 'page' : undefined}
-                class:list={[
-                  'block py-2 text-base font-medium text-white transition-colors hover:text-secondary-200 border-l-4 pl-3',
-                  esActual(item.href)
-                    ? 'border-secondary-400'
-                    : 'border-transparent',
-                ]}
-              >
-                {item.name}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-      <div class="mt-4 pt-4 border-t border-primary-600">
+      <!-- Mobile actions -->
+      <div class="flex items-center gap-2 lg:hidden">
         <a
           href={whatsappUrl('desde el menú')}
           target="_blank"
           rel="noopener noreferrer"
-          class="whatsapp-btn w-full justify-center"
+          class="whatsapp-btn p-0 w-11 h-11 justify-center"
           aria-label="Contactar por WhatsApp"
         >
           <svg
@@ -149,9 +95,78 @@ const esActual = (href: string) =>
             viewBox="0 0 24 24"
             aria-hidden="true"
           >
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-            ></path>
+            <path d={WHATSAPP_ICONO}></path>
+          </svg>
+        </a>
+        <button
+          type="button"
+          class="menu-boton relative w-11 h-11 rounded-full text-white hover:bg-white/10 transition-colors"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          id="mobile-menu-button"
+        >
+          <span class="menu-linea" aria-hidden="true"></span>
+          <span class="menu-linea" aria-hidden="true"></span>
+          <span class="menu-linea" aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu: flota sobre la página, no la empuja -->
+  <div id="mobile-menu" class="menu-movil lg:hidden" data-abierto="false">
+    <div class="container py-6">
+      <ul class="flex flex-col gap-1">
+        {
+          NAVIGATION.map((item, i) => (
+            <li class="menu-item" style={`--i: ${i}`}>
+              <a
+                href={item.href}
+                aria-current={esActual(item.href) ? 'page' : undefined}
+                class:list={[
+                  'flex items-center justify-between py-3 px-4 rounded-xl text-lg font-medium text-white hover:text-white hover:bg-white/5 transition-colors',
+                  esActual(item.href) && 'bg-white/10',
+                ]}
+              >
+                {item.name}
+                <svg
+                  class="w-4 h-4 text-secondary-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div
+        class="menu-item mt-5 pt-5 border-t border-white/10"
+        style={`--i: ${NAVIGATION.length}`}
+      >
+        <a
+          href={whatsappUrl('desde el menú')}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="whatsapp-btn w-full justify-center py-4"
+          aria-label="Contactar por WhatsApp"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d={WHATSAPP_ICONO}></path>
           </svg>
           <span>WhatsApp</span>
         </a>
@@ -161,20 +176,211 @@ const esActual = (href: string) =>
 </header>
 
 <script>
+  const header = document.getElementById('sitio-header');
+  const centinela = document.getElementById('header-centinela');
   const menuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
 
+  // La sombra del encabezado aparece cuando la página deja de estar arriba;
+  // un centinela observado evita escuchar el scroll.
+  if (header && centinela && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([entrada]) => {
+      header.toggleAttribute('data-scrolled', !entrada.isIntersecting);
+    }).observe(centinela);
+  }
+
+  const abrirMenu = (abrir: boolean) => {
+    menuButton?.setAttribute('aria-expanded', String(abrir));
+    menuButton?.setAttribute(
+      'aria-label',
+      abrir ? 'Cerrar menú' : 'Abrir menú'
+    );
+    mobileMenu?.setAttribute('data-abierto', String(abrir));
+  };
+
   menuButton?.addEventListener('click', () => {
-    const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
-    menuButton.setAttribute('aria-expanded', String(!isExpanded));
-    mobileMenu?.classList.toggle('hidden');
+    abrirMenu(menuButton.getAttribute('aria-expanded') !== 'true');
   });
 
-  // Close menu when clicking on a link
   mobileMenu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      menuButton?.setAttribute('aria-expanded', 'false');
-    });
+    link.addEventListener('click', () => abrirMenu(false));
+  });
+
+  document.addEventListener('keydown', (evento) => {
+    if (
+      evento.key === 'Escape' &&
+      menuButton?.getAttribute('aria-expanded') === 'true'
+    ) {
+      abrirMenu(false);
+      menuButton.focus();
+    }
   });
 </script>
+
+<style>
+  .sitio-header {
+    background-color: rgb(7 31 71 / 0.92);
+    backdrop-filter: saturate(1.4) blur(14px);
+    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    view-transition-name: sitio-header;
+  }
+
+  /* La franja de calor de las piezas de marca, arriba del todo. */
+  .sitio-header::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--color-secondary-900),
+      var(--color-secondary-500),
+      var(--color-secondary-300),
+      var(--color-secondary-500)
+    );
+  }
+
+  /* La sombra va en un pseudo-elemento para animarla sólo con opacidad. */
+  .sitio-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    box-shadow: 0 10px 30px rgba(7, 31, 71, 0.35);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out);
+    pointer-events: none;
+  }
+
+  .sitio-header[data-scrolled]::after {
+    opacity: 1;
+  }
+
+  .marca-logo {
+    transition: transform 1.2s var(--ease-out);
+  }
+
+  .marca:hover .marca-logo,
+  .marca:focus-visible .marca-logo {
+    transform: rotate(360deg);
+  }
+
+  .nav-link {
+    position: relative;
+    padding-block: 0.375rem;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-secondary-400);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  .nav-link:hover::after,
+  .nav-link[aria-current='page']::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .nav-link[aria-current='page'] {
+    color: white;
+  }
+
+  .menu-linea {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20px;
+    height: 2px;
+    margin: -1px 0 0 -10px;
+    border-radius: 2px;
+    background: currentColor;
+    transition:
+      transform 0.35s var(--ease-out),
+      opacity 0.2s;
+  }
+
+  .menu-linea:nth-child(1) {
+    transform: translateY(-6px);
+  }
+
+  .menu-linea:nth-child(3) {
+    transform: translateY(6px);
+  }
+
+  [aria-expanded='true'] .menu-linea:nth-child(1) {
+    transform: rotate(45deg);
+  }
+
+  [aria-expanded='true'] .menu-linea:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0.2);
+  }
+
+  [aria-expanded='true'] .menu-linea:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+
+  .menu-movil {
+    position: absolute;
+    inset: 100% 0 auto;
+    background-color: var(--color-primary-950);
+    border-top: 1px solid rgb(255 255 255 / 0.08);
+    box-shadow: 0 24px 48px rgba(7, 31, 71, 0.45);
+    max-height: calc(100dvh - 4rem);
+    overflow-y: auto;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.25s var(--ease-out),
+      transform 0.35s var(--ease-out),
+      visibility 0s 0.35s;
+  }
+
+  .menu-movil[data-abierto='true'] {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.25s var(--ease-out),
+      transform 0.35s var(--ease-out),
+      visibility 0s;
+  }
+
+  .menu-item {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.3s var(--ease-out),
+      transform 0.4s var(--ease-out);
+  }
+
+  [data-abierto='true'] .menu-item {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(var(--i) * 40ms + 60ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marca:hover .marca-logo,
+    .marca:focus-visible .marca-logo {
+      transform: none;
+    }
+
+    .menu-movil,
+    .menu-movil[data-abierto='true'],
+    .menu-item,
+    [data-abierto='true'] .menu-item {
+      transform: none;
+      transition-duration: 0s;
+      transition-delay: 0s;
+    }
+  }
+</style>
