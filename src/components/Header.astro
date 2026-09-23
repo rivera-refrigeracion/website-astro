@@ -225,7 +225,10 @@ const esActual = (href: string) =>
     view-transition-name: sitio-header;
   }
 
-  /* La franja de calor de las piezas de marca, arriba del todo. */
+  /*
+   * Franja fría arriba del todo. Sólo azules: mezclar azul con naranja
+   * en un degradado deja un tramo verdoso en el medio.
+   */
   .sitio-header::before {
     content: '';
     position: absolute;
@@ -233,10 +236,10 @@ const esActual = (href: string) =>
     height: 3px;
     background: linear-gradient(
       90deg,
-      var(--color-secondary-900),
-      var(--color-secondary-500),
-      var(--color-secondary-300),
-      var(--color-secondary-500)
+      var(--color-primary-700),
+      var(--color-primary-400),
+      var(--color-primary-100),
+      var(--color-primary-400)
     );
   }
 
