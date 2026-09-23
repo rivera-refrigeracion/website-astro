@@ -1,0 +1,90 @@
+[
+  {
+    "report": "home-desktop.json.gz",
+    "url": "http://localhost:4401/",
+    "fetchTime": "2026-09-23T14:46:59.812Z",
+    "lighthouseVersion": "12.8.2",
+    "browserUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+    "formFactor": "desktop",
+    "throttlingMethod": "simulate",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "first-contentful-paint": 245.3976,
+      "largest-contentful-paint": 425.3976,
+      "speed-index": 245.3976,
+      "total-blocking-time": 0,
+      "cumulative-layout-shift": 0
+    }
+  },
+  {
+    "report": "home-mobile.json.gz",
+    "url": "http://localhost:4401/",
+    "fetchTime": "2026-09-23T14:46:37.134Z",
+    "lighthouseVersion": "12.8.2",
+    "browserUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+    "formFactor": "mobile",
+    "throttlingMethod": "simulate",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "first-contentful-paint": 908.57695,
+      "largest-contentful-paint": 1730.1539,
+      "speed-index": 908.57695,
+      "total-blocking-time": 0,
+      "cumulative-layout-shift": 0
+    }
+  },
+  {
+    "report": "neveras-desktop.json.gz",
+    "url": "http://localhost:4401/servicios/neveras/",
+    "fetchTime": "2026-09-23T14:47:11.117Z",
+    "lighthouseVersion": "12.8.2",
+    "browserUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+    "formFactor": "desktop",
+    "throttlingMethod": "simulate",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "first-contentful-paint": 244.3077,
+      "largest-contentful-paint": 404.30769999999995,
+      "speed-index": 244.3077,
+      "total-blocking-time": 0,
+      "cumulative-layout-shift": 0
+    }
+  },
+  {
+    "report": "neveras-mobile.json.gz",
+    "url": "http://localhost:4401/servicios/neveras/",
+    "fetchTime": "2026-09-23T14:46:48.540Z",
+    "lighthouseVersion": "12.8.2",
+    "browserUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+    "formFactor": "mobile",
+    "throttlingMethod": "simulate",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "first-contentful-paint": 944.7014999999999,
+      "largest-contentful-paint": 1654.7015,
+      "speed-index": 944.7014999999999,
+      "total-blocking-time": 0,
+      "cumulative-layout-shift": 0
+    }
+  }
+]
