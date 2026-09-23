@@ -82,14 +82,11 @@ const imagenSchema = await getImage({
         class="container max-w-4xl mx-auto text-center pt-14 pb-40 lg:pt-20 lg:pb-56"
       >
         <h1
-          class="entrada text-3xl lg:text-5xl font-bold mb-5 text-white leading-tight text-balance"
+          class="text-3xl lg:text-5xl font-bold mb-5 text-white leading-tight text-balance"
         >
           {service.data.h1}
         </h1>
-        <p
-          class="entrada text-lg lg:text-xl text-primary-50/90 leading-relaxed"
-          style="--entrada-i: 1"
-        >
+        <p class="text-lg lg:text-xl text-primary-50/90 leading-relaxed">
           {service.data.shortDescription}
         </p>
       </div>
@@ -99,8 +96,7 @@ const imagenSchema = await getImage({
     <div class="container">
       <!-- Hero Image -->
       <figure
-        class="servicio-foto entrada relative z-10 max-w-4xl mx-auto -mt-32 lg:-mt-44 mb-16"
-        style="--entrada-i: 2"
+        class="servicio-foto relative z-10 max-w-4xl mx-auto -mt-32 lg:-mt-44 mb-16"
       >
         <Picture
           src={imagenPrincipal}

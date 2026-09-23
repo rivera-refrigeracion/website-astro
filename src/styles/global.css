@@ -771,6 +771,10 @@
     animation-name: subir-zoom;
   }
 
+  .js [data-reveal].sin-entrada {
+    animation: none;
+  }
+
   .js .section-title::after,
   .js .title-accent::after {
     transform: scaleX(0);
@@ -784,10 +788,11 @@
     transform: none;
   }
 
-  /* Entrada de la portada: corre sola al cargar, sin esperar al script. */
-  .entrada {
-    animation: subir 0.9s var(--ease-out) both;
-    animation-delay: calc(var(--entrada-i, 0) * 120ms + 80ms);
+  .js .sin-entrada .section-title::after,
+  .js .sin-entrada.section-title::after,
+  .js .sin-entrada .title-accent::after,
+  .js .sin-entrada.title-accent::after {
+    transition: none;
   }
 
   .girar {

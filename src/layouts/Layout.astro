@@ -96,7 +96,15 @@ const { class: className, ...seoProps } = Astro.props;
           },
           { rootMargin: '0px 0px -8% 0px' }
         );
+        // Lo que ya está en pantalla al cargar se pinta tal cual en el primer
+        // frame: animarlo sólo retrasa el speed index. El resto aparece con
+        // el scroll.
+        var alto = window.innerHeight;
         elementos.forEach(function (el) {
+          if (el.getBoundingClientRect().top < alto) {
+            el.classList.add('is-visible', 'sin-entrada');
+            return;
+          }
           observador.observe(el);
         });
       })();

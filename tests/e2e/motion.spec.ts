@@ -28,7 +28,6 @@ test.describe('Movimiento reducido', () => {
         )
         .toBe(0);
 
-      expect(await animacionDe(page, '.entrada')).toBe('none');
       expect(await animacionDe(page, '.girar, .girar-inverso')).toBe('none');
       expect(
         await page.evaluate(
@@ -65,6 +64,18 @@ test.describe('Movimiento completo', () => {
     await expect(razon).toHaveClass(/is-visible/);
     await expect(razon).toHaveCSS('opacity', '1');
   });
+
+  for (const ruta of RUTAS) {
+    test(`${ruta}: la cabecera se pinta sin animación de entrada`, async ({
+      page,
+    }) => {
+      await page.goto(ruta);
+
+      const h1 = page.getByRole('heading', { level: 1 });
+      expect(await animacionDe(page, 'h1')).toBe('none');
+      await expect(h1).toHaveCSS('opacity', '1');
+    });
+  }
 
   test('la decoración gira en la portada', async ({ page }) => {
     await page.goto('/');
