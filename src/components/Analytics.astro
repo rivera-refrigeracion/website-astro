@@ -1,19 +1,15 @@
 ---
 // Google Tag Manager - Head Script
 // Manages all analytics and conversion tracking through GTM container
-// Only loads in production to avoid sending test data to GA4
+// Only included in production builds, and at runtime only runs on the
+// production hosts (see HOSTS_PRODUCCION in src/lib/medicion.ts)
 // Note: This component only includes the <head> script portion
 // The <noscript> iframe fallback should be added in <body> via AnalyticsBody.astro
 // La carga es diferida; el porqué está en src/lib/gtm-diferido.js.
-import cargadorGtm from '@/lib/gtm-diferido.js?raw';
+import { scriptMedicion } from '@/lib/medicion';
 
-const GTM_ID = 'GTM-WGKFDPTD';
 const isProduction = import.meta.env.PROD;
-
-// Sin el comentario de cabecera: se incrusta en cada página.
-const script = cargadorGtm
-  .replace(/^\/\*[\s\S]*?\*\/\s*/, '')
-  .replace('__GTM_ID__', GTM_ID);
+const script = scriptMedicion();
 ---
 
 {isProduction && <script is:inline set:html={script} />}

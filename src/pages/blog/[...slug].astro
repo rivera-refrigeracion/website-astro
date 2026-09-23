@@ -56,7 +56,7 @@ const imagenSocial = imagen
     { name: post.data.title, path: `/blog/${post.slug}/` },
   ]}
 >
-  <article class="py-12">
+  <article class="py-12" data-ubicacion="blog_articulo">
     <div class="container">
       <header class="max-w-3xl mx-auto text-center mb-8">
         <h1 class="text-3xl lg:text-4xl font-bold mb-4 text-neutral-900">
@@ -114,6 +114,7 @@ const imagenSocial = imagen
               target="_blank"
               rel="noopener noreferrer"
               class="whatsapp-btn"
+              data-ubicacion="blog_cierre"
             >
               <svg
                 class="w-5 h-5"
