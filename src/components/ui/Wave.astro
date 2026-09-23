@@ -1,0 +1,32 @@
+---
+/**
+ * Borde ondulado entre una banda y la siguiente. Se posiciona en absoluto
+ * sobre el borde de la sección, así que no ocupa alto en el flujo.
+ */
+interface Props {
+  class?: string;
+  /** Color de la sección hacia la que se abre la ola. */
+  fill?: string;
+  flip?: boolean;
+}
+
+const { class: className, fill = 'white', flip = false } = Astro.props;
+---
+
+<svg
+  class:list={[
+    'pointer-events-none absolute inset-x-0 w-full h-10 sm:h-14 lg:h-20',
+    flip ? 'top-0 -translate-y-px rotate-180' : 'bottom-0 translate-y-px',
+    className,
+  ]}
+  viewBox="0 0 1440 80"
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path
+    d="M0 48C180 72 360 80 540 64S900 12 1080 12s300 28 360 40v28H0Z"
+    fill={fill}
+    opacity="0.45"></path>
+  <path d="M0 60c240 20 480 20 720 4s480-40 720-20v36H0Z" fill={fill}></path>
+</svg>

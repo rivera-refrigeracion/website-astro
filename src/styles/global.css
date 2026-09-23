@@ -89,6 +89,12 @@
   --color-primary-700: #1976d2;
   --color-primary-800: #1565c0;
   --color-primary-900: #0d47a1;
+  /*
+   * El azul profundo de las piezas de marca (variante A de la pieza de
+   * calor). Es el fondo de las bandas oscuras: bajo él, el blanco da 16:1 y
+   * el naranja de la escala, 8:1.
+   */
+  --color-primary-950: #071f47;
 
   /* Secondary Colors - Orange (Warmth, approachability) */
   --color-secondary-50: #fff3e0;
@@ -145,21 +151,27 @@
   --text-body-sm: 0.875rem;
   --text-caption: 0.75rem;
 
-  /* Shadows */
-  --shadow-level1: 0 1px 4px rgba(0, 0, 0, 0.1);
-  --shadow-level2: 0 2px 8px rgba(0, 0, 0, 0.15);
-  --shadow-level3: 0 4px 16px rgba(0, 0, 0, 0.2);
+  /* Shadows: teñidas del azul profundo para que no ensucien de gris */
+  --shadow-level1:
+    0 1px 2px rgba(7, 31, 71, 0.06), 0 2px 8px rgba(7, 31, 71, 0.06);
+  --shadow-level2:
+    0 2px 4px rgba(7, 31, 71, 0.06), 0 10px 28px rgba(7, 31, 71, 0.12);
+  --shadow-level3:
+    0 4px 8px rgba(7, 31, 71, 0.08), 0 24px 56px rgba(7, 31, 71, 0.2);
 
   /* Border Radius */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
+  --radius-xl: 24px;
   --radius-pill: 1000px;
   --radius-round: 50%;
 
   /* Transitions */
   --transition-default: 0.25s ease-in-out;
   --transition-fast: 0.15s ease-in-out;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Container */
   --container-max: 1200px;
@@ -168,9 +180,15 @@
 /* Base Styles */
 @layer base {
   html {
-    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -189,7 +207,8 @@
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: 1.2;
-    color: var(--color-neutral-900);
+    color: var(--heading-color, var(--color-neutral-900));
+    letter-spacing: -0.01em;
   }
 
   h1 {
@@ -233,10 +252,29 @@
     height: auto;
   }
 
-  /* Focus styles for accessibility */
+  /*
+   * Foco: primary-700 contra blanco da 4,6:1. En las bandas oscuras el
+   * anillo pasa a naranja claro (9:1 contra el azul profundo); un solo color
+   * no llega a 3:1 en los dos fondos.
+   */
   :focus-visible {
-    outline: 2px solid var(--color-primary-500);
-    outline-offset: 2px;
+    outline: 3px solid var(--color-primary-700);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .on-dark {
+    --heading-color: white;
+    color: white;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-secondary-300);
+  }
+
+  ::selection {
+    background-color: var(--color-secondary-200);
+    color: var(--color-primary-950);
   }
 }
 
@@ -249,15 +287,30 @@
   }
 
   .btn {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
     font-family: var(--font-body);
     font-weight: 600;
-    border-radius: var(--radius-sm);
-    transition: all var(--transition-fast);
+    border-radius: var(--radius-pill);
+    transition:
+      background-color var(--transition-fast),
+      box-shadow 0.3s var(--ease-out),
+      transform 0.3s var(--ease-out);
     cursor: pointer;
     text-decoration: none;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn:active {
+    transform: translateY(0);
   }
 
   /* Con texto blanco, primary-600 da 3,7:1; primary-700 pasa AA (4,6:1). */
@@ -269,6 +322,8 @@
 
   .btn-primary:hover {
     background-color: var(--color-primary-800);
+    color: white;
+    box-shadow: var(--shadow-level2);
   }
 
   .btn-secondary {
@@ -281,39 +336,114 @@
     background-color: var(--color-primary-50);
   }
 
+  /*
+   * El botón naranja de "Agenda tu cita". Texto primary-950 sobre
+   * secondary-500: 7,9:1. El brillo que cruza al pasar el puntero es un
+   * pseudo-elemento que sólo se traslada.
+   */
+  .btn-accent {
+    background-color: var(--color-secondary-500);
+    color: var(--color-primary-950);
+    box-shadow:
+      0 1px 2px rgba(7, 31, 71, 0.2),
+      0 8px 24px -6px rgba(255, 152, 0, 0.55);
+  }
+
+  .btn-accent:hover {
+    background-color: var(--color-secondary-400);
+    color: var(--color-primary-950);
+    box-shadow:
+      0 2px 4px rgba(7, 31, 71, 0.2),
+      0 14px 32px -6px rgba(255, 152, 0, 0.7);
+  }
+
+  .btn-accent::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.55) 50%,
+      transparent 70%
+    );
+    transform: translateX(-110%);
+    transition: transform 0.7s var(--ease-out);
+  }
+
+  .btn-accent:hover::after {
+    transform: translateX(110%);
+  }
+
   .btn-sm {
     height: 32px;
-    padding-inline: 12px;
+    padding-inline: 14px;
     font-size: var(--text-body-sm);
   }
 
   .btn-md {
-    height: 40px;
-    padding-inline: 16px;
+    height: 44px;
+    padding-inline: 20px;
     font-size: var(--text-body-md);
   }
 
   .btn-lg {
-    height: 48px;
-    padding-inline: 24px;
+    height: 56px;
+    padding-inline: 32px;
     font-size: var(--text-body-lg);
   }
 
   .card {
     background-color: white;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(7, 31, 71, 0.07);
     box-shadow: var(--shadow-level1);
     padding: 1.5rem;
+    transition:
+      box-shadow 0.4s var(--ease-out),
+      transform 0.4s var(--ease-out);
   }
 
   .section {
-    padding-block: 4rem;
+    padding-block: 5rem;
   }
 
+  @media (min-width: 1024px) {
+    .section {
+      padding-block: 7rem;
+    }
+  }
+
+  /*
+   * Títulos de sección con el trazo frío-calor de la marca debajo. El trazo
+   * es un pseudo-elemento que se dibuja con scaleX al entrar en pantalla.
+   */
   .section-title {
-    font-size: var(--text-h2);
-    margin-bottom: 2rem;
+    font-size: clamp(1.875rem, 1.2rem + 2.6vw, var(--text-h2));
+    margin-bottom: 3.5rem;
     text-align: center;
+  }
+
+  .section-title::after,
+  .title-accent::after {
+    content: '';
+    display: block;
+    width: 72px;
+    height: 4px;
+    margin: 1rem auto 0;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(
+      90deg,
+      var(--color-primary-500),
+      var(--color-secondary-500)
+    );
+    transform-origin: center;
+  }
+
+  .title-accent-start::after {
+    margin-inline: 0;
+    transform-origin: left;
   }
 
   /*
@@ -330,15 +460,22 @@
     padding: 0.75rem 1.5rem;
     border-radius: var(--radius-pill);
     font-weight: 600;
-    transition: all var(--transition-fast);
-    box-shadow: var(--shadow-level2);
+    transition:
+      background-color var(--transition-fast),
+      box-shadow 0.3s var(--ease-out),
+      transform 0.3s var(--ease-out);
+    box-shadow:
+      0 1px 2px rgba(7, 31, 71, 0.2),
+      0 8px 24px -6px rgba(24, 136, 66, 0.55);
   }
 
   .whatsapp-btn:hover {
     background-color: #136c34;
     color: white;
     transform: translateY(-2px);
-    box-shadow: var(--shadow-level3);
+    box-shadow:
+      0 2px 4px rgba(7, 31, 71, 0.2),
+      0 14px 32px -6px rgba(24, 136, 66, 0.7);
   }
 }
 
@@ -361,8 +498,13 @@
     margin-bottom: 1rem;
     color: var(--color-neutral-900);
     font-family: var(--font-heading);
-    border-bottom: 3px solid var(--color-primary-500);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.75rem;
+    background: linear-gradient(
+        90deg,
+        var(--color-primary-500),
+        var(--color-secondary-500)
+      )
+      left bottom / 64px 4px no-repeat;
   }
 
   .prose h3 {
@@ -526,5 +668,141 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+}
+
+/*
+ * Motion
+ *
+ * Todo lo que se mueve anima sólo transform y opacity: nada cambia de tamaño
+ * ni empuja al resto de la página (CLS 0). Y todo vive dentro de
+ * prefers-reduced-motion: no-preference, así que con la preferencia de
+ * movimiento reducido la página queda quieta y completa desde el primer
+ * pintado.
+ */
+
+/*
+ * Transiciones entre páginas: las View Transitions nativas entre documentos,
+ * sin el router de Astro, que añadiría JavaScript y obligaría a reiniciar
+ * GTM y el chat en cada navegación. El navegador que no las soporta
+ * simplemente navega.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+::view-transition-old(root) {
+  animation: 0.18s ease-in both vt-salida;
+}
+
+::view-transition-new(root) {
+  animation: 0.36s var(--ease-out) both vt-entrada;
+}
+
+@keyframes vt-salida {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes subir-zoom {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+}
+
+@keyframes flotar {
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes respirar {
+  50% {
+    opacity: 0.55;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /*
+   * Aparición al hacer scroll. La clase .js la pone un script en línea del
+   * <head>, así que sin JavaScript nada se oculta; el script del final del
+   * <body> marca .is-visible con IntersectionObserver.
+   */
+  .js [data-reveal]:not(.is-visible) {
+    opacity: 0;
+  }
+
+  /*
+   * Relleno "backwards": la animación sólo se aplica mientras corre, así que
+   * al terminar las transiciones propias del elemento (el hover de las
+   * tarjetas) vuelven a funcionar sin pelear con ella.
+   */
+  .js [data-reveal].is-visible {
+    animation: subir 0.8s var(--ease-out) backwards;
+    animation-delay: calc(var(--reveal-i, 0) * 90ms);
+  }
+
+  .js [data-reveal='zoom'].is-visible {
+    animation-name: subir-zoom;
+  }
+
+  .js .section-title::after,
+  .js .title-accent::after {
+    transform: scaleX(0);
+    transition: transform 0.9s 0.25s var(--ease-out);
+  }
+
+  .js .is-visible .section-title::after,
+  .js .is-visible.section-title::after,
+  .js .is-visible .title-accent::after,
+  .js .is-visible.title-accent::after {
+    transform: none;
+  }
+
+  /* Entrada de la portada: corre sola al cargar, sin esperar al script. */
+  .entrada {
+    animation: subir 0.9s var(--ease-out) both;
+    animation-delay: calc(var(--entrada-i, 0) * 120ms + 80ms);
+  }
+
+  .girar {
+    animation: girar var(--giro, 60s) linear infinite;
+  }
+
+  .girar-inverso {
+    animation: girar var(--giro, 90s) linear infinite reverse;
+  }
+
+  .flotar {
+    animation: flotar 6s ease-in-out infinite;
+  }
+
+  .respirar {
+    animation: respirar 9s ease-in-out infinite;
   }
 }

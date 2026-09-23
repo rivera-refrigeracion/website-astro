@@ -21,6 +21,11 @@ const { class: className, ...seoProps } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1976D2" />
+    <!-- Antes del primer pintado: habilita las apariciones al hacer scroll
+         sólo si hay JavaScript, para que sin él nada quede oculto. -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
 
     <!-- Favicons -->
     <link rel="icon" type="image/webp" href="/favicon.webp" />
@@ -62,7 +67,7 @@ const { class: className, ...seoProps } = Astro.props;
     <AnalyticsBody />
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 bg-primary-600 text-white px-4 py-2 rounded"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] bg-secondary-500 text-primary-950 font-semibold px-5 py-3 rounded-full shadow-lg"
     >
       Ir al contenido
     </a>
@@ -72,5 +77,29 @@ const { class: className, ...seoProps } = Astro.props;
     </main>
     <Footer />
     <Chatwoot />
+    <script is:inline>
+      (function () {
+        var elementos = document.querySelectorAll('[data-reveal]');
+        if (!('IntersectionObserver' in window)) {
+          elementos.forEach(function (el) {
+            el.classList.add('is-visible');
+          });
+          return;
+        }
+        var observador = new IntersectionObserver(
+          function (entradas) {
+            entradas.forEach(function (entrada) {
+              if (!entrada.isIntersecting) return;
+              entrada.target.classList.add('is-visible');
+              observador.unobserve(entrada.target);
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px' }
+        );
+        elementos.forEach(function (el) {
+          observador.observe(el);
+        });
+      })();
+    </script>
   </body>
 </html>
