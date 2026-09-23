@@ -10,9 +10,7 @@ const esActual = (href: string) =>
   currentPath === href || (href !== '/' && currentPath.startsWith(href));
 ---
 
-<header
-  class="sticky top-0 z-50 bg-primary-700 text-white shadow-[var(--shadow-level2)]"
->
+<header class="site-header sticky top-0 z-50 text-white">
   <div class="container">
     <nav class="flex items-center justify-between h-16 lg:h-20">
       <!-- Logo -->
@@ -25,7 +23,7 @@ const esActual = (href: string) =>
           src={logo}
           formats={['avif']}
           fallbackFormat="webp"
-          alt={SITE.name}
+          alt=""
           class="h-10 lg:h-12 w-auto"
           width={48}
           height={48}
@@ -33,9 +31,7 @@ const esActual = (href: string) =>
           sizes="48px"
           loading="eager"
         />
-        <span
-          class="hidden sm:block text-xl lg:text-2xl font-bold text-secondary-200"
-        >
+        <span class="brand-name text-xl lg:text-2xl font-bold">
           Rivera Refrigeración
         </span>
       </a>
@@ -168,6 +164,17 @@ const esActual = (href: string) =>
     const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
     menuButton.setAttribute('aria-expanded', String(!isExpanded));
     mobileMenu?.classList.toggle('hidden');
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (
+      event.key === 'Escape' &&
+      menuButton?.getAttribute('aria-expanded') === 'true'
+    ) {
+      mobileMenu?.classList.add('hidden');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.focus();
+    }
   });
 
   // Close menu when clicking on a link

@@ -1,0 +1,27 @@
+<script>
+  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const elements = document.querySelectorAll<HTMLElement>('[data-reveal]');
+  let observer: IntersectionObserver | undefined;
+
+  function configureMotion() {
+    observer?.disconnect();
+    elements.forEach((element) => element.classList.remove('reveal-enter'));
+    if (preference.matches) return;
+
+    // El contenido permanece visible sin JavaScript y nunca espera al observador.
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('reveal-enter');
+          observer?.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.15 }
+    );
+    elements.forEach((element) => observer?.observe(element));
+  }
+
+  configureMotion();
+  preference.addEventListener('change', configureMotion);
+</script>

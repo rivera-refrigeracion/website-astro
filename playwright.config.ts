@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const port = process.env.PLAYWRIGHT_PORT || '4500';
+
 export default defineConfig({
   testDir: './tests/e2e',
   fullyParallel: true,
@@ -8,7 +10,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:4500',
+    baseURL: `http://localhost:${port}`,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -24,8 +26,8 @@ export default defineConfig({
     // { name: 'Mobile Safari', use: { ...devices['iPhone 12'] } },
   ],
   webServer: {
-    command: 'pnpm preview --port 4500',
-    url: 'http://localhost:4500',
+    command: `pnpm preview --port ${port}`,
+    url: `http://localhost:${port}`,
     reuseExistingServer: false,
     timeout: 30000,
   },

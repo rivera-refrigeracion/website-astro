@@ -17,12 +17,16 @@ const serviceImages: Record<string, string> = {
 
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr">
       {
-        SERVICES.map((service) => (
+        SERVICES.map((service, index) => (
           <a
             href={`/servicios/${service.id}/`}
-            class="card text-center hover:shadow-[var(--shadow-level2)] transition-all hover:scale-105 flex flex-col group"
+            class="card service-card flex flex-col group"
+            data-reveal
           >
-            <figure class="mb-4">
+            <span class="service-number" aria-hidden="true">
+              0{index + 1}
+            </span>
+            <figure class="service-image">
               <Picture
                 src={imagenLocal(
                   serviceImages[service.id] ||
@@ -31,11 +35,11 @@ const serviceImages: Record<string, string> = {
                 formats={['avif']}
                 fallbackFormat="webp"
                 alt={service.title}
-                class="w-32 h-32 object-contain mx-auto"
-                width={128}
-                height={128}
-                widths={[128, 256]}
-                sizes="128px"
+                class="object-contain mx-auto"
+                width={224}
+                height={224}
+                widths={[224, 448]}
+                sizes="224px"
                 loading="lazy"
               />
             </figure>
@@ -45,7 +49,7 @@ const serviceImages: Record<string, string> = {
             <p class="text-neutral-600 leading-relaxed mb-4 flex-grow">
               {service.description}
             </p>
-            <span class="inline-flex items-center gap-1 text-secondary-950 font-medium text-sm transition-colors mt-auto group-hover:gap-2">
+            <span class="inline-flex items-center gap-1 text-secondary-950 font-medium text-sm mt-auto">
               Ver más
               <svg
                 class="w-4 h-4"

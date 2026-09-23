@@ -333,12 +333,21 @@ test.describe('Service Pages - Accessibility', () => {
     expect(isOpen).toBe(true);
   });
 
-  test('all images should have alt text', async ({ page }) => {
+  test('content images have alt text and the decorative brand has a named link', async ({
+    page,
+  }) => {
     for (const service of services) {
       await page.goto(servicePath(service.slug));
 
-      const images = page.locator('img');
+      const brand = page.locator('.site-header').getByRole('link', {
+        name: 'Rivera Refrigeración',
+        exact: true,
+      });
+      await expect(brand).toBeVisible();
+      await expect(brand.locator('img')).toHaveAttribute('alt', '');
+      const images = page.locator('main img, footer img');
       const count = await images.count();
+      await expect(page.locator('img')).toHaveCount(count + 1);
 
       for (let i = 0; i < count; i++) {
         const img = images.nth(i);

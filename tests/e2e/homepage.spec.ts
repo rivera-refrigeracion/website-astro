@@ -13,7 +13,13 @@ test.describe('Homepage', () => {
     const header = page.locator('header');
     await expect(header).toBeVisible();
 
-    const logo = header.getByRole('img', { name: /Rivera Refrigeración/i });
+    const brand = header.getByRole('link', {
+      name: 'Rivera Refrigeración',
+      exact: true,
+    });
+    await expect(brand).toBeVisible();
+    const logo = brand.locator('img');
+    await expect(logo).toHaveAttribute('alt', '');
     await expect(logo).toBeVisible();
 
     // On mobile, nav items are hidden until menu is opened
@@ -34,7 +40,7 @@ test.describe('Homepage', () => {
     await expect(heroHeading).toContainText('Soluciones Confiables');
 
     const ctaButton = page
-      .getByRole('link', { name: 'Agenda tu cita' })
+      .getByRole('link', { name: 'Agende su visita' })
       .first();
     await expect(ctaButton).toBeVisible();
   });

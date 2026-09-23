@@ -1,5 +1,7 @@
 ---
 import '@/styles/global.css';
+import '@/styles/redesign.css';
+import Motion from '@/components/Motion.astro';
 import SEO from '@/components/SEO.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
@@ -72,5 +74,6 @@ const { class: className, ...seoProps } = Astro.props;
     </main>
     <Footer />
     <Chatwoot />
+    <Motion />
   </body>
 </html>

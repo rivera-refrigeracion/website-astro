@@ -22,7 +22,7 @@ const icons = {
     <div class="grid md:grid-cols-3 gap-8">
       {
         WHY_US.map((item) => (
-          <article class="text-center">
+          <article class="text-center" data-reveal>
             <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-secondary-100 text-secondary-600 mb-6">
               <Fragment set:html={icons[item.icon as keyof typeof icons]} />
             </div>
