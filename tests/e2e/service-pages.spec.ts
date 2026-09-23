@@ -90,7 +90,7 @@ test.describe('Service Pages - General', () => {
         await expect(brandsHeading).toBeVisible();
 
         // Should have at least 5 brand items
-        const brandItems = page.locator('.bg-neutral-50').first();
+        const brandItems = page.locator('.marca-ficha').first();
         await expect(brandItems).toBeVisible();
       });
 
