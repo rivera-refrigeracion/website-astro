@@ -62,6 +62,7 @@ const currentYear = new Date().getFullYear();
             <strong class="block text-sm text-primary-200">Llamadas:</strong>
             <a
               href={`tel:${CONTACT.phone}`}
+              data-ubicacion="pie_contacto"
               class="pie-enlace text-white/80 hover:text-white inline-flex items-center gap-2"
             >
               <svg
@@ -86,6 +87,7 @@ const currentYear = new Date().getFullYear();
             >
             <a
               href={whatsappUrl('desde el pie de página')}
+              data-ubicacion="pie_contacto"
               target="_blank"
               rel="noopener noreferrer"
               class="pie-enlace text-white/80 hover:text-white inline-flex items-center gap-2"
@@ -207,6 +209,7 @@ const currentYear = new Date().getFullYear();
           aria-label="WhatsApp"
           class="pie-social"
           title="Contáctanos por WhatsApp"
+          data-ubicacion="pie_redes"
         >
           <svg
             class="w-5 h-5"

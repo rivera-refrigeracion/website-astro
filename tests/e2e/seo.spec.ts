@@ -105,6 +105,13 @@ test.describe('SEO', () => {
       const completedRequests: string[] = [];
       const failedRequests: string[] = [];
 
+      // Fuera de producción el sitio ya no pide GTM; se simula el host real
+      // para que haya peticiones que el fixture tenga que bloquear.
+      await page.addInitScript(() => {
+        (window as unknown as { __hostMedicion?: string }).__hostMedicion =
+          'rivera-refrigeracion.com';
+      });
+
       // Listen for all request completions
       page.on('requestfinished', (request) => {
         const url = request.url();

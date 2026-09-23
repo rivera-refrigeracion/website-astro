@@ -2,7 +2,8 @@
 // Google Tag Manager - Body Noscript Fallback
 // Provides tracking for users with JavaScript disabled
 // Only loads in production to avoid sending test data to GA4
-const GTM_ID = 'GTM-WGKFDPTD';
+import { GTM_ID } from '@/lib/medicion';
+
 const isProduction = import.meta.env.PROD;
 
 const gtmNoscript = `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`;

@@ -266,6 +266,7 @@ const imagenSchema = await getImage({
             rel="noopener noreferrer"
             class="whatsapp-btn whatsapp-cta-service inline-flex items-center gap-2 text-white px-8 py-4 font-semibold text-lg"
             data-service={service.slug}
+            data-ubicacion="servicio_cierre"
           >
             <svg
               class="w-6 h-6"
@@ -283,7 +284,8 @@ const imagenSchema = await getImage({
             Llamadas: <a
               href={`tel:${CONTACT.phone}`}
               class="phone-link phone-link-service text-white underline hover:no-underline"
-              data-service={service.slug}>{CONTACT.phone}</a
+              data-service={service.slug}
+              data-ubicacion="servicio_cierre">{CONTACT.phone}</a
             >
           </p>
         </section>
