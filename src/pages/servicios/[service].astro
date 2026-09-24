@@ -144,9 +144,13 @@ if (!ofertaPrincipal) {
               >
                 Guías relacionadas
               </h2>
-              <ul class="grid gap-4 md:grid-cols-2">
+              <ul class="flex flex-wrap justify-center gap-4">
                 {articulosRelacionados.map((articulo, i) => (
-                  <li data-reveal style={`--reveal-i: ${i}`}>
+                  <li
+                    class="w-full md:w-[calc(50%-0.5rem)]"
+                    data-reveal
+                    style={`--reveal-i: ${i}`}
+                  >
                     <a
                       href={`/blog/${articulo.slug}/`}
                       class="guia card group flex h-full flex-col gap-2 text-neutral-900 hover:text-neutral-900"
