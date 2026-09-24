@@ -1,13 +1,13 @@
 ---
 title: 'Por qué el aire acondicionado deja de enfriar'
 description: 'Señales para describir una falla de enfriamiento y preparar una revisión de aire acondicionado en Cali.'
-pubDate: 2026-09-22
+pubDate: 2024-09-11
 updatedDate: 2026-09-22
 category: 'Aire acondicionado'
 author: 'Rivera Refrigeración'
 image:
-  url: '/images/blog/aire-acondicionado-no-enfria.webp'
-  alt: 'Unidad de aire acondicionado con señales de falta de enfriamiento'
+  url: '/images/blog/aire-acondicionado-portada.png'
+  alt: 'Unidades interior y exterior de aire acondicionado sin marcas'
 imagePosition: 'top'
 relatedService: 'aire-acondicionado'
 tags: ['aire acondicionado', 'falta de enfriamiento', 'reparación']

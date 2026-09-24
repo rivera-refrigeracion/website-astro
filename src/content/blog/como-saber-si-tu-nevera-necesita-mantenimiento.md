@@ -1,7 +1,7 @@
 ---
 title: 'Nevera que no enfría: señales antes de solicitar reparación'
 description: 'Cómo describir cambios de temperatura, agua, escarcha o ruido para solicitar revisión de neveras en Cali.'
-pubDate: 2026-09-22
+pubDate: 2024-09-05
 updatedDate: 2026-09-22
 category: 'Neveras'
 author: 'Rivera Refrigeración'

@@ -2,11 +2,12 @@
 title: 'Cuándo programar una revisión de aire acondicionado'
 description: 'Señales de cambio en el funcionamiento y datos del equipo que ayudan a solicitar mantenimiento de aire acondicionado en Cali.'
 pubDate: 2026-10-13
+draft: true
 category: 'Aire acondicionado'
 author: 'Rivera Refrigeración'
 image:
-  url: '/images/blog/aire-acondicionado-no-enfria.webp'
-  alt: 'Equipo de aire acondicionado que requiere una revisión de funcionamiento'
+  url: '/images/blog/aire-acondicionado-portada.png'
+  alt: 'Unidades interior y exterior de aire acondicionado sin marcas'
 imagePosition: 'top'
 relatedService: 'aire-acondicionado'
 tags: ['aire acondicionado', 'mantenimiento', 'revisión']

@@ -2,11 +2,12 @@
 title: 'Antes de instalar aire acondicionado en Cali: qué revisar'
 description: 'Datos del espacio y del equipo que conviene reunir antes de solicitar una instalación de aire acondicionado en Cali.'
 pubDate: 2026-11-03
+draft: true
 category: 'Instalación'
 author: 'Rivera Refrigeración'
 image:
-  url: '/images/services/aire-acondicionado.jpg'
-  alt: 'Unidades interior y exterior de un equipo de aire acondicionado'
+  url: '/images/blog/aire-acondicionado-portada.png'
+  alt: 'Unidades interior y exterior de aire acondicionado sin marcas'
 imagePosition: 'top'
 relatedService: 'instalacion-aire-acondicionado'
 tags: ['instalación de aire acondicionado', 'Cali', 'preparación']

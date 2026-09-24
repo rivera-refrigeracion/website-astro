@@ -2,11 +2,12 @@
 title: 'Mantenimiento de lavadoras: hábitos de uso y señales para pedir revisión'
 description: 'Cuidados basados en el manual de su lavadora y señales que justifican solicitar una revisión técnica en Cali.'
 pubDate: 2026-10-06
+draft: true
 category: 'Lavadoras'
 author: 'Rivera Refrigeración'
 image:
-  url: '/images/blog/errores-lavadora.webp'
-  alt: 'Lavadora doméstica para una guía de cuidado y mantenimiento'
+  url: '/images/blog/lavadora-portada.webp'
+  alt: 'Ilustración sencilla de una lavadora frontal sin marcas'
 imagePosition: 'top'
 relatedService: 'lavadoras'
 tags: ['lavadora', 'mantenimiento', 'cuidado']

@@ -7,10 +7,12 @@ import { whatsappUrl } from '@/lib/utils';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
-  }));
+  return posts
+    .filter((post) => !post.data.draft)
+    .map((post) => ({
+      params: { slug: post.slug },
+      props: post,
+    }));
 }
 
 type Props = CollectionEntry<'blog'>;
@@ -18,11 +20,22 @@ type Props = CollectionEntry<'blog'>;
 const post = Astro.props;
 const { Content } = await post.render();
 
+// El frontmatter representa un día de calendario; el mediodía UTC evita que
+// la conversión a Bogotá lo muestre como el día anterior.
+const fechaParaMostrar = new Date(
+  Date.UTC(
+    post.data.pubDate.getUTCFullYear(),
+    post.data.pubDate.getUTCMonth(),
+    post.data.pubDate.getUTCDate(),
+    12
+  )
+);
 const formattedDate = new Intl.DateTimeFormat('es-CO', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-}).format(post.data.pubDate);
+  timeZone: 'America/Bogota',
+}).format(fechaParaMostrar);
 
 const imagen = post.data.image ? imagenLocal(post.data.image.url) : undefined;
 

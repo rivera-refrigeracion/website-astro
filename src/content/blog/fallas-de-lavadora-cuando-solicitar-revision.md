@@ -2,11 +2,12 @@
 title: 'Fallas de lavadora que conviene describir antes de pedir una revisión'
 description: 'Cómo registrar problemas de llenado, drenaje, centrifugado o ruido antes de solicitar reparación de lavadoras en Cali.'
 pubDate: 2026-09-29
+draft: true
 category: 'Lavadoras'
 author: 'Rivera Refrigeración'
 image:
-  url: '/images/blog/errores-lavadora.webp'
-  alt: 'Lavadora de carga frontal y superior para ilustrar fallas de funcionamiento'
+  url: '/images/blog/lavadora-portada.webp'
+  alt: 'Ilustración sencilla de una lavadora frontal sin marcas'
 imagePosition: 'top'
 relatedService: 'lavadoras'
 tags: ['lavadora', 'fallas', 'reparación']

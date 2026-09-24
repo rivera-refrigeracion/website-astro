@@ -2,11 +2,12 @@
 title: 'Fallas de calentador: cuándo solicitar una revisión en Cali'
 description: 'Cómo describir cambios de funcionamiento y preparar una solicitud de revisión o reparación de calentadores en Cali.'
 pubDate: 2026-10-27
+draft: true
 category: 'Calentadores'
 author: 'Rivera Refrigeración'
 image:
-  url: '/images/services/calentadores.webp'
-  alt: 'Calentador de agua de pared con pantalla digital'
+  url: '/images/blog/calentador-portada.webp'
+  alt: 'Ilustración sencilla de un calentador de pared sin marcas ni pantalla'
 imagePosition: 'top'
 relatedService: 'calentadores'
 tags: ['calentador', 'revisión', 'reparación']

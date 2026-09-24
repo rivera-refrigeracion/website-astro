@@ -2,11 +2,12 @@
 title: 'Reparación de aire acondicionado en Cali: qué incluye el diagnóstico'
 description: 'Qué información compartir y cómo se acuerdan el trabajo y el presupuesto al solicitar reparación de aire acondicionado en Cali.'
 pubDate: 2026-10-20
+draft: true
 category: 'Aire acondicionado'
 author: 'Rivera Refrigeración'
 image:
-  url: '/images/blog/aire-acondicionado-no-enfria.webp'
-  alt: 'Aire acondicionado para una guía de diagnóstico y reparación'
+  url: '/images/blog/aire-acondicionado-portada.png'
+  alt: 'Unidades interior y exterior de aire acondicionado sin marcas'
 imagePosition: 'top'
 relatedService: 'aire-acondicionado'
 tags: ['aire acondicionado', 'diagnóstico', 'reparación en Cali']

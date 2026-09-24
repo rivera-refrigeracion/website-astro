@@ -1,5 +1,36 @@
 import { test, expect } from './fixtures';
 
+const borradores = [
+  {
+    slug: 'fallas-de-lavadora-cuando-solicitar-revision',
+    service: 'lavadoras',
+  },
+  {
+    slug: 'mantenimiento-de-lavadoras-habitos-y-senales',
+    service: 'lavadoras',
+  },
+  {
+    slug: 'cuando-programar-mantenimiento-de-aire-acondicionado',
+    service: 'aire-acondicionado',
+  },
+  {
+    slug: 'reparacion-aire-acondicionado-diagnostico-en-cali',
+    service: 'aire-acondicionado',
+  },
+  {
+    slug: 'fallas-de-calentador-cuando-solicitar-revision',
+    service: 'calentadores',
+  },
+  {
+    slug: 'antes-de-instalar-aire-acondicionado-en-cali',
+    service: 'instalacion-aire-acondicionado',
+  },
+  {
+    slug: 'instalacion-de-calentadores-que-se-revisa-antes-de-cotizar',
+    service: 'calentadores',
+  },
+];
+
 test.describe('Blog', () => {
   test.describe('Blog listing page', () => {
     test.beforeEach(async ({ page }) => {
@@ -12,7 +43,7 @@ test.describe('Blog', () => {
 
     test('should display blog posts', async ({ page }) => {
       const articles = page.locator('article');
-      await expect(articles).toHaveCount(10);
+      await expect(articles).toHaveCount(3);
     });
 
     test('should display post titles', async ({ page }) => {
@@ -20,17 +51,29 @@ test.describe('Blog', () => {
         'Por qué el aire acondicionado deja de enfriar',
         'Nevera que no enfría: señales antes de solicitar reparación',
         '5 Errores Que Debes Evitar Al Usar Tu Lavadora',
-        'Fallas de lavadora que conviene describir antes de pedir una revisión',
-        'Mantenimiento de lavadoras: hábitos de uso y señales para pedir revisión',
-        'Cuándo programar una revisión de aire acondicionado',
-        'Reparación de aire acondicionado en Cali: qué incluye el diagnóstico',
-        'Fallas de calentador: cuándo solicitar una revisión en Cali',
-        'Antes de instalar aire acondicionado en Cali: qué revisar',
-        'Instalación de calentadores en Cali: qué se revisa antes de cotizar',
       ];
 
       for (const title of expectedTitles) {
         await expect(page.getByText(title).first()).toBeVisible();
+      }
+    });
+
+    test('should hide draft posts and omit their routes', async ({ page }) => {
+      for (const { slug } of borradores) {
+        await expect(page.locator(`a[href="/blog/${slug}/"]`)).toHaveCount(0);
+
+        const response = await page.request.get(`/blog/${slug}/`);
+        expect(response.status()).toBe(404);
+      }
+
+      const feed = await page.request.get('/rss.xml');
+      const feedXml = await feed.text();
+
+      for (const { slug, service } of borradores) {
+        expect(feedXml).not.toContain(`/blog/${slug}/`);
+
+        await page.goto(`/servicios/${service}/`);
+        await expect(page.locator(`a[href="/blog/${slug}/"]`)).toHaveCount(0);
       }
     });
 
@@ -79,31 +122,12 @@ test.describe('Blog', () => {
     });
   });
 
-  test('the nine proposed posts have metadata and an early service link', async ({
+  test('published proposed posts have metadata and an early service link', async ({
     page,
   }) => {
     const posts = [
       ['por-que-tu-aire-acondicionado-no-enfria-bien', 'aire-acondicionado'],
-      ['fallas-de-lavadora-cuando-solicitar-revision', 'lavadoras'],
-      ['mantenimiento-de-lavadoras-habitos-y-senales', 'lavadoras'],
-      [
-        'cuando-programar-mantenimiento-de-aire-acondicionado',
-        'aire-acondicionado',
-      ],
       ['como-saber-si-tu-nevera-necesita-mantenimiento', 'neveras'],
-      [
-        'reparacion-aire-acondicionado-diagnostico-en-cali',
-        'aire-acondicionado',
-      ],
-      ['fallas-de-calentador-cuando-solicitar-revision', 'calentadores'],
-      [
-        'antes-de-instalar-aire-acondicionado-en-cali',
-        'instalacion-aire-acondicionado',
-      ],
-      [
-        'instalacion-de-calentadores-que-se-revisa-antes-de-cotizar',
-        'calentadores',
-      ],
     ];
 
     for (const [slug, service] of posts) {
@@ -122,33 +146,8 @@ test.describe('Blog', () => {
 
   test('service pages link to their proposed posts', async ({ page }) => {
     const services = [
-      [
-        'aire-acondicionado',
-        [
-          'por-que-tu-aire-acondicionado-no-enfria-bien',
-          'cuando-programar-mantenimiento-de-aire-acondicionado',
-          'reparacion-aire-acondicionado-diagnostico-en-cali',
-        ],
-      ],
-      [
-        'instalacion-aire-acondicionado',
-        ['antes-de-instalar-aire-acondicionado-en-cali'],
-      ],
-      [
-        'lavadoras',
-        [
-          'fallas-de-lavadora-cuando-solicitar-revision',
-          'mantenimiento-de-lavadoras-habitos-y-senales',
-        ],
-      ],
+      ['aire-acondicionado', ['por-que-tu-aire-acondicionado-no-enfria-bien']],
       ['neveras', ['como-saber-si-tu-nevera-necesita-mantenimiento']],
-      [
-        'calentadores',
-        [
-          'fallas-de-calentador-cuando-solicitar-revision',
-          'instalacion-de-calentadores-que-se-revisa-antes-de-cotizar',
-        ],
-      ],
     ] as const;
 
     for (const [service, slugs] of services) {

@@ -2,11 +2,12 @@
 title: 'Instalación de calentadores en Cali: qué se revisa antes de cotizar'
 description: 'Qué datos del calentador y del lugar compartir antes de solicitar una visita de instalación en Cali.'
 pubDate: 2026-11-10
+draft: true
 category: 'Calentadores'
 author: 'Rivera Refrigeración'
 image:
-  url: '/images/services/calentadores.webp'
-  alt: 'Calentador de agua de pared con pantalla digital'
+  url: '/images/blog/calentador-portada.webp'
+  alt: 'Ilustración sencilla de un calentador de pared sin marcas ni pantalla'
 imagePosition: 'top'
 relatedService: 'calentadores'
 tags: ['instalación de calentadores', 'Cali', 'presupuesto']

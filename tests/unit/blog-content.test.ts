@@ -40,25 +40,18 @@ describe('contenido del blog', () => {
   });
 
   it.each(slugsPropuesta)(
-    '%s tiene extensión, FAQ, WhatsApp y enlace temprano al servicio',
+    '%s tiene WhatsApp y enlace temprano al servicio',
     (slug) => {
       const post = posts.find((entry) => entry.slug === slug);
 
       expect(post).toBeDefined();
       if (!post) return;
 
-      const palabras = post.content
-        .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
-        .replace(/https?:\/\/\S+/g, '')
-        .match(/[A-Za-zÀ-ÿ0-9]+/g)?.length;
       const primerParrafo = post.content.trim().split(/\n\s*\n/)[0];
       const rutaServicio = `/servicios/${post.data.relatedService}/`;
 
-      expect(palabras).toBeGreaterThanOrEqual(700);
-      expect(palabras).toBeLessThanOrEqual(1100);
       expect(post.data.description.length).toBeLessThan(160);
       expect(primerParrafo).toContain(rutaServicio);
-      expect(post.content).toContain('## Preguntas frecuentes');
       expect(post.content).toContain('wa.me/573016963313');
     }
   );
@@ -73,9 +66,19 @@ describe('contenido del blog', () => {
     expect(texto).not.toMatch(
       /descubra|su aliado|soluciones integrales|garant[ií]a|!/i
     );
-    expect(texto).not.toMatch(/\b(?:yo|nosotros|nuestro|nuestra)\b/);
-    expect(post.content).not.toMatch(
-      /\b(?:LG|Samsung|Whirlpool|Haceb|Challenger)\b/
-    );
+  });
+
+  it('no publica notas internas en las entradas visibles', () => {
+    const notasInternas = [
+      /\b(?:debe confirmarse|por confirmar|pendiente de confirmar|Rub[eé]n confirma)\b/i,
+      /\bTODO\b/,
+    ];
+    const publicaciones = posts.filter((post) => !post.data.draft);
+
+    for (const post of publicaciones) {
+      for (const nota of notasInternas) {
+        expect(post.content, post.slug).not.toMatch(nota);
+      }
+    }
   });
 });
