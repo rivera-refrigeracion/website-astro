@@ -1,1 +1,1 @@
-pnpm lint-staged && pnpm test && pnpm schema:check
+pnpm lint-staged && pnpm check && pnpm test && pnpm schema:check

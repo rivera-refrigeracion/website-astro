@@ -19,7 +19,7 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "lint": "eslint . --ext .js,.ts,.astro",
+    "lint": "eslint . --ext .js,.ts,.astro --max-warnings 0",
     "lint:fix": "eslint . --ext .js,.ts,.astro --fix",
     "format": "prettier --write \"**/*.{js,ts,astro,json,md,css}\"",
     "format:check": "prettier --check \"**/*.{js,ts,astro,json,md,css}\"",
@@ -35,6 +35,7 @@
   "devDependencies": {
     "@adobe/structured-data-validator": "^1.7.0",
     "@astrojs/check": "^0.9.6",
+    "@axe-core/playwright": "^4.13.0",
     "@marbec/web-auto-extractor": "^2.2.1",
     "@playwright/test": "^1.57.0",
     "@testing-library/dom": "^10.4.1",

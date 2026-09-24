@@ -4,7 +4,7 @@ import tsparser from '@typescript-eslint/parser';
 
 export default [
   {
-    ignores: ['dist/**', 'node_modules/**', '.astro/**'],
+    ignores: ['coverage/**', 'dist/**', 'node_modules/**', '.astro/**'],
   },
   ...eslintPluginAstro.configs.recommended,
   {
