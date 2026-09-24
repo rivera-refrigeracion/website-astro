@@ -87,6 +87,3 @@ En la visita se revisa la nevera y se explica el diagnóstico. Rivera
 Refrigeración entrega el presupuesto antes de empezar; con su aprobación,
 realiza la reparación acordada y comprueba el funcionamiento al terminar. El
 tiempo estimado depende de la falla y de la disponibilidad de repuestos.
-
-También puede leer la guía sobre
-[señales de que una nevera necesita mantenimiento](/blog/como-saber-si-tu-nevera-necesita-mantenimiento/).

@@ -7,10 +7,12 @@ import { whatsappUrl } from '@/lib/utils';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
-  }));
+  return posts
+    .filter((post) => !post.data.draft)
+    .map((post) => ({
+      params: { slug: post.slug },
+      props: post,
+    }));
 }
 
 type Props = CollectionEntry<'blog'>;
@@ -18,11 +20,22 @@ type Props = CollectionEntry<'blog'>;
 const post = Astro.props;
 const { Content } = await post.render();
 
+// El frontmatter representa un día de calendario; el mediodía UTC evita que
+// la conversión a Bogotá lo muestre como el día anterior.
+const fechaParaMostrar = new Date(
+  Date.UTC(
+    post.data.pubDate.getUTCFullYear(),
+    post.data.pubDate.getUTCMonth(),
+    post.data.pubDate.getUTCDate(),
+    12
+  )
+);
 const formattedDate = new Intl.DateTimeFormat('es-CO', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-}).format(post.data.pubDate);
+  timeZone: 'America/Bogota',
+}).format(fechaParaMostrar);
 
 const imagen = post.data.image ? imagenLocal(post.data.image.url) : undefined;
 
@@ -89,7 +102,8 @@ const imagenSocial = imagen
               formats={['avif']}
               fallbackFormat="webp"
               alt={post.data.image?.alt || post.data.title}
-              class="w-full h-auto rounded-lg shadow-lg"
+              class="w-full h-auto mx-auto rounded-lg shadow-lg"
+              style={`max-width: ${imagen.width}px`}
               widths={[400, 768, 1024]}
               sizes="(min-width: 816px) 768px, calc(100vw - 48px)"
               loading="eager"
@@ -107,7 +121,7 @@ const imagenSocial = imagen
         <div class="mt-12 pt-8 border-t border-neutral-200">
           <div class="text-center">
             <p class="text-lg text-neutral-700 mb-4">
-              ¿Necesitas ayuda con tus electrodomésticos?
+              ¿Necesita revisar un equipo?
             </p>
             <a
               href={whatsappUrl('desde el blog')}

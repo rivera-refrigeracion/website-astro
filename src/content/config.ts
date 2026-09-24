@@ -17,6 +17,15 @@ const blog = defineCollection({
       .optional(),
     imagePosition: z.enum(['top', 'inline']).default('top'),
     tags: z.array(z.string()).optional(),
+    relatedService: z
+      .enum([
+        'aire-acondicionado',
+        'instalacion-aire-acondicionado',
+        'calentadores',
+        'neveras',
+        'lavadoras',
+      ])
+      .optional(),
     draft: z.boolean().default(false),
   }),
 });

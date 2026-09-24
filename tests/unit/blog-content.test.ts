@@ -1,0 +1,84 @@
+import { readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
+import matter from 'gray-matter';
+import { describe, expect, it } from 'vitest';
+
+const BLOG_DIR = join(process.cwd(), 'src/content/blog');
+const posts = readdirSync(BLOG_DIR)
+  .filter((file) => file.endsWith('.md'))
+  .map((file) => {
+    const source = readFileSync(join(BLOG_DIR, file), 'utf8');
+    const { content, data } = matter(source);
+
+    return {
+      slug: file.replace(/\.md$/, ''),
+      content,
+      data,
+    };
+  });
+
+const slugsPropuesta = [
+  'por-que-tu-aire-acondicionado-no-enfria-bien',
+  'fallas-de-lavadora-cuando-solicitar-revision',
+  'mantenimiento-de-lavadoras-habitos-y-senales',
+  'cuando-programar-mantenimiento-de-aire-acondicionado',
+  'como-saber-si-tu-nevera-necesita-mantenimiento',
+  'reparacion-aire-acondicionado-diagnostico-en-cali',
+  'fallas-de-calentador-cuando-solicitar-revision',
+  'antes-de-instalar-aire-acondicionado-en-cali',
+  'instalacion-de-calentadores-que-se-revisa-antes-de-cotizar',
+];
+
+describe('contenido del blog', () => {
+  it('usa títulos únicos y descripciones menores de 160 caracteres', () => {
+    const titulos = posts.map((post) => post.data.title);
+
+    expect(new Set(titulos).size).toBe(titulos.length);
+    for (const post of posts) {
+      expect(post.data.description.length).toBeLessThan(160);
+    }
+  });
+
+  it.each(slugsPropuesta)(
+    '%s tiene WhatsApp y enlace temprano al servicio',
+    (slug) => {
+      const post = posts.find((entry) => entry.slug === slug);
+
+      expect(post).toBeDefined();
+      if (!post) return;
+
+      const primerParrafo = post.content.trim().split(/\n\s*\n/)[0];
+      const rutaServicio = `/servicios/${post.data.relatedService}/`;
+
+      expect(post.data.description.length).toBeLessThan(160);
+      expect(primerParrafo).toContain(rutaServicio);
+      expect(post.content).toContain('wa.me/573016963313');
+    }
+  );
+
+  it.each(slugsPropuesta)('%s respeta las reglas editoriales', (slug) => {
+    const post = posts.find((entry) => entry.slug === slug);
+
+    expect(post).toBeDefined();
+    if (!post) return;
+
+    const texto = post.content.toLowerCase();
+    expect(texto).not.toMatch(
+      /descubra|su aliado|soluciones integrales|garant[ií]a|!/i
+    );
+  });
+
+  it('no publica notas internas en las entradas visibles', () => {
+    const notasInternas = [
+      /\b(?:debe confirmarse|por confirmar|pendiente de confirmar|Rub[eé]n confirma)\b/i,
+      /\bTODO\b/,
+    ];
+    const publicaciones = posts.filter((post) => !post.data.draft);
+
+    for (const post of publicaciones) {
+      for (const nota of notasInternas) {
+        expect(post.content, post.slug).not.toMatch(nota);
+      }
+    }
+  });
+});

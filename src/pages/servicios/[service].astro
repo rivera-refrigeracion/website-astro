@@ -29,6 +29,11 @@ type Props = CollectionEntry<'services'>;
 
 const service: Props = Astro.props;
 const { Content } = await service.render();
+const articulosRelacionados = (await getCollection('blog'))
+  .filter(
+    (post) => !post.data.draft && post.data.relatedService === service.slug
+  )
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const url = urlAbsoluta(`/servicios/${service.slug}/`);
 // Nunca más ancha que el archivo: una foto de 500 px estirada a 896 se ve
@@ -128,6 +133,58 @@ if (!ofertaPrincipal) {
         <div class="prose prose-lg max-w-none mb-16">
           <Content />
         </div>
+
+        {
+          articulosRelacionados.length > 0 && (
+            <section class="mb-20" aria-labelledby="guias-relacionadas">
+              <h2
+                id="guias-relacionadas"
+                class="title-accent text-2xl lg:text-3xl font-bold mb-8 text-center"
+                data-reveal
+              >
+                Guías relacionadas
+              </h2>
+              <ul class="flex flex-wrap justify-center gap-4">
+                {articulosRelacionados.map((articulo, i) => (
+                  <li
+                    class="w-full md:w-[calc(50%-0.5rem)]"
+                    data-reveal
+                    style={`--reveal-i: ${i}`}
+                  >
+                    <a
+                      href={`/blog/${articulo.slug}/`}
+                      class="guia card group flex h-full flex-col gap-2 text-neutral-900 hover:text-neutral-900"
+                    >
+                      <span class="font-semibold text-lg leading-snug text-primary-800">
+                        {articulo.data.title}
+                      </span>
+                      <span class="text-neutral-600 text-sm leading-relaxed flex-grow">
+                        {articulo.data.description}
+                      </span>
+                      <span class="inline-flex items-center gap-1.5 text-secondary-950 font-semibold text-sm mt-2">
+                        Leer la guía
+                        <svg
+                          class="guia-flecha w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 12h14m-6-6 6 6-6 6"
+                          />
+                        </svg>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
 
         <!-- Brands Section -->
         {
@@ -358,6 +415,14 @@ if (!ofertaPrincipal) {
     box-shadow: var(--shadow-level2);
   }
 
+  .guia:hover {
+    box-shadow: var(--shadow-level2);
+  }
+
+  .guia-flecha {
+    transition: translate 0.35s var(--ease-out);
+  }
+
   .proceso {
     background:
       radial-gradient(
@@ -465,8 +530,13 @@ if (!ofertaPrincipal) {
 
   @media (prefers-reduced-motion: no-preference) {
     .marca-ficha:hover,
-    .paso:hover {
+    .paso:hover,
+    .guia:hover {
       transform: translateY(-4px);
+    }
+
+    .guia:hover .guia-flecha {
+      translate: 4px 0;
     }
 
     .faq[open] .faq-respuesta {

@@ -5,15 +5,15 @@ pubDate: 2024-08-30
 category: 'Consejos'
 author: 'Rivera Refrigeración'
 image:
-  url: '/images/blog/errores-lavadora.webp'
-  alt: 'Ilustración de dos lavadoras: una con carga adecuada y otra sobrecargada'
+  url: '/images/blog/lavadora-portada.webp'
+  alt: 'Ilustración sencilla de una lavadora frontal sin marcas'
 tags: ['lavadora', 'consejos', 'mantenimiento', 'errores comunes']
 imagePosition: 'inline'
 ---
 
 La lavadora es uno de los electrodomésticos más esenciales en cualquier hogar, pero su uso incorrecto puede llevar a problemas serios y costosos de reparar. En **Rivera Refrigeración**, hemos visto de primera mano cómo algunos errores comunes pueden afectar el rendimiento y la vida útil de las lavadoras. A continuación, te compartimos los cinco errores más comunes que debes evitar y cómo hacerlo para mantener tu lavadora en perfecto estado.
 
-![Ilustración de dos lavadoras: una con carga adecuada y otra sobrecargada](../../assets/images/blog/errores-lavadora.webp)
+![Ilustración sencilla de una lavadora frontal sin marcas](../../assets/images/blog/lavadora-portada.webp)
 
 ## 1. Sobrecargar la Lavadora
 
