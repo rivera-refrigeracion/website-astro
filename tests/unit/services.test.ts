@@ -202,7 +202,9 @@ describe('Service pages', () => {
     expect(install.data.h1).toBe('Instalación de aire acondicionado en Cali');
     expect(allInstallText).toMatch(/presupuesto\s+antes de\s+empezar/i);
     expect(allInstallText).toMatch(/antes de la visita|tener listo/i);
-    expect(allInstallText).toMatch(/split, de ventana y cassette/i);
+    expect(allInstallText).toMatch(
+      /split, mini split, de ventana y cassette.*chillers, sistemas de agua helada para negocios/i
+    );
     expect(allInstallText).toMatch(/varias horas/i);
     expect(install.content).toContain('/servicios/aire-acondicionado/');
     expect(repair.content).toContain(
