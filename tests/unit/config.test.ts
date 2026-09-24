@@ -97,6 +97,15 @@ describe('Site Configuration', () => {
       expect(blogLink?.href).toBe('/blog/');
     });
 
+    it('should link directly to air conditioner installation', () => {
+      const installLink = NAVIGATION.find(
+        (item) => item.name === 'Instalación de aire'
+      );
+      expect(installLink?.href).toBe(
+        '/servicios/instalacion-aire-acondicionado/'
+      );
+    });
+
     it('all items should have name and href', () => {
       NAVIGATION.forEach((item) => {
         expect(item.name).toBeDefined();
@@ -106,8 +115,8 @@ describe('Site Configuration', () => {
   });
 
   describe('SERVICES', () => {
-    it('should have 4 services', () => {
-      expect(SERVICES.length).toBe(4);
+    it('should have 5 service pages', () => {
+      expect(SERVICES.length).toBe(5);
     });
 
     it('should include air conditioning service', () => {
@@ -132,6 +141,25 @@ describe('Site Configuration', () => {
       );
       expect(washerService).toBeDefined();
       expect(washerService?.title).toBe('Lavadoras');
+    });
+
+    it('should include the separate air conditioner installation page', () => {
+      const installService = SERVICES.find(
+        (service) => service.id === 'instalacion-aire-acondicionado'
+      );
+      expect(installService?.title).toBe(
+        'Instalación de aire acondicionado en Cali'
+      );
+    });
+
+    it('uses service terms as internal link text', () => {
+      expect(SERVICES.map((service) => service.anchorText)).toEqual([
+        'Reparación de aire acondicionado en Cali',
+        'Reparación de neveras y refrigeradores en Cali',
+        'Reparación de lavadoras en Cali',
+        'Instalación y reparación de calentadores en Cali',
+        'Instalación de aire acondicionado en Cali',
+      ]);
     });
 
     it('all services should have id, title, description and icon', () => {

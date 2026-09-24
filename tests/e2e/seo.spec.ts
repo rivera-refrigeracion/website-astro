@@ -179,7 +179,10 @@ test.describe('SEO', () => {
       // since GTM script never loaded
       if (dataLayerExists) {
         const dataLayerLength = await page.evaluate(() => {
-          return (window as any).dataLayer?.length || 0;
+          return (
+            (window as Window & { dataLayer?: unknown[] }).dataLayer?.length ||
+            0
+          );
         });
         // If dataLayer exists, it should be empty or have minimal entries
         expect(dataLayerLength).toBeLessThanOrEqual(1);

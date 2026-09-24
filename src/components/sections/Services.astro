@@ -5,6 +5,7 @@ import { imagenLocal } from '@/lib/images';
 
 const serviceImages: Record<string, string> = {
   'aire-acondicionado': '/images/services/aire-acondicionado.jpg',
+  'instalacion-aire-acondicionado': '/images/services/aire-acondicionado.jpg',
   neveras: '/images/services/nevera.webp',
   lavadoras: '/images/services/lavadora.webp',
   calentadores: '/images/services/calentadores.webp',
@@ -15,11 +16,14 @@ const serviceImages: Record<string, string> = {
   <div class="container">
     <h2 class="section-title" data-reveal>Nuestros servicios</h2>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 auto-rows-fr">
+    <div
+      class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-7 auto-rows-fr"
+    >
       {
         SERVICES.map((service, i) => (
           <a
             href={`/servicios/${service.id}/`}
+            aria-label={service.anchorText}
             class="servicio card group flex flex-col text-center p-6 pb-7 text-neutral-900 hover:text-neutral-900"
             data-reveal
             style={`--reveal-i: ${i}`}
@@ -33,7 +37,16 @@ const serviceImages: Record<string, string> = {
                 )}
                 formats={['avif']}
                 fallbackFormat="webp"
-                alt={service.title}
+                alt={
+                  service.id === 'aire-acondicionado' ||
+                  service.id === 'instalacion-aire-acondicionado'
+                    ? 'Unidad interior y condensadora de un aire acondicionado Samsung'
+                    : service.id === 'lavadoras'
+                      ? 'Lavadora de carga frontal en acabado gris'
+                      : service.id === 'neveras'
+                        ? 'Nevera de dos puertas con dispensador de agua'
+                        : 'Calentador de agua blanco de pared con pantalla digital'
+                }
                 class="servicio-imagen relative w-32 h-32 object-contain mix-blend-multiply"
                 width={128}
                 height={128}
@@ -49,9 +62,9 @@ const serviceImages: Record<string, string> = {
               {service.description}
             </p>
             <span class="inline-flex items-center justify-center gap-1.5 text-secondary-950 font-semibold text-sm mt-auto">
-              Ver más
+              {service.anchorText}
               <svg
-                class="servicio-flecha w-4 h-4"
+                class="servicio-flecha w-4 h-4 shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

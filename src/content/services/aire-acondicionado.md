@@ -1,128 +1,101 @@
 ---
 title: 'Aire Acondicionado'
 h1: 'Instalación y reparación de aire acondicionado en Cali'
-shortDescription: 'Servicios profesionales de instalación, mantenimiento y reparación de aires acondicionados en Cali'
+shortDescription: 'Diagnóstico a domicilio, presupuesto antes de empezar y prueba final del equipo.'
 icon: 'air-conditioner'
-
-# SEO
 metaTitle: 'Aire acondicionado en Cali'
-metaDescription: 'Servicio técnico especializado en aire acondicionado en Cali. Instalación, mantenimiento y reparación. +30 años de experiencia. Todas las marcas.'
+metaDescription: 'En Cali, Rivera Refrigeración repara aires acondicionados, instala equipos y realiza su mantenimiento, con diagnóstico y presupuesto previo.'
 keywords:
-  - 'reparación aire acondicionado Cali'
-  - 'instalación aire acondicionado Cali'
-  - 'mantenimiento aire acondicionado'
-  - 'técnico aire acondicionado Cali'
-  - 'servicio aire acondicionado Valle del Cauca'
-
-# Images
+  - 'reparación de aire acondicionado Cali'
+  - 'instalación de aire acondicionado Cali'
+  - 'mantenimiento de aire acondicionado Cali'
+  - 'servicio técnico de aire acondicionado Cali'
 heroImage:
   url: '/images/services/aire-acondicionado.jpg'
-  alt: 'Técnico reparando aire acondicionado en Cali'
-
+  alt: 'Unidad interior y condensadora de un aire acondicionado Samsung'
 ogImage:
   url: '/images/og-aire-acondicionado.jpg'
-  alt: 'Aire acondicionado en Cali - Rivera Refrigeración'
-
-# Brands serviced
+  alt: 'Gráfico promocional de aire acondicionado en Cali con datos de contacto'
 brands:
   - name: 'LG'
   - name: 'Samsung'
   - name: 'Whirlpool'
-  - name: 'Electrolux'
   - name: 'Haceb'
-  - name: 'Carrier'
-  - name: 'York'
-
-# Process (4 steps)
+  - name: 'Challenger'
 process:
   - step: 1
-    title: 'Diagnóstico Profesional'
-    description: 'Visitamos su hogar y evaluamos el problema (costo aplicable a reparación)'
+    title: 'Diagnóstico en su domicilio'
+    description: 'Se revisa el equipo para identificar la causa de la falla reportada.'
     icon: '🔍'
   - step: 2
-    title: 'Presupuesto Transparente'
-    description: 'Explicamos el problema y cotizamos la reparación'
-    icon: '💰'
+    title: 'Presupuesto antes de empezar'
+    description: 'Rivera Refrigeración explica el trabajo y su costo. Usted decide si continúa.'
+    icon: '🧾'
   - step: 3
-    title: 'Reparación Profesional'
-    description: 'Realizamos el trabajo con repuestos de calidad'
+    title: 'Reparación acordada'
+    description: 'Se realiza el trabajo aprobado. Si hace falta otra gestión, se informa antes.'
     icon: '🔧'
   - step: 4
-    title: 'Prueba y Garantía'
-    description: 'Verificamos funcionamiento y otorgamos garantía'
-    icon: '✅'
-
-# FAQs
+    title: 'Prueba final'
+    description: 'Al terminar, se comprueba el funcionamiento del equipo.'
+    icon: '✓'
 faqs:
-  - question: '¿Cuánto cuesta la reparación de un aire acondicionado en Cali?'
-    answer: 'El costo varía según el tipo de falla. La visita de diagnóstico tiene un costo desde $25,000 COP, que se descuenta si aprueba la reparación. Después del diagnóstico, le entregamos un presupuesto detallado.'
-  - question: '¿Qué marcas de aire acondicionado reparan?'
-    answer: 'Reparamos todas las marcas: LG, Samsung, Whirlpool, Electrolux, Haceb, Carrier, York, Challenger, y muchas más. Contamos con 30 años de experiencia en el sector.'
-  - question: '¿Cuánto tiempo toma reparar un aire acondicionado?'
-    answer: 'La mayoría de reparaciones se completan el mismo día. En casos que requieran repuestos especiales, puede tomar de 2 a 3 días hábiles.'
-  - question: '¿Ofrecen garantía en las reparaciones?'
-    answer: 'Sí, todas nuestras reparaciones incluyen garantía en mano de obra y repuestos utilizados. Los términos específicos se detallan en la orden de servicio.'
-  - question: '¿Realizan instalación de aires acondicionados nuevos?'
-    answer: 'Sí, realizamos instalaciones profesionales de equipos nuevos, incluyendo Split, ventana y tipo cassette. Garantizamos correcta instalación eléctrica y de refrigeración.'
-  - question: '¿Con qué frecuencia debo dar mantenimiento al aire acondicionado?'
-    answer: 'Recomendamos mantenimiento preventivo cada 3-6 meses, dependiendo del uso. Esto incluye limpieza de filtros, revisión de gas refrigerante, y verificación de componentes eléctricos.'
-  - question: '¿Atienden emergencias los fines de semana?'
-    answer: 'Nuestro horario regular es lunes a viernes de 8 AM a 6 PM. Para emergencias fuera de horario, contáctenos al +57 317 309 5159 para coordinar disponibilidad.'
-  - question: '¿Por qué mi aire acondicionado no enfría bien?'
-    answer: 'Las causas más comunes son: filtros sucios, falta de gas refrigerante, compresor dañado, o problemas en el condensador. Realizamos diagnóstico completo para identificar la causa exacta.'
-
-# Service areas
+  - question: '¿Qué problemas puede revisar Rivera Refrigeración?'
+    answer: 'Se revisan fallas como falta de enfriamiento, ruidos, goteo, apagados o problemas de encendido. El diagnóstico permite definir la causa en cada equipo.'
+  - question: '¿Cuánto cuesta reparar un aire acondicionado en Cali?'
+    answer: 'El costo depende de la falla y del trabajo requerido. Rivera Refrigeración presenta el presupuesto después del diagnóstico y antes de empezar la reparación.'
+  - question: '¿Atienden equipos de distintas marcas?'
+    answer: 'Rivera Refrigeración trabaja con LG, Samsung, Whirlpool, Haceb, Challenger y otras marcas. La atención depende del tipo y estado del equipo.'
+  - question: '¿Cuánto tarda la reparación?'
+    answer: 'El tiempo depende de la falla y de si se necesita conseguir un repuesto. Después de revisar el equipo, se informa el tiempo estimado antes de empezar.'
+  - question: '¿También instalan equipos nuevos?'
+    answer: 'Sí. Para conocer los requisitos y el alcance, consulte la página de instalación de aire acondicionado en Cali o solicite una visita.'
 serviceAreas:
-  - 'Norte de Cali'
-  - 'Sur de Cali'
-  - 'Centro de Cali'
-  - 'Oeste de Cali'
-  - 'Ciudad Jardín'
+  - 'Todo Cali'
   - 'Valle del Lili'
+  - 'Ciudad Jardín'
   - 'Granada'
   - 'San Fernando'
   - 'Limonar'
   - 'Meléndez'
+  - 'Pance'
 ---
 
-## Servicio Técnico Especializado en Aire Acondicionado en Cali
+## Fallas frecuentes en aires acondicionados
 
-Con más de 30 años de experiencia, **Rivera Refrigeración** es su aliado confiable para la instalación, mantenimiento y reparación de sistemas de aire acondicionado en Cali y Valle del Cauca. Atendemos tanto residencias como negocios, garantizando confort y eficiencia energética en cada servicio.
+Rivera Refrigeración realiza diagnóstico a domicilio en Cali. Estos síntomas
+ayudan a describir lo que ocurre; por sí solos no identifican la causa.
 
-### ¿Por qué elegir nuestro servicio?
+### El equipo enciende, pero no enfría
 
-Nuestro equipo técnico está certificado y cuenta con la experiencia necesaria para trabajar con todas las marcas del mercado. Utilizamos equipos especializados de diagnóstico y repuestos originales o de alta calidad, asegurando reparaciones duraderas y eficientes.
+Anote si el flujo de aire cambió o si la falla aparece después de un tiempo de
+uso. La revisión determina qué componente requiere atención.
 
-## Problemas Comunes que Solucionamos
+### Se apaga o no enciende
 
-### 1. Aire acondicionado no enciende
+Indique si el equipo responde al control y si la falla es constante o
+intermitente. No desmonte la unidad antes de la visita.
 
-Uno de los problemas más frecuentes. Puede deberse a fallas eléctricas, problemas en el control remoto, o daños en la tarjeta electrónica. Realizamos diagnóstico completo para identificar la causa raíz.
+### Hay goteo, ruido u olor al usarlo
 
-### 2. No enfría adecuadamente
+Cuente en qué momento aparece y de cuál unidad parece provenir. Esa información
+ayuda a orientar la revisión, pero se confirma en el diagnóstico.
 
-Si su equipo funciona pero no genera frío suficiente, puede tratarse de falta de gas refrigerante, compresor defectuoso, o filtros obstruidos. Evaluamos el sistema completo y restauramos el rendimiento óptimo.
+## Reparación de aire acondicionado
 
-### 3. Hace ruido excesivo
+La visita incluye diagnóstico, explicación del trabajo propuesto y presupuesto
+antes de empezar. Con su aprobación, se realiza la reparación acordada y se
+prueba el equipo al finalizar. El tiempo estimado depende de la falla y de la
+disponibilidad de los repuestos requeridos.
 
-Ruidos anormales pueden indicar problemas mecánicos en el ventilador, compresor suelto, o rodamientos desgastados. Identificamos y reparamos la fuente del ruido.
+## Instalación
 
-### 4. Goteo de agua
+Rivera Refrigeración también instala equipos de aire acondicionado en Cali.
+Conozca el alcance y lo que se revisa durante la visita en la página de
+[instalación de aire acondicionado en Cali](/servicios/instalacion-aire-acondicionado/).
 
-El goteo interno generalmente se debe a drenajes obstruidos o instalación inadecuada. Solucionamos fugas y prevenimos daños por humedad en su propiedad.
+## Mantenimiento
 
-### 5. Mal olor al encender
-
-Olores desagradables suelen provenir de hongos o bacterias en el filtro y evaporador. Realizamos limpieza profunda y desinfección del sistema.
-
-### 6. Consume mucha energía
-
-Un consumo elevado puede indicar baja eficiencia por falta de mantenimiento, fuga de gas, o compresor trabajando forzado. Optimizamos el sistema para reducir costos.
-
-### 7. Se apaga automáticamente
-
-Apagados repentinos pueden deberse a sobrecalentamiento, problemas eléctricos, o sensores defectuosos. Diagnosticamos y corregimos el problema.
-
-### 8. Control remoto no responde
-
-Ya sea por pilas agotadas, sensor infrarrojo dañado, o fallas en la tarjeta receptora, reparamos o reemplazamos componentes según sea necesario.
+Rivera Refrigeración realiza mantenimiento de aire acondicionado. Durante la
+visita se revisa el equipo y se confirma el trabajo necesario antes de
+presentar el presupuesto.

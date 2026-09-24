@@ -6,7 +6,9 @@ test.describe('Homepage', () => {
   });
 
   test('should have correct title', async ({ page }) => {
-    await expect(page).toHaveTitle(/Rivera Refrigeración/);
+    await expect(page).toHaveTitle(
+      'Rivera Refrigeración - Expertos en Aire Acondicionado y Electrodomésticos'
+    );
   });
 
   test('should display header with logo and navigation', async ({ page }) => {
@@ -35,10 +37,12 @@ test.describe('Homepage', () => {
   test('should display hero section with CTA', async ({ page }) => {
     const heroHeading = page.getByRole('heading', { level: 1 });
     await expect(heroHeading).toBeVisible();
-    await expect(heroHeading).toContainText('Soluciones Confiables');
+    await expect(heroHeading).toContainText(
+      'Soluciones Confiables para Aire Acondicionado, Neveras, Lavadoras y Más'
+    );
 
     const ctaButton = page
-      .getByRole('link', { name: 'Agenda tu cita' })
+      .getByRole('link', { name: 'Agende una visita' })
       .first();
     await expect(ctaButton).toBeVisible();
   });
@@ -52,12 +56,35 @@ test.describe('Homepage', () => {
     });
     await expect(servicesHeading).toBeVisible();
 
-    const services = ['Aire Acondicionado', 'Neveras', 'Lavadoras'];
+    const services = [
+      'Aire Acondicionado',
+      'Neveras',
+      'Lavadoras',
+      'Calentadores',
+      'Instalación de aire acondicionado en Cali',
+    ];
     for (const service of services) {
       await expect(
-        servicesSection.getByRole('heading', { name: service })
+        servicesSection.getByRole('heading', { name: service, exact: true })
       ).toBeVisible();
     }
+
+    const serviceLinks = servicesSection.getByRole('link', {
+      name: / en Cali$/,
+    });
+    await expect(serviceLinks).toHaveCount(5);
+  });
+
+  test('should include a direct menu link to air conditioner installation', async ({
+    page,
+  }) => {
+    const link = page
+      .getByRole('link', { name: 'Instalación de aire' })
+      .first();
+    await expect(link).toHaveAttribute(
+      'href',
+      '/servicios/instalacion-aire-acondicionado/'
+    );
   });
 
   test('should display about section', async ({ page }) => {

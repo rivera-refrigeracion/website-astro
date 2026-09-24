@@ -103,6 +103,10 @@ export const SOCIAL = {
 export const NAVIGATION = [
   { name: 'Inicio', href: '/' },
   { name: 'Servicios', href: '/#services' },
+  {
+    name: 'Instalación de aire',
+    href: '/servicios/instalacion-aire-acondicionado/',
+  },
   { name: 'Sobre nosotros', href: '/#about' },
   { name: 'Testimonios', href: '/#reviews' },
   { name: '¿Por qué nosotros?', href: '/#whyus' },
@@ -119,30 +123,42 @@ export const SERVICES = [
   {
     id: 'aire-acondicionado',
     title: 'Aire Acondicionado',
+    anchorText: 'Reparación de aire acondicionado en Cali',
     description:
-      'Instalamos y reparamos unidades de aire acondicionado para mantener tu hogar u oficina a la temperatura perfecta durante todo el año.',
+      'Diagnóstico a domicilio, presupuesto antes de empezar y prueba final del equipo.',
     icon: 'air-conditioner',
   },
   {
     id: 'neveras',
     title: 'Neveras',
+    anchorText: 'Reparación de neveras y refrigeradores en Cali',
     description:
-      'Mantenemos tus alimentos frescos con nuestros servicios de reparación y mantenimiento de refrigeradores de todas las marcas y modelos.',
+      'Revisión del equipo, presupuesto previo y comprobación de funcionamiento.',
     icon: 'refrigerator',
   },
   {
     id: 'lavadoras',
     title: 'Lavadoras',
+    anchorText: 'Reparación de lavadoras en Cali',
     description:
-      'Ofrecemos reparación y mantenimiento para asegurarte que tu lavadora funcione de manera eficiente, ahorrándote tiempo y esfuerzo.',
+      'Atención a domicilio para identificar fallas de llenado, drenaje, centrifugado y más.',
     icon: 'washing-machine',
   },
   {
     id: 'calentadores',
     title: 'Calentadores',
+    anchorText: 'Instalación y reparación de calentadores en Cali',
     description:
-      'Instalación, mantenimiento y reparación de calentadores de agua de gas y eléctricos para garantizar agua caliente cuando la necesites.',
+      'Revisión del equipo y del lugar, con alcance y presupuesto antes de empezar.',
     icon: 'flame',
+  },
+  {
+    id: 'instalacion-aire-acondicionado',
+    title: 'Instalación de aire acondicionado en Cali',
+    anchorText: 'Instalación de aire acondicionado en Cali',
+    description:
+      'Evaluación del equipo y el espacio, cotización previa y prueba final.',
+    icon: 'air-conditioner',
   },
 ] as const;
 
@@ -153,21 +169,21 @@ export const SERVICES = [
  */
 export const WHY_US = [
   {
-    title: 'Experiencia y Confiabilidad',
+    title: 'Servicio técnico en Cali',
     description:
-      'Con décadas de experiencia, Rubén Darío Rivera ha construido una reputación de confianza y calidad en cada trabajo realizado.',
+      'Rivera Refrigeración cuenta con más de treinta años de servicio en Cali.',
     icon: 'shield-check',
   },
   {
-    title: 'Atención Personalizada',
+    title: 'Presupuesto antes de empezar',
     description:
-      'Nos enorgullece ofrecer un servicio personalizado y adaptado a las necesidades específicas de cada cliente.',
+      'Se explica el trabajo y su costo para que usted decida si continúa.',
     icon: 'users',
   },
   {
-    title: 'Soluciones Rápidas y Efectivas',
+    title: 'Prueba al terminar',
     description:
-      'Entendemos la importancia de tus electrodomésticos en el día a día, por lo que trabajamos con rapidez y eficiencia para minimizar las molestias.',
+      'El funcionamiento del equipo se comprueba al finalizar el trabajo acordado.',
     icon: 'clock',
   },
 ] as const;

@@ -139,15 +139,15 @@ test.describe('Footer', () => {
   });
 
   test.describe('Service Links', () => {
-    test('should link to all 4 service pages', async ({ page }) => {
+    test('should link to all 5 service pages', async ({ page }) => {
       const serviceLinks = page.locator('footer nav a');
-      await expect(serviceLinks).toHaveCount(4);
+      await expect(serviceLinks).toHaveCount(5);
     });
 
     test('should link to air conditioning service', async ({ page }) => {
-      const link = page
-        .locator('footer')
-        .getByRole('link', { name: 'Aire Acondicionado' });
+      const link = page.locator('footer').getByRole('link', {
+        name: 'Reparación de aire acondicionado en Cali',
+      });
       await expect(link).toHaveAttribute(
         'href',
         '/servicios/aire-acondicionado/'
@@ -155,24 +155,34 @@ test.describe('Footer', () => {
     });
 
     test('should link to refrigerator service', async ({ page }) => {
-      const link = page
-        .locator('footer')
-        .getByRole('link', { name: 'Neveras' });
+      const link = page.locator('footer').getByRole('link', {
+        name: 'Reparación de neveras y refrigeradores en Cali',
+      });
       await expect(link).toHaveAttribute('href', '/servicios/neveras/');
     });
 
     test('should link to washing machine service', async ({ page }) => {
       const link = page
         .locator('footer')
-        .getByRole('link', { name: 'Lavadoras' });
+        .getByRole('link', { name: 'Reparación de lavadoras en Cali' });
       await expect(link).toHaveAttribute('href', '/servicios/lavadoras/');
     });
 
     test('should link to water heater service', async ({ page }) => {
-      const link = page
-        .locator('footer')
-        .getByRole('link', { name: 'Calentadores' });
+      const link = page.locator('footer').getByRole('link', {
+        name: 'Instalación y reparación de calentadores en Cali',
+      });
       await expect(link).toHaveAttribute('href', '/servicios/calentadores/');
+    });
+
+    test('should link to air conditioner installation', async ({ page }) => {
+      const link = page.locator('footer').getByRole('link', {
+        name: 'Instalación de aire acondicionado en Cali',
+      });
+      await expect(link).toHaveAttribute(
+        'href',
+        '/servicios/instalacion-aire-acondicionado/'
+      );
     });
   });
 
