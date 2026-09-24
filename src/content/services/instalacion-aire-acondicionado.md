@@ -39,7 +39,7 @@ faqs:
   - question: '¿Qué debo tener listo antes de la visita?'
     answer: 'Tenga a mano la marca y el modelo del equipo, despeje el acceso a la ubicación prevista y comparta si ya existe una conexión eléctrica y un punto de drenaje. La revisión confirma qué hace falta.'
   - question: '¿Qué tipos de equipo se pueden instalar?'
-    answer: 'Hay equipos tipo split, de ventana y cassette. La viabilidad y el alcance de instalación se confirman para el modelo y el espacio específicos antes de cotizar.'
+    answer: 'Rivera Refrigeración trabaja con equipos split, mini split, de ventana y cassette, además de chillers, sistemas de agua helada para negocios. La viabilidad y el alcance de instalación se confirman para el modelo y el espacio antes de cotizar.'
   - question: '¿Cuánto tiempo toma instalarlo?'
     answer: 'Una instalación estándar puede tomar varias horas. El tiempo cambia según el equipo y las condiciones del sitio; se estima después de la revisión.'
   - question: '¿El presupuesto se entrega antes de empezar?'
@@ -79,9 +79,10 @@ fachada o área común.
 
 ### Tipos de equipos
 
-Los equipos tipo split, de ventana y cassette tienen requisitos distintos de
-ubicación y conexión. Rivera Refrigeración revisa el modelo y el espacio para
-confirmar el alcance posible antes de cotizar.
+Rivera Refrigeración trabaja con equipos split, mini split, de ventana y
+cassette, además de chillers, sistemas de agua helada para negocios. Cada
+sistema tiene requisitos de ubicación y conexión. Rivera Refrigeración revisa
+el modelo y el espacio para confirmar el alcance antes de cotizar.
 
 ### Tiempo de instalación
 
