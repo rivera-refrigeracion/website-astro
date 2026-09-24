@@ -228,24 +228,6 @@ const esActual = (href: string) =>
     view-transition-name: sitio-header;
   }
 
-  /*
-   * Franja fría arriba del todo. Sólo azules: mezclar azul con naranja
-   * en un degradado deja un tramo verdoso en el medio.
-   */
-  .sitio-header::before {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto;
-    height: 3px;
-    background: linear-gradient(
-      90deg,
-      var(--color-primary-700),
-      var(--color-primary-400),
-      var(--color-primary-100),
-      var(--color-primary-400)
-    );
-  }
-
   /* La sombra va en un pseudo-elemento para animarla sólo con opacidad. */
   .sitio-header::after {
     content: '';
