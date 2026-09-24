@@ -184,6 +184,7 @@ export function negocio(
       longitude: GEO.longitude,
     },
     areaServed: ciudadesAtendidas(servicios.flatMap((s) => s.serviceAreas)),
+    priceRange: '$$',
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: HOURS.dayOfWeek.map(
