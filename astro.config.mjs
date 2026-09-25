@@ -1,12 +1,17 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
+import { unified } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://rivera-refrigeracion.com',
+
+  markdown: {
+    processor: unified(),
+  },
 
   vite: {
     plugins: [
@@ -37,6 +42,9 @@ export default defineConfig({
   i18n: {
     defaultLocale: 'es',
     locales: ['es'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
   },
 
   // Las imágenes del Markdown de los artículos salían a su tamaño original

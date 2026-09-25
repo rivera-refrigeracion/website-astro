@@ -19,7 +19,8 @@ export default defineConfig({
       // Vitest mide módulos JS/TS; las plantillas Astro se validan en E2E.
       include: ['src/**/*.js', 'src/**/*.ts'],
       reporter: ['text', 'json', 'html'],
-      exclude: ['node_modules/', 'dist/', '.astro/', 'tests/'],
+      // Astro compila las rutas API; Vitest no instrumenta su sintaxis de entrada.
+      exclude: ['node_modules/', 'dist/', '.astro/', 'tests/', 'src/pages/'],
       thresholds: {
         statements: 40,
         branches: 40,

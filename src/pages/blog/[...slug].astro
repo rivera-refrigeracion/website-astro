@@ -1,14 +1,15 @@
 ---
 import { getImage, Picture } from 'astro:assets';
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import { imagenLocal } from '@/lib/images';
+import { imagenSeoArticulo } from '@/lib/seo-assets';
 import { whatsappUrl } from '@/lib/utils';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: post,
   }));
 }
@@ -16,7 +17,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const formattedDate = new Intl.DateTimeFormat('es-CO', {
   year: 'numeric',
@@ -28,12 +29,15 @@ const imagen = post.data.image ? imagenLocal(post.data.image.url) : undefined;
 
 // WhatsApp, por donde se comparte casi todo, no siempre previsualiza WebP:
 // la imagen social del artículo sale en JPEG aunque la de la página no.
+const rutaImagenSocial = imagenSeoArticulo(post.id);
 const imagenSocial = imagen
-  ? await getImage({
-      src: imagen,
-      format: 'jpg',
-      width: Math.min(1200, imagen.width),
-    })
+  ? rutaImagenSocial
+    ? { src: rutaImagenSocial }
+    : await getImage({
+        src: imagen,
+        format: 'jpg',
+        width: Math.min(1200, imagen.width),
+      })
   : undefined;
 ---
 
@@ -48,12 +52,12 @@ const imagenSocial = imagen
   tags={post.data.tags}
   image={imagenSocial?.src}
   imageAlt={post.data.image?.alt}
-  imageWidth={imagenSocial && Number(imagenSocial.attributes.width)}
-  imageHeight={imagenSocial && Number(imagenSocial.attributes.height)}
+  imageWidth={imagen && Number(imagen.width)}
+  imageHeight={imagen && Number(imagen.height)}
   breadcrumbs={[
     { name: 'Inicio', path: '/' },
     { name: 'Blog', path: '/blog/' },
-    { name: post.data.title, path: `/blog/${post.slug}/` },
+    { name: post.data.title, path: `/blog/${post.id}/` },
   ]}
 >
   <article class="py-12" data-ubicacion="blog_articulo">
