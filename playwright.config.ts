@@ -25,6 +25,7 @@ export default defineConfig({
   ],
   webServer: {
     command: 'pnpm preview --port 4500',
+    env: { ASTRO_PREVIEW_BACKGROUND: '0' },
     url: 'http://localhost:4500',
     reuseExistingServer: false,
     timeout: 30000,

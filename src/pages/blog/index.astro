@@ -28,7 +28,7 @@ const posts = (await getCollection('blog'))
             <article class="card hover:shadow-[var(--shadow-level2)] transition-shadow group">
               {post.data.image && (
                 <a
-                  href={`/blog/${post.slug}/`}
+                  href={`/blog/${post.id}/`}
                   class="block aspect-video overflow-hidden rounded-md mb-4"
                 >
                   <Picture
@@ -53,7 +53,7 @@ const posts = (await getCollection('blog'))
               </span>
 
               <h2 class="text-xl font-semibold mb-3 text-neutral-900 group-hover:text-primary-700 transition-colors">
-                <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
               </h2>
 
               <div class="text-sm text-neutral-500 mb-3">

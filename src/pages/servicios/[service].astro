@@ -1,11 +1,12 @@
 ---
 import { getImage, Picture } from 'astro:assets';
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import Turbine from '@/components/ui/Turbine.astro';
 import Wave from '@/components/ui/Wave.astro';
 import Layout from '@/layouts/Layout.astro';
 import { CONTACT } from '@/lib/config';
 import { imagenLocal } from '@/lib/images';
+import { imagenSeoServicio } from '@/lib/seo-assets';
 import {
   idServicio,
   idOferta,
@@ -20,7 +21,7 @@ import { whatsappUrl } from '@/lib/utils';
 export async function getStaticPaths() {
   const services = await getCollection('services');
   return services.map((service) => ({
-    params: { service: service.slug },
+    params: { service: service.id },
     props: service,
   }));
 }
@@ -28,25 +29,29 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'services'>;
 
 const service: Props = Astro.props;
-const { Content } = await service.render();
+const { Content } = await render(service);
 
-const url = urlAbsoluta(`/servicios/${service.slug}/`);
+const url = urlAbsoluta(`/servicios/${service.id}/`);
 // Nunca más ancha que el archivo: una foto de 500 px estirada a 896 se ve
 // borrosa (Lighthouse, image-size-responsive).
 const imagenPrincipal = imagenLocal(service.data.heroImage.url);
 
 // El schema necesita una URL que exista: el original ya no se publica en
 // /images/, sólo las versiones que genera Astro.
-const imagenSchema = await getImage({
-  src: imagenPrincipal,
-  format: 'jpg',
-  width: Math.min(1200, imagenPrincipal.width),
-});
+const imagenSchema =
+  imagenSeoServicio(service.id) ??
+  (
+    await getImage({
+      src: imagenPrincipal,
+      format: 'jpg',
+      width: Math.min(1200, imagenPrincipal.width),
+    })
+  ).src;
 const ofertaPrincipal = OFERTAS_CATALOGO.find(
-  (oferta) => oferta.slug === service.slug && oferta.fragmento === 'servicio'
+  (oferta) => oferta.slug === service.id && oferta.fragmento === 'servicio'
 );
 if (!ofertaPrincipal) {
-  throw new Error(`No hay una oferta principal de schema para ${service.slug}`);
+  throw new Error(`No hay una oferta principal de schema para ${service.id}`);
 }
 ---
 
@@ -60,7 +65,7 @@ if (!ofertaPrincipal) {
   pageType="FAQPage"
   breadcrumbs={[
     { name: 'Inicio', path: '/' },
-    { name: service.data.h1, path: `/servicios/${service.slug}/` },
+    { name: service.data.h1, path: `/servicios/${service.id}/` },
   ]}
   pageSchema={{
     about: ref(idServicio(url)),
@@ -73,7 +78,7 @@ if (!ofertaPrincipal) {
       nombre: ofertaPrincipal.nombre,
       tipo: ofertaPrincipal.tipo,
       descripcion: service.data.metaDescription,
-      imagen: urlAbsoluta(imagenSchema.src),
+      imagen: urlAbsoluta(imagenSchema),
       zonas: service.data.serviceAreas,
     }),
   ]}
@@ -270,7 +275,7 @@ if (!ofertaPrincipal) {
             target="_blank"
             rel="noopener noreferrer"
             class="whatsapp-btn whatsapp-cta-service inline-flex items-center gap-2 text-white px-8 py-4 font-semibold text-lg"
-            data-service={service.slug}
+            data-service={service.id}
             data-ubicacion="servicio_cierre"
             aria-label="Agendar visita por WhatsApp"
           >
@@ -290,7 +295,7 @@ if (!ofertaPrincipal) {
             Llamadas: <a
               href={`tel:${CONTACT.phone}`}
               class="phone-link phone-link-service text-white underline hover:no-underline"
-              data-service={service.slug}
+              data-service={service.id}
               data-ubicacion="servicio_cierre">{CONTACT.phone}</a
             >
           </p>

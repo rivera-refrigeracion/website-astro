@@ -1,8 +1,6 @@
 ---
-import { getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import type { Thing } from 'schema-dts';
-import logoMarca from '@/assets/images/logo.webp';
 import { ADDRESS, GEO, SERVICES, SITE } from '@/lib/config';
 import {
   NEGOCIO_ID,
@@ -19,6 +17,7 @@ import {
   sitio,
   urlAbsoluta,
 } from '@/lib/schema';
+import { LOGO_NEGOCIO_SEO } from '@/lib/seo-assets';
 import type { SEOProps } from '@/types';
 
 interface Props extends SEOProps {}
@@ -61,7 +60,7 @@ const altoOg = imageHeight ?? (esOgPorDefecto ? 630 : undefined);
 // resuelve los @id dentro del mismo documento.
 const servicios = (await getCollection('services'))
   .map((s) => ({
-    slug: s.slug,
+    slug: s.id,
     title: s.data.title,
     serviceAreas: s.data.serviceAreas,
   }))
@@ -95,10 +94,9 @@ const nodosOferta = OFERTAS_CATALOGO.filter(
 });
 // Google pide un logo de al menos 112 px en un formato que indexe; PNG es el
 // más seguro.
-const logo = await getImage({ src: logoMarca, format: 'png', width: 512 });
 const url = canonicalURL.toString();
 const nodos: Thing[] = [
-  negocio(servicios, new URL(logo.src, SITE.url).toString()),
+  negocio(servicios, new URL(LOGO_NEGOCIO_SEO, SITE.url).toString()),
   sitio(),
   pagina({
     url,
