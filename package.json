@@ -40,7 +40,7 @@
     "@marbec/web-auto-extractor": "^2.2.1",
     "@playwright/test": "^1.57.0",
     "@testing-library/dom": "^10.4.1",
-    "@types/node": "^22.15.2",
+    "@types/node": "^26.6.2",
     "@typescript-eslint/eslint-plugin": "^8.51.0",
     "@typescript-eslint/parser": "^8.51.0",
     "@vitest/coverage-v8": "^5.0.1",
