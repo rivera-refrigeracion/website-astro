@@ -15,8 +15,8 @@ import type {
   BreadcrumbList,
   City,
   Graph,
+  HVACBusiness,
   IdReference,
-  LocalBusiness,
   Place,
   Question,
   Service,
@@ -140,10 +140,23 @@ export function zonaAtendida(zona: string): City | Place {
   return { '@type': 'Place', name: zona, containedInPlace: CALI };
 }
 
+/**
+ * Barrios o comunas de Cali que Juan haya confirmado como zona de cobertura
+ * real. Vacía a propósito: no se declaran zonas sin confirmar.
+ * TODO: llenar con los rótulos confirmados (p. ej. 'Comuna 8'); cada uno sale
+ * en areaServed como Place dentro de Cali.
+ */
+export const ZONAS_CONFIRMADAS: readonly string[] = [];
+
 /** Cali y los municipios de todas las zonas, sin barrios ni repetidos. */
 export function ciudadesAtendidas(zonas: readonly string[]): City[] {
   const municipios = new Set(zonas.filter((z) => MUNICIPIOS.has(z)));
   return [CALI, ...[...municipios].map(municipio)];
+}
+
+/** Ciudades atendidas más las zonas confirmadas del negocio. */
+function areaServidaNegocio(zonas: readonly string[]): Array<City | Place> {
+  return [...ciudadesAtendidas(zonas), ...ZONAS_CONFIRMADAS.map(zonaAtendida)];
 }
 
 // --- Nodos ------------------------------------------------------------------
@@ -161,9 +174,9 @@ export interface ServicioResumen {
 export function negocio(
   servicios: readonly ServicioResumen[],
   logo: string
-): LocalBusiness {
+): HVACBusiness {
   return {
-    '@type': 'LocalBusiness',
+    '@type': 'HVACBusiness',
     '@id': NEGOCIO_ID,
     name: SITE.name,
     description: SITE.description,
@@ -183,7 +196,7 @@ export function negocio(
       latitude: GEO.latitude,
       longitude: GEO.longitude,
     },
-    areaServed: ciudadesAtendidas(servicios.flatMap((s) => s.serviceAreas)),
+    areaServed: areaServidaNegocio(servicios.flatMap((s) => s.serviceAreas)),
     priceRange: '$$',
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',

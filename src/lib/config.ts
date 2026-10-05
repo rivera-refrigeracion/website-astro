@@ -64,10 +64,13 @@ export const ADDRESS = {
   regionCode: 'CO-VAC',
 } as const;
 
-/** Coordenadas del centro de Cali, las mismas de las metas geo.* */
+/**
+ * Coordenadas del taller (Cra. 26H #52-10), las mismas de la ficha de Google.
+ * Las usan el geo del JSON-LD y las metas geo.position e ICBM.
+ */
 export const GEO = {
-  latitude: 3.4516467,
-  longitude: -76.5319854,
+  latitude: 3.4361333,
+  longitude: -76.4976704,
 } as const;
 
 /**
