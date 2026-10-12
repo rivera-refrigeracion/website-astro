@@ -102,63 +102,42 @@ test.describe('SEO', () => {
 
   test.describe('Analytics Blocking', () => {
     test('should block GTM/GA requests in E2E tests', async ({ page }) => {
+      const analyticsUrls = [
+        'https://www.googletagmanager.com/gtm.js?id=GTM-WGKFDPTD',
+        'https://www.google-analytics.com/analytics.js',
+        'https://analytics.google.com/analytics.js',
+      ];
       const completedRequests: string[] = [];
-      const failedRequests: string[] = [];
 
-      // Fuera de producción el sitio ya no pide GTM; se simula el host real
-      // para que haya peticiones que el fixture tenga que bloquear.
-      await page.addInitScript(() => {
-        (window as unknown as { __hostMedicion?: string }).__hostMedicion =
-          'rivera-refrigeracion.com';
-      });
-
-      // Listen for all request completions
       page.on('requestfinished', (request) => {
-        const url = request.url();
-        if (
-          url.includes('googletagmanager.com') ||
-          url.includes('google-analytics.com') ||
-          url.includes('analytics.google.com')
-        ) {
-          completedRequests.push(url);
-        }
-      });
-
-      // Listen for failed/aborted requests
-      page.on('requestfailed', (request) => {
-        const url = request.url();
-        if (
-          url.includes('googletagmanager.com') ||
-          url.includes('google-analytics.com') ||
-          url.includes('analytics.google.com')
-        ) {
-          failedRequests.push(url);
+        if (analyticsUrls.includes(request.url())) {
+          completedRequests.push(request.url());
         }
       });
 
       await page.goto('/');
 
-      // GTM se carga con la primera interacción: sin ella no hay nada que
-      // bloquear en el primer segundo.
-      await page.waitForTimeout(1000);
-      expect(completedRequests.length + failedRequests.length).toBe(0);
+      // La carga diferida tiene sus propias pruebas; el fixture debe bloquear
+      // los tres dominios sin depender del scroll inicial de Chromium.
+      const failures = analyticsUrls.map((url) =>
+        page.waitForEvent('requestfailed', (request) => request.url() === url)
+      );
+      await page.evaluate((urls) => {
+        for (const url of urls) {
+          const script = document.createElement('script');
+          script.src = url;
+          document.head.appendChild(script);
+        }
+      }, analyticsUrls);
 
-      await page.mouse.wheel(0, 200);
-      await page.waitForTimeout(1000);
-
-      // Log for debugging
-      if (completedRequests.length > 0) {
-        console.log('Completed analytics requests:', completedRequests);
+      const failedRequests = await Promise.all(failures);
+      expect(failedRequests.map((request) => request.url())).toEqual(
+        analyticsUrls
+      );
+      for (const request of failedRequests) {
+        expect(request.failure()).not.toBeNull();
       }
-      if (failedRequests.length > 0) {
-        console.log('Failed/aborted analytics requests:', failedRequests);
-      }
-
-      // No analytics requests should have completed successfully
-      expect(completedRequests.length).toBe(0);
-
-      // Analytics requests should have been blocked (failed/aborted)
-      expect(failedRequests.length).toBeGreaterThan(0);
+      expect(completedRequests).toEqual([]);
     });
 
     test('should have GTM script in HTML but not execute', async ({ page }) => {
