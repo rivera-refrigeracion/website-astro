@@ -55,7 +55,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.5.1",
     "prettier": "^3.9.9",
-    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-astro": "^1.1.1",
     "rollup-plugin-visualizer": "^7.1.1",
     "schema-dts": "^2.1.0",
     "sharp": "^0.35.5",
