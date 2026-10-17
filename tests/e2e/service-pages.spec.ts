@@ -236,9 +236,7 @@ test.describe('Service Pages - General', () => {
             node['@id'] ===
             `https://rivera-refrigeracion.com${servicePath(service.slug)}#servicio`
         );
-        const business = graph.find(
-          (node) => node['@type'] === 'LocalBusiness'
-        );
+        const business = graph.find((node) => node['@type'] === 'HVACBusiness');
         const catalog = business?.hasOfferCatalog as {
           itemListElement: Array<{ itemOffered: { '@id': string } }>;
         };

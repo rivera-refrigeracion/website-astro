@@ -62,7 +62,7 @@ test.describe('SEO', () => {
       await expect(structuredData).toBeAttached();
 
       const content = await structuredData.textContent();
-      expect(content).toContain('LocalBusiness');
+      expect(content).toContain('HVACBusiness');
       expect(content).toContain('Rivera Refrigeración');
     });
   });

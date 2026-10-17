@@ -16,6 +16,7 @@
     "check": "astro check",
     "test": "vitest run",
     "test:schema": "node scripts/validar-schema.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
     "schema:check": "astro build --silent && node scripts/validar-schema.mjs",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",

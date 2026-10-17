@@ -114,7 +114,7 @@ test.describe('Footer', () => {
       const nodos: Array<Record<string, unknown>> = JSON.parse(json ?? '{}')[
         '@graph'
       ];
-      const negocios = nodos.filter((n) => n['@type'] === 'LocalBusiness');
+      const negocios = nodos.filter((n) => n['@type'] === 'HVACBusiness');
       expect(negocios).toHaveLength(1);
 
       const [negocio] = negocios;
